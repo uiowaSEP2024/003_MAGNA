@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # apps
     "forms",
     "login",
+    "management",
 ]
 
 MIDDLEWARE = [
