@@ -13,9 +13,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2bSfpaok8GLOGnO9G1LLS4Tsjoa" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "django__starting__project",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -39,6 +39,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706213584914</updated>
       <workItem from="1706213587332" duration="50000" />
+      <workItem from="1706724699663" duration="212000" />
     </task>
     <servers />
   </component>
