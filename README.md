@@ -113,8 +113,14 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Authors
 
 [Charles Wilmot](https://github.com/chazwilmot)
+
+
 [Trey Eckenrod](https://github.com/teckenrod)
+
+
 [Chase Ditmer](https://github.com/ChaseDitt)
+
+
 [Spencer Blackwell](https://github.com/smblackwll)
 
 Project Link: [https://github.com/uiowaSEP2024/003_MAGNA](https://github.com/uiowaSEP2024/003_MAGNA)
