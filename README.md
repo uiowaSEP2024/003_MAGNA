@@ -1,6 +1,3 @@
-Here's a more concise and optimized version of your README.md:
-
-```markdown
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
