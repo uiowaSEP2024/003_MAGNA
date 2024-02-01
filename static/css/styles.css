@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form h2 {
+    text-align: center;
+}
+
+form label,
+form input,
+form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+form input {
+    line-height: 2;
+    padding: 0 10px;
+}
+
+form button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
