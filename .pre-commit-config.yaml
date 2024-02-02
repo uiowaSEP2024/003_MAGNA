@@ -16,3 +16,20 @@ repos:
     hooks:
     - id: interrogate
       args: [-vv, -i, --fail-under=80]
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: name-tests-test
+        args: [ "--django" ]
+      - id: trailing-whitespace
+- repo: https://github.com/pycqa/bandit
+  rev: 1.7.7
+  hooks:
+    - id: bandit
+      args: ['-iii', '-ll']
