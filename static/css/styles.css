@@ -53,7 +53,47 @@ body, html {
 .card {
     background-color: #f0f0f0;
     border: 1px solid #d0d0d0;
+    border-radius: 15px;
     padding: 20px;
     text-align: center;
     position: relative;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo img {
+    height: 50px; /* Adjust as needed */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px; /* Space between links */
+    font-size: 16px; /* Adjust as needed */
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Add a class for the active page */
+.nav-links a.active {
+    text-decoration: underline;
+    font-weight: bold;
 }
