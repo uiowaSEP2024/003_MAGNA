@@ -8,6 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.9"
+django = "~=4.2.8"
+behave = "~=1.2.6"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
