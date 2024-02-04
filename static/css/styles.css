@@ -57,19 +57,3 @@ body, html {
     text-align: center;
     position: relative;
 }
-
-.card.red {
-    background-color: #ff0000;
-    color: white;
-}
-
-.card h2 {
-    margin: 0;
-}
-
-.arrow {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-}
