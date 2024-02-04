@@ -16,6 +16,28 @@ flake8 = "^7.0.0"
 pre-commit = "^3.6.0"
 tox = "^4.12.1"
 
+[tool.djlint]
+profile="django"
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = false
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = true
+ignore-nested-functions = false
+ignore-nested-classes = true
+ignore-setters = false
+fail-under = 95
+exclude = ["setup.py", "docs", "build"]
+ignore-regex = ["^get$", "^mock_.*", ".*BaseClass.*"]
+verbose = 0
+quiet = false
+whitelist-regex = []
+color = true
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

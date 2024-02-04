@@ -11,11 +11,6 @@ repos:
     rev: 5.13.2
     hooks:
     -   id: isort
-#-   repo: https://github.com/econchick/interrogate
-#    rev: 1.5.0
-#    hooks:
-#    - id: interrogate
-#      args: [-vv, -i, --fail-under=80]
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -33,13 +28,17 @@ repos:
   hooks:
     - id: bandit
       args: ['-iii', '-ll']
-#- repo: https://github.com/pre-commit/mirrors-mypy
-#  rev: v1.8.0
-#  hooks:
-#    - id: mypy
-#      exclude: "[a-zA-Z]*/(migrations)/(.)*"
-#      additional_dependencies: [
-#          # mypy dependencies
-#          django-stubs,
-#          # runtime dependencies
-#      ]
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: ''
+  hooks:
+    - id: mypy
+      args: ['--strict', '--ignore-missing-imports']
+- repo: https://github.com/Riverside-Healthcare/djLint
+  rev: v1.19.16
+  hooks:
+    - id: djlint-django
+-   repo: https://github.com/econchick/interrogate
+    rev: 1.5.0
+    hooks:
+    - id: interrogate
+      args: [-v, -i, --fail-under=80]
