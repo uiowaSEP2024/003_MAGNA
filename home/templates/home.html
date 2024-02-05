@@ -1,10 +1,52 @@
+<!-- Not my HTML file - taken from Chase's branch for UI -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magna Homepage</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> <!-- Link to stylesheet -->
 </head>
 <body>
-    <p>Test Text for home page</p>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <!-- Image should be moved to a static -->
+                <img src="../templates/images/magnaLogoWhite.png" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a href="/innovation">Innovation</a>
+                <a href="/products">Products</a>
+                <a href="/stories">Stories</a>
+                <a href="/company">Company</a>
+                <a href="/careers">Careers</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </nav>
+        <div class="header-image-container">
+            <img src="../templates/images/magnaLogo.png" alt="Header Image" class="header-image">
+        </div>
+        <hr class="separator">
+    </header>
+<!-- This will eventually be replaced by a for loop to autocreate those buttons, so we don't hardcode the buttons-->
+    <main>
+        <div class="container">
+            <div class="card">
+                <h2>Time Off</h2>
+            </div>
+            <div class="card">
+                <h2>Job Openings</h2>
+            </div>
+            <div class="card">
+                <h2>HR Safety and Well Being</h2>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+    <script src="../static/js/scripts.js"></script>
 </body>
 </html>
