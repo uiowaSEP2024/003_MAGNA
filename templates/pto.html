@@ -2,9 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Off Request</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
 </head>
 <body>
+
+    <div class="request-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>Support Absence Request</h2>
+            </div>
+            <div>
+                <hr class="form-separator">
+            </div>
+            <form id="time-off-form">
+                <label for="clock">Clock:</label>
+                <input type="text" id="clock" name="clock">
+
+                <label for="shift">Shift:</label>
+                <select id="shift" name="shift">
+                    <option value="morning">Morning</option>
+                    <option value="evening">Evening</option>
+                    <option value="night">Night</option>
+                </select>
+
+                <label for="full-name">Full Name: (Please include first and last name)</label>
+                <input type="text" id="full-name" name="full_name">
+
+                <label for="first-day-absent">First Day Absent:</label>
+                <input type="date" id="first-day-absent" name="first_day_absent">
+
+                <label for="last-day-absent">Last Day Absent:</label>
+                <input type="date" id="last-day-absent" name="last_day_absent">
+
+                <label for="hours">Hours:</label>
+                <input type="number" id="hours" name="hours">
+
+                <label for="absence-type">Absence Type:</label>
+                <select id="absence-type" name="absence_type">
+                    <option value="pto">PTO</option>
+                    <!-- Add more absence types as needed -->
+                </select>
+
+                <label for="approving-supervisor">Approving Supervisor:</label>
+                <input type="text" id="approving-supervisor" name="approving_supervisor">
+
+                <label for="email">Your Email Address:</label>
+                <input type="email" id="email" name="email">
+
+                <button type="submit">Save Request and Submit</button>
+            </form>
+        </div>
+
+        <!-- Right side with the calendar will go here -->
+
+    </div>
 
 </body>
 </html>

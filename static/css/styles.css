@@ -127,3 +127,75 @@ body {
     margin-top: 20px;
     margin-bottom: 20px; /* Adjust the margin as needed */
 }
+
+.request-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Reduced space below the header */
+}
+
+.form-header h2 {
+    font-size: 1rem; /* Reduced font size for the title */
+    margin: 0; /* Remove default margins */
+    flex-shrink: 0; /* Prevents the title from shrinking */
+}
+
+.form-separator {
+    height: 2px; /* Thickness of the separator line */
+    background-color: black; /* Color of the separator line */
+    border: none;
+    flex-grow: 1; /* Allows the line to take up the remaining space */
+    margin-left: 5px; /* Space from the title to the line */
+}
+
+.form-card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form h2 {
+    margin-bottom: 20px;
+}
+
+form label {
+    margin-top: 0;
+    margin-bottom: 4px; /* Reduced space between label and input */
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="number"],
+form input[type="email"],
+form select {
+    padding: 8px;
+    margin-bottom: 12px; /* Reduced space between form inputs */
+    background-color: #f0f0f0; /* Light gray background */
+    border: none;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 16px; /* Adjusted space above the submit button */
+}
