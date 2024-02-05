@@ -7,14 +7,34 @@
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <!-- Assuming you have a logo image named 'logo.png' in the images folder -->
+                <img src="../templates/images/magnaLogoWhite.png" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a href="/innovation">Innovation</a>
+                <a href="/products">Products</a>
+                <a href="/stories">Stories</a>
+                <a href="/company">Company</a>
+                <a href="/careers">Careers</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </nav>
+    </header>
 
     <div class="request-container">
         <div class="form-card">
-            <div class="form-logo">
-                <img src="../templates/images/magnaLogo.png" alt="Top Right Image" class="top-right-image">
+            <div class="form-top">
+                <div class="form-logo">
+                    <img src="../templates/images/magnaLogo.png" alt="Company Logo" class="top-right-image">
+                </div>
+                <div class="datetime-container">
+                    <div class="current-time">Current Time: <span id="time"></span></div>
+                    <div class="current-date">Current Date: <span id="date"></span></div>
+                </div>
             </div>
-            <div class="current-time">Current Time: <span id="time"></span></div>
-            <div class="current-date">Current Date: <span id="date"></span></div>
             <div class="form-header">
                 <h2>Support Absence Request</h2>
             </div>
@@ -60,7 +80,7 @@
             </form>
         </div>
 
-        <!-- Right side with the calendar will go here -->
+        <!-- Right side with the calendar will go here but from has built in calendar so might not do this-->
 
     </div>
 
