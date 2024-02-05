@@ -134,6 +134,29 @@ body {
     padding: 20px;
 }
 
+.form-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px; /* Adjust as needed */
+}
+
+.datetime-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.current-time,
+.current-date {
+    font-size: 0.9rem; /* Adjust as needed */
+}
+
+.top-right-image {
+    height: 50px; /* Adjust as needed */
+    width: auto; /* Adjust as needed */
+}
+
 .form-header {
     display: flex;
     align-items: center;
@@ -157,7 +180,7 @@ body {
 .form-card {
     background-color: #ffffff;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 20px;
     width: 40%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

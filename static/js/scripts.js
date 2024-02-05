@@ -21,3 +21,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+function updateDateTime() {
+    var now = new Date();
+
+    // Format the date as you like
+    var dateString = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    var timeString = now.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+
+    // Update the HTML elements
+    document.getElementById('date').textContent = dateString;
+    document.getElementById('time').textContent = timeString;
+}
+
+// Update the date/time on page load
+updateDateTime();
+
+// Optionally, set it to update every minute
+setInterval(updateDateTime, 60000);
+
