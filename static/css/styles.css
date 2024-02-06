@@ -34,3 +34,214 @@ form button {
     padding: 10px;
     cursor: pointer;
 }
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%; /* Set to 100% of the viewport width */
+    max-width: 1200px; /* Adjust based on your design preference */
+    margin: auto; /* Centers the container */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Define exactly three columns */
+    grid-gap: 20px; /* Adjust the spacing between cards */
+    padding: 20px 0; /* Adjust as needed, adding padding top and bottom */
+    justify-content: center; /* Center grid items horizontally */
+}
+
+.card {
+    background-color: #f0f0f0;
+    border: 1px solid #d0d0d0;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* Use a fixed width and height for larger screens */
+    width: 300px; /* Your Figma width */
+    height: 200px; /* Your Figma height */
+
+    /* Make sure cards are flexible and maintain aspect ratio on smaller screens */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px; /* Adjust as needed for smaller screens */
+    }
+
+    .card {
+        width: 100%; /* Full width of the column */
+        height: auto; /* Height is automatic to maintain aspect ratio */
+        aspect-ratio: 3 / 2; /* Your desired aspect ratio */
+        padding: 15px;
+        margin: auto;
+    }
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo img {
+    height: 50px; /* Adjust as needed */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px; /* Space between links */
+    font-size: 16px; /* Adjust as needed */
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Add a class for the active page */
+.nav-links a.active {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.header-image-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.header-image {
+    width: auto; /* maintain the aspect ratio */
+    height: auto; /* maintain the aspect ratio */
+    max-width: 50%; /* or any other percentage or pixel value you prefer */
+    max-height: 75px; /* or any other pixel value you prefer */
+    display: block; /* this can help with centering */
+    margin: 0 auto; /* center the image horizontally */
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin-top: 20px;
+    margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.request-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.form-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px; /* Adjust as needed */
+}
+
+.datetime-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.current-time,
+.current-date {
+    font-size: 0.9rem; /* Adjust as needed */
+}
+
+.top-right-image {
+    height: 50px; /* Adjust as needed */
+    width: auto; /* Adjust as needed */
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Reduced space below the header */
+}
+
+.form-header h2 {
+    font-size: 1rem; /* Reduced font size for the title */
+    margin: 0; /* Remove default margins */
+    flex-shrink: 0; /* Prevents the title from shrinking */
+}
+
+.form-separator {
+    height: 2px; /* Thickness of the separator line */
+    background-color: black; /* Color of the separator line */
+    border: none;
+    flex-grow: 1; /* Allows the line to take up the remaining space */
+    margin-left: 5px; /* Space from the title to the line */
+}
+
+.form-card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 20px;
+    width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form h2 {
+    margin-bottom: 20px;
+}
+
+form label {
+    margin-top: 0;
+    margin-bottom: 4px; /* Reduced space between label and input */
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="number"],
+form input[type="email"],
+form select {
+    padding: 8px;
+    margin-bottom: 12px; /* Reduced space between form inputs */
+    background-color: #f0f0f0; /* Light gray background */
+    border: none;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 16px; /* Adjusted space above the submit button */
+}
+
