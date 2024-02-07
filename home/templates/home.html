@@ -1,4 +1,4 @@
-<!-- Not my HTML file - taken from Chase's branch for UI -->
+
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -6,14 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magna Homepage</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"> <!-- Link to stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"> <!-- Link to your external CSS file -->
 </head>
 <body>
     <header>
         <nav class="navbar">
             <a href="/" class="logo">
-                <!-- Image should be moved to a static -->
-                <img src="../templates/images/magnaLogoWhite.png" alt="Company Logo">
+                <!-- Note: This isn't correct and will need to be changed - we'll have to load it elsewhere than in templates -->
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
             </a>
             <div class="nav-links">
                 <a href="/innovation">Innovation</a>
@@ -27,13 +27,13 @@
         <div class="header-image-container">
             <img src="../templates/images/magnaLogo.png" alt="Header Image" class="header-image">
         </div>
-        <hr class="separator">
+        <hr class="separator"> <!-- This is the line separator -->
     </header>
-<!-- This will eventually be replaced by a for loop to autocreate those buttons, so we don't hardcode the buttons-->
+
     <main>
         <div class="container">
             <div class="card">
-                <h2>Time Off</h2>
+                <a class="btn btn-primary" href="/pto">Time Off</a>
             </div>
             <div class="card">
                 <h2>Job Openings</h2>
