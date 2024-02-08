@@ -10,3 +10,8 @@ def home_page(request):
 def pto(request):
     """FILL IN"""
     return render(request, "pto.html")
+
+
+def requests(request):
+    """FILL IN"""
+    return render(request, "requests.html")

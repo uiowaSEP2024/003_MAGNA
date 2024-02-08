@@ -38,3 +38,21 @@ updateDateTime();
 
 // Optionally, set it to update every minute
 setInterval(updateDateTime, 60000);
+
+
+
+function activateCurrentPageNav() {
+    const currentPage = window.location.pathname.split('/').pop();
+
+    const navButtonIdMap = {
+        'pto.html': 'new-request',
+        'requests.html': 'current-requests',
+    };
+
+    const activeButtonId = navButtonIdMap[currentPage];
+    if (activeButtonId) {
+        document.getElementById(activeButtonId).classList.add('active');
+    }
+}
+
+window.onload = activateCurrentPageNav;

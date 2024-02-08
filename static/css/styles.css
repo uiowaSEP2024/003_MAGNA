@@ -1,7 +1,9 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Sets the default font for the entire website */
 }
 
+/* Login Container Style - Used for login pages (not included in provided HTML) */
 #login-container {
     width: 300px;
     margin: 100px auto;
@@ -10,6 +12,7 @@ body {
     border-radius: 5px;
 }
 
+/* Form Element Styles - Applied to forms in pto.html */
 form h2 {
     text-align: center;
 }
@@ -35,21 +38,16 @@ form button {
     cursor: pointer;
 }
 
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
+/* Container and Card Styles - Used in home.html and requests.html for layout */
 .container {
-    width: 100%; /* Set to 100% of the viewport width */
-    max-width: 1200px; /* Adjust based on your design preference */
-    margin: auto; /* Centers the container */
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Define exactly three columns */
-    grid-gap: 20px; /* Adjust the spacing between cards */
-    padding: 20px 0; /* Adjust as needed, adding padding top and bottom */
-    justify-content: center; /* Center grid items horizontally */
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 20px 0;
+    justify-content: center;
 }
 
 .card {
@@ -60,44 +58,53 @@ body, html {
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-    /* Use a fixed width and height for larger screens */
-    width: 300px; /* Your Figma width */
-    height: 200px; /* Your Figma height */
-
-    /* Make sure cards are flexible and maintain aspect ratio on smaller screens */
+    width: 300px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
+    cursor: pointer; /* Changes the mouse cursor to indicate it's clickable */
+    text-decoration: none; /* Removes underline from links */
 }
 
-/* Responsive adjustments for smaller screens */
+.card-link {
+    text-decoration: none; /* Removes underline from links */
+    color: black; /* Sets the text color to black */
+    display: block; /* Makes the link behave like a block, allowing it to wrap the .card */
+}
+
+.card-link h2 {
+    color: black; /* Ensures the color is black */
+    text-decoration: none; /* Removes underline */
+}
+.card h2 {
+    color: black; /* Ensures the color is black */
+    text-decoration: none; /* Removes underline */
+}
+
+/* Responsive Design - Adjusts layout for screens with max-width of 768px */
 @media (max-width: 768px) {
     .container {
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 10px; /* Adjust as needed for smaller screens */
+        grid-gap: 10px;
     }
 
     .card {
-        width: 100%; /* Full width of the column */
-        height: auto; /* Height is automatic to maintain aspect ratio */
-        aspect-ratio: 3 / 2; /* Your desired aspect ratio */
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
         padding: 15px;
         margin: auto;
     }
 }
 
-
+/* Box Model - Applies box-sizing to all elements */
 * {
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
+/* Navbar Styles - Applied to navigation bars in all HTML files */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -108,38 +115,38 @@ body {
 }
 
 .logo img {
-    height: 50px; /* Adjust as needed */
+    height: 50px;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    margin-left: 20px; /* Space between links */
-    font-size: 16px; /* Adjust as needed */
+    margin-left: 20px;
+    font-size: 16px;
 }
 
 .nav-links a:hover {
     text-decoration: underline;
 }
 
-/* Add a class for the active page */
 .nav-links a.active {
     text-decoration: underline;
     font-weight: bold;
 }
 
+/* Header Image Container - Used in home.html */
 .header-image-container {
     text-align: center;
     padding: 20px 0;
 }
 
 .header-image {
-    width: auto; /* maintain the aspect ratio */
-    height: auto; /* maintain the aspect ratio */
-    max-width: 50%; /* or any other percentage or pixel value you prefer */
-    max-height: 75px; /* or any other pixel value you prefer */
-    display: block; /* this can help with centering */
-    margin: 0 auto; /* center the image horizontally */
+    width: auto;
+    height: auto;
+    max-width: 50%;
+    max-height: 75px;
+    display: block;
+    margin: 0 auto;
 }
 
 .separator {
@@ -147,20 +154,22 @@ body {
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     margin-top: 20px;
-    margin-bottom: 20px; /* Adjust the margin as needed */
+    margin-bottom: 20px;
 }
 
+/* Request Container Styles - Used in pto.html */
 .request-container {
     display: flex;
     justify-content: space-around;
     padding: 20px;
 }
 
+/* Form Top Styles - Used in pto.html */
 .form-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 10px; /* Adjust as needed */
+    padding-bottom: 10px;
 }
 
 .datetime-container {
@@ -171,34 +180,35 @@ body {
 
 .current-time,
 .current-date {
-    font-size: 0.9rem; /* Adjust as needed */
+    font-size: 0.9rem;
 }
 
 .top-right-image {
-    height: 50px; /* Adjust as needed */
-    width: auto; /* Adjust as needed */
+    height: 50px;
+    width: auto;
 }
 
 .form-header {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Reduced space below the header */
+    margin-bottom: 10px;
 }
 
 .form-header h2 {
-    font-size: 1rem; /* Reduced font size for the title */
-    margin: 0; /* Remove default margins */
-    flex-shrink: 0; /* Prevents the title from shrinking */
+    font-size: 1rem;
+    margin: 0;
+    flex-shrink: 0;
 }
 
 .form-separator {
-    height: 2px; /* Thickness of the separator line */
-    background-color: black; /* Color of the separator line */
+    height: 2px;
+    background-color: black;
     border: none;
-    flex-grow: 1; /* Allows the line to take up the remaining space */
-    margin-left: 5px; /* Space from the title to the line */
+    flex-grow: 1;
+    margin-left: 5px;
 }
 
+/* Form Card Styles - Used in pto.html */
 .form-card {
     background-color: #ffffff;
     border: none;
@@ -209,18 +219,15 @@ body {
     margin: auto;
 }
 
+/* Additional Form Styles - Applied to forms in pto.html */
 form {
     display: flex;
     flex-direction: column;
 }
 
-form h2 {
-    margin-bottom: 20px;
-}
-
 form label {
     margin-top: 0;
-    margin-bottom: 4px; /* Reduced space between label and input */
+    margin-bottom: 4px;
 }
 
 form input[type="text"],
@@ -229,18 +236,74 @@ form input[type="number"],
 form input[type="email"],
 form select {
     padding: 8px;
-    margin-bottom: 12px; /* Reduced space between form inputs */
-    background-color: #f0f0f0; /* Light gray background */
+    margin-bottom: 12px;
+    background-color: #f0f0f0;
     border: none;
     border-radius: 5px;
 }
 
-form button {
+/* Page Navigation Styles - Used in pto.html and requests.html */
+.navigation-container {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.page-navigation {
+    display: inline-block;
+    margin-bottom: -1px; /* Overlap with the separator */
+}
+
+.nav-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-align: center;
+    background-color: transparent;
+    color: black; /* Default color */
+    text-decoration: none;
+    border-radius: 5px; /* If you want rounded corners */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-button:hover {
     background-color: red;
     color: white;
-    padding: 10px;
-    border: none;
+    text-decoration: none; /* Ensures no underline on hover */
+}
+
+.active {
+    background-color: red;
+    color: white;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#new-request.active, #current-requests.active {
+    background-color: red;
+    color: white;
     border-radius: 5px;
-    cursor: pointer;
-    margin-top: 16px; /* Adjusted space above the submit button */
+}
+
+/* Request Type Specific Styles - Used in requests.html */
+.request-type-pto {
+    /* Styles specific to PTO request cards */
+}
+
+/* Status Styles - Used in requests.html to indicate request status */
+.status-approved {
+    color: green;
+}
+
+.status-pending {
+    color: orange;
+}
+
+.status-rejected {
+    color: red;
 }
