@@ -35,5 +35,5 @@ jobs:
         poetry install
     - name: Run Tests
       run: |
-        poetry run pytest -v
+#        poetry run pytest -v
         python manage.py test
