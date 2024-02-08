@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+import forms.views
 import home.views
 import login.views
 
@@ -28,4 +29,5 @@ urlpatterns = [
     # root view
     path("", login.views.login_view, name="login"),
     path("home", home.views.index, name="home"),
+    path("pto", forms.views.pto, name="pto"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

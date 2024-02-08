@@ -5,3 +5,8 @@ from django.shortcuts import render
 def home_page(request):
     """FILL IN"""
     return render(request, "home.html")
+
+
+def pto(request):
+    """FILL IN"""
+    return render(request, "pto.html")
