@@ -35,7 +35,7 @@ Notes:
 - You only need to run docker-compose build the first time
 - Updates to the application will be shown without needing to restart Docker
 - Environment changes must be done with Docker open in order for it to be changed in Docker
-  
+
 <!-- ROADMAP -->
 ## Roadmap
 
