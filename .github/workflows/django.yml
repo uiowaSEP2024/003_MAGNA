@@ -27,12 +27,11 @@ jobs:
     - uses: actions/cache@v3
       name: Define a cache for the virtual environment based on the dependencies lock file
       with:
-        path: ./.venv
+        path: ~/.cache/pypoetry/virtualenvs
         key: venv-${{ hashFiles('poetry.lock') }}
     - name: Install Dependencies
       run: |
         poetry install
     - name: Run Tests
       run: |
-        source .venv/bin/activate
-        python manage.py test
+        poetry run python manage.py test
