@@ -2,7 +2,7 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "actions" ]
   pull_request:
     branches: [ "main" ]
 
@@ -37,4 +37,3 @@ jobs:
       run: |
         poetry run pytest -v
         python manage.py test
-        
