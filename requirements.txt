@@ -3,7 +3,6 @@ bson==0.5.10
 Django==5.0.2
 dnspython==2.4.2
 gunicorn==21.2.0
-packaging @ file:///private/tmp/python-packaging-20231211-10905-adsfgp/packaging-23.2
 pymongo==4.6.0
 python-dateutil==2.8.2
 six==1.16.0
