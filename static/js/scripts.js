@@ -38,7 +38,3 @@ updateDateTime();
 
 // Optionally, set it to update every minute
 setInterval(updateDateTime, 60000);
-
-
-
-
