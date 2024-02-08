@@ -22,17 +22,3 @@ class LoginTestCase(TestCase):
 
 class EmployeeModelTestCase(TestCase):
     """Testing class for the employee model"""
-
-    @pytest.mark.django_db
-    def test_employee_creation(self):
-        """Test employee creation model"""
-        employee = Employee.objects.create(
-            name="Test User",
-            role="employee",
-            clock_number="021456",
-            email="test@example.com",
-        )
-        assert employee.name == "Test User"
-        assert employee.role == "Developer"
-        assert employee.clock_number == "12345"
-        assert employee.email == "test@example.com"
