@@ -1,1 +1,1 @@
-web: gunicorn magna.wsgi
+web: gunicorn magna.wsgi --log-file -
