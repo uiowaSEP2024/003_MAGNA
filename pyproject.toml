@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "magna"
+version = "0.1.0"
+description = "Prototype Kiosk System for Magna International"
+authors = ["teckenrod <treyeck2@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+django = "~=4.2.8"
+behave = "~=1.2.6"
+psycopg2 = "^2.9.9"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.1.1"
+flake8 = "^7.0.0"
+pre-commit = "^3.6.0"
+tox = "^4.12.1"
+
+[tool.djlint]
+profile="django"
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = false
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = true
+ignore-nested-functions = false
+ignore-nested-classes = true
+ignore-setters = false
+fail-under = 95
+exclude = ["setup.py", "docs", "build"]
+ignore-regex = ["^get$", "^mock_.*", ".*BaseClass.*"]
+verbose = 0
+quiet = false
+whitelist-regex = []
+color = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

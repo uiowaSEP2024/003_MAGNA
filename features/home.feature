@@ -13,3 +13,8 @@ Feature: Home Page functionality
     Given a manager is logged in
     When on the home page
     Then The manager should see all forms
+Feature: Home Page Functionality
+  Scenario: User goes to fill out PTO form
+    Given the user has navigated to the home page
+    When the user clicks on the absence request button
+    Then the user is redirected to the absence request form
