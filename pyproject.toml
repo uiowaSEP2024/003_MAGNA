@@ -17,6 +17,7 @@ black = "^24.1.1"
 flake8 = "^7.0.0"
 pre-commit = "^3.6.0"
 tox = "^4.12.1"
+coverage = "^7.4.1"
 
 [tool.djlint]
 profile="django"
@@ -39,6 +40,11 @@ verbose = 0
 quiet = false
 whitelist-regex = []
 color = true
+
+[tool.coverage.report]
+omit = [
+    "*/tests.py"
+]
 
 [build-system]
 requires = ["poetry-core"]
