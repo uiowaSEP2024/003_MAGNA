@@ -14,14 +14,14 @@ def step_impl(context):
 
 @given("the user has navigated to the home page")
 def step_impl(context):
-    """Putting the test enviroment on the home page"""
+    """Putting the test environment on the home page"""
     context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/home")
 
 
-@given("a user is logged in and on the PTO form")
+@given("a user is logged in and on the absence request form")
 def step_impl(context):
-    """Logs the user in, then navigates to the PTO Form
+    """Logs the user in, then navigates to the absence request Form
     This is a temporary fix until I can get a before run function set up.
     It didn't want to work earlier
     """
@@ -34,8 +34,8 @@ def step_impl(context):
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
     # then once we're on the home page
-    pto_button = context.browser.find_element(By.ID, "pto-link")
-    pto_button.click()
+    absence_request_button = context.browser.find_element(By.ID, "absence-request-link")
+    absence_request_button.click()
 
 
 @when("the user correctly fills out clock number")
@@ -178,18 +178,18 @@ def step_impl(context):
     login_button.click()
 
 
-@when("the user clicks on the PTO button")
+@when("the user clicks on the absence request button")
 def step_impl(context):
-    """Clicks on the pto link"""
-    pto_button = context.browser.find_element(By.ID, "pto-link")
-    pto_button.click()
+    """Clicks on the absence request link"""
+    absence_request_button = context.browser.find_element(By.ID, "absence-request-link")
+    absence_request_button.click()
 
 
-@when("the user submits the PTO form")
+@when("the user submits the absence request form")
 def step_impl(context):
-    """Submits the PTO form"""
-    pto_submit = context.browser.find_element(By.ID, "submit")
-    pto_submit.click()
+    """Submits the absence request form"""
+    absence_request_submit = context.browser.find_element(By.ID, "submit")
+    absence_request_submit.click()
 
 
 @then("the user should not be redirected to the home page")
@@ -210,11 +210,11 @@ def step_impl(context):
     )
 
 
-@then("the user is redirected to the PTO form")
+@then("the user is redirected to the absence request form")
 def step_impl(context):
-    """Checks if the test env is on the PTO form"""
-    assert context.browser.current_url == "http://localhost:8000/pto", (
-        f"Expected url to be on pto form page, "
+    """Checks if the test env is on the absence request form"""
+    assert context.browser.current_url == "http://localhost:8000/absence_request", (
+        f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
 
@@ -223,15 +223,15 @@ def step_impl(context):
 def step_impl(context):
     """Checks if the test env is on the confirmation page"""
     assert context.browser.current_url == "http://localhost:8000/confirm", (
-        f"Expected url to be on pto form page, "
+        f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
 
 
 @then("the form should not be submitted")
 def step_impl(context):
-    """Checks if the test env is still on the PTO page"""
-    assert context.browser.current_url == "http://localhost:8000/pto", (
-        f"Expected url to be on pto form page, "
+    """Checks if the test env is still on the absence request page"""
+    assert context.browser.current_url == "http://localhost:8000/absence_request", (
+        f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
