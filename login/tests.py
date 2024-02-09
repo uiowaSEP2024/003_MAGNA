@@ -1,4 +1,3 @@
-import pytest
 from django.test import TestCase
 from django.urls import reverse
 
@@ -24,6 +23,7 @@ class EmployeeModelTestCase(TestCase):
     """Testing class for the employee model"""
 
     def test_employee_creation(self):
+        """Test for valid employee creation"""
         employee = Employee.objects.create(
             name="John Doe",
             role="Developer",
