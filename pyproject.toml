@@ -10,9 +10,9 @@ readme = "README.md"
 python = ">=3.9"
 django = "~=4.2.8"
 behave = "~=1.2.6"
+psycopg2 = "^2.9.9"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.0.0"
 black = "^24.1.1"
 flake8 = "^7.0.0"
 pre-commit = "^3.6.0"

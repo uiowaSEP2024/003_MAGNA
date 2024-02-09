@@ -29,8 +29,7 @@ urlpatterns = [
     # root view
     path("", login.views.login_view, name="login"),
     path("home", home.views.index, name="home"),
-    path("pto", forms.views.pto, name="pto"),
-    path("requests", forms.views.requests, name="requests")
+    path("absence-request", forms.views.absence_request, name="absence-request"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
