@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="/" class="logo">
+            <a href="/home" class="logo">
                 <!-- Note: This isn't correct and will need to be changed - we'll have to load it elsewhere than in templates -->
                 <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
             </a>
@@ -32,9 +32,11 @@
 
     <main>
         <div class="container">
-            <div class="card">
-                <a class="btn btn-primary" id="absence-request-link" href="/absence-request">Time Off</a>
-            </div>
+            <a href="/absense-request" class="card-link">
+                <div class="card">
+                    <h2>Time Off</h2>
+                </div>
+            </a>
             <div class="card">
                 <h2>Job Openings</h2>
             </div>

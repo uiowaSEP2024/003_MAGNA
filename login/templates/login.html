@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+            <a href="/home" class="logo">
+                <!-- Note: This isn't correct and will need to be changed - we'll have to load it elsewhere than in templates -->
+                <img src="{{ MEDIA_URL }}images/magnaLogoWhite" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a href="/innovation">Innovation</a>
+                <a href="/products">Products</a>
+                <a href="/stories">Stories</a>
+                <a href="/company">Company</a>
+                <a href="/careers">Careers</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </nav>
+    </header>
     <div class="login-container">
         <form class="login-form">
             <h2>Login</h2>
