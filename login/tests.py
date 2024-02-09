@@ -22,3 +22,15 @@ class LoginTestCase(TestCase):
 
 class EmployeeModelTestCase(TestCase):
     """Testing class for the employee model"""
+
+    def test_employee_creation(self):
+        employee = Employee.objects.create(
+            name="John Doe",
+            role="Developer",
+            clock_number="123456",
+            email="john@example.com",
+        )
+        self.assertEqual(employee.name, "John Doe")
+        self.assertEqual(employee.role, "Developer")
+        self.assertEqual(employee.clock_number, "123456")
+        self.assertEqual(employee.email, "john@example.com")
