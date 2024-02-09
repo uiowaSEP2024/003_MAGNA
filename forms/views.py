@@ -10,3 +10,8 @@ def home_page(request):
 def absence_request(request):
     """FILL IN"""
     return render(request, "absence_request.html")
+
+
+def requests(request):
+    """FILL IN"""
+    return render(request, "requests.html")
