@@ -10,7 +10,7 @@ def home_page(request):
     return render(request, "home.html")
 
 
-def pto(request):
+def absence_request(request):
     if request.method == 'POST':
         form = PTOForm(request.POST)
         if form.is_valid():
@@ -30,3 +30,8 @@ def pto(request):
     else:
         form = PTOForm()
     return render(request, 'pto.html', {'form': form})
+
+
+def requests(request):
+    """FILL IN"""
+    return render(request, "requests.html")

@@ -28,7 +28,7 @@ Plans for future development or improvements
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Note: This project is currently under development and is not authorized for external use at this time.
 
 <!-- AUTHORS -->
 ## Authors

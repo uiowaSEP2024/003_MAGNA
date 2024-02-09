@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Requests</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <style>
+    /* You may add additional CSS here or in your external stylesheet */
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <!-- Navigation bar content here -->
+</div>
+
+<div class="navigation-container">
+    <div class="page-navigation">
+        <a href="/absence-request" class="nav-button" id="new-request">New Request</a>
+        <a href="/requests" class="nav-button" id="current-requests">Current Requests</a>
+    </div>
+    <hr class="separator">
+</div>
+
+<div class="container">
+    <!-- Loop through the requests and create a card for each one -->
+    <div class="card request-type-pto">
+        <div class="form-header">
+            <h2>PTO</h2>
+            <hr class="form-separator">
+        </div>
+        <div class="datetime-container">
+            <div class="issue-date">Issue Date: 12/16/2023</div>
+            <div class="effective-date">Effective Date: 12/22/2024</div>
+            <div class="end-date">End Date: 12/24/2024</div>
+        </div>
+        <div class="status-approved">Status: Approved</div>
+    </div>
+    <!-- Repeat for other requests -->
+</div>
+
+<script src="../static/js/scripts.js"></script>
+</body>
+</html>
