@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class AbsenceRequest(models.Model):
+    """Model for Absence Requets"""
+
+    pass
