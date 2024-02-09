@@ -7,6 +7,6 @@ def home_page(request):
     return render(request, "home.html")
 
 
-def pto(request):
+def absence_request(request):
     """FILL IN"""
     return render(request, "absence_request.html")

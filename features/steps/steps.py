@@ -213,7 +213,7 @@ def step_impl(context):
 @then("the user is redirected to the absence request form")
 def step_impl(context):
     """Checks if the test env is on the absence request form"""
-    assert context.browser.current_url == "http://localhost:8000/absence_request", (
+    assert context.browser.current_url == "http://localhost:8000/absence-request", (
         f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
