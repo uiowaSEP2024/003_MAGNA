@@ -11,6 +11,7 @@ def home_page(request):
 
 
 def absence_request(request):
+    """The form for absence request, all information is put in here"""
     if request.method == 'POST':
         form = PTOForm(request.POST)
         if form.is_valid():
