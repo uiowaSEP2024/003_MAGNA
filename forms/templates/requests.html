@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Requests</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <style>
-    /* You may add additional CSS here or in your external stylesheet */
-    </style>
 </head>
 <body>
 
@@ -25,22 +22,24 @@
 </div>
 
 <div class="container">
-    <!-- Loop through the requests and create a card for each one -->
-    <div class="card request-type-pto">
+    {% for request in requests %}
+    <div class="card request-type-{{ request.absence_type|lower }}">
         <div class="form-header">
-            <h2>PTO</h2>
+            <h2>{{ request.absence_type }}</h2>
             <hr class="form-separator">
         </div>
         <div class="datetime-container">
-            <div class="issue-date">Issue Date: 12/16/2023</div>
-            <div class="effective-date">Effective Date: 12/22/2024</div>
-            <div class="end-date">End Date: 12/24/2024</div>
+            <div class="issue-date">Start Date: {{ request.start_date|date:"m/d/Y" }}</div>
+            <div class="end-date">End Date: {{ request.end_date|date:"m/d/Y" }}</div>
         </div>
-        <div class="status-approved">Status: Approved</div>
+        <div class="status-{{ request.approval_status }}">Status: {{ request.get_approval_status_display }}</div>
+        <!-- Additional fields like employee name, hours, etc. can be added here -->
     </div>
-    <!-- Repeat for other requests -->
+    {% empty %}
+    <p>No requests found.</p>
+    {% endfor %}
 </div>
 
-<script src="../static/js/scripts.js"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

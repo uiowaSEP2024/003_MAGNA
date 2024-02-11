@@ -19,6 +19,9 @@ class AbsenceRequest(models.Model):
         ("4th", "4th Shift"),
     ]
 
+    clock = models.CharField(max_length=100, blank=True, null=True)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
     approval_status = models.CharField(max_length=20, choices=APPROVAL_CHOICES)

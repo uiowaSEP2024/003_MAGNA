@@ -11,8 +11,7 @@
     <header>
         <nav class="navbar">
             <a href="/" class="logo">
-                <!-- Assuming you have a logo image named 'logo.png' in the images folder -->
-                <img src="../templates/images/magnaLogoWhite.png" alt="Company Logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
             </a>
             <div class="nav-links">
                 <a href="/innovation">Innovation</a>
@@ -32,11 +31,12 @@
         </div>
         <hr class="separator">
     </div>
+
     <div class="request-container">
         <div class="form-card">
             <div class="form-top">
                 <div class="form-logo">
-                    <img src="../templates/images/magnaLogo.png" alt="Company Logo" class="top-right-image">
+                    <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="top-right-image">
                 </div>
                 <div class="datetime-container">
                     <div class="current-time">Current Time: <span id="time"></span></div>
@@ -49,15 +49,17 @@
             <div>
                 <hr class="form-separator">
             </div>
-            <form id="time-off-form">
+            <form id="time-off-form" method="post" action="{% url 'absence-request' %}">
+                {% csrf_token %}
                 <label for="clock">Clock:</label>
                 <input type="text" id="clock" name="clock">
 
                 <label for="shift">Shift:</label>
                 <select id="shift" name="shift">
-                    <option value="morning">Morning</option>
-                    <option value="evening">Evening</option>
-                    <option value="night">Night</option>
+                    <option value="1st">1st Shift</option>
+                    <option value="2nd">2nd Shift</option>
+                    <option value="3rd">3rd Shift</option>
+                    <option value="4th">4th Shift</option>
                 </select>
 
                 <label for="full-name">Full Name: (Please include first and last name)</label>
@@ -78,8 +80,9 @@
                     <!-- Add more absence types as needed -->
                 </select>
 
-                <label for="approving-supervisor">Approving Supervisor:</label>
-                <input type="text" id="approving-supervisor" name="approving_supervisor">
+                <!-- Assuming approving_supervisor field is handled in the backend -->
+                <!-- <label for="approving-supervisor">Approving Supervisor:</label> -->
+                <!-- <input type="text" id="approving-supervisor" name="approving_supervisor"> -->
 
                 <label for="email">Your Email Address:</label>
                 <input type="email" id="email" name="email">
@@ -87,11 +90,8 @@
                 <button type="submit" id="submit">Save Request and Submit</button>
             </form>
         </div>
-
-        <!-- Right side with the calendar will go here but from has built in calendar so might not do this-->
-
     </div>
 
-<script src="../static/js/scripts.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

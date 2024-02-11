@@ -24,7 +24,7 @@ db.sqlite3
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
-.idea/**/dataSources.ids
+.idea/**/dataSources.ids 
 .idea/**/dataSources.local.xml
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
@@ -127,3 +127,5 @@ Control.ca-list
 Control.ca-bundle
 Control.system-ca-bundle
 GitHub.sublime-settings
+.idea/003_MAGNA.iml
+.idea/misc.xml
