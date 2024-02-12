@@ -276,19 +276,51 @@ form select {
 }
 
 /* Request Type Specific Styles - Used in requests.html */
-.request-type-pto {
-    /* Styles specific to PTO request cards */
+.request-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Space between cards */
+    text-align: left; /* Aligns text to the left */
 }
 
-/* Status Styles - Used in requests.html to indicate request status */
-.status-approved {
-    color: green;
+.request-card-top {
+    background-color: #FF0000; /* Replace with the desired color for top section */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px 15px 0 0;
 }
 
-.status-pending {
-    color: orange;
+.request-card-bottom {
+    background-color: #FFFFFF; /* White color for the bottom part */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.status-rejected {
-    color: red;
+/* You can add additional classes to handle the different request types */
+.request-type-pto .request-card-top {
+    background-color: #4CAF50; /* Green for PTO */
+}
+
+.request-type-vacation .request-card-top {
+    background-color: #2196F3; /* Blue for Vacation */
+}
+
+.request-type-sick .request-card-top {
+    background-color: #FF9800; /* Orange for Sick Leave */
+}
+
+/* Specific styles for status */
+.status-approved .request-card-top {
+    background-color: #4CAF50; /* Green for approved */
+}
+
+.status-pending .request-card-top {
+    background-color: #FFEB3B; /* Yellow for pending */
+}
+
+.status-rejected .request-card-top {
+    background-color: #F44336; /* Red for rejected */
 }
