@@ -250,7 +250,7 @@ form select {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.nav-button:hover {
+.nav-button.active {
     background-color: red;
     color: white;
     text-decoration: none; /* Ensures no underline on hover */

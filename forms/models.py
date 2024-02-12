@@ -6,6 +6,7 @@ from login.models import Employee
 class AbsenceRequest(models.Model):
     # Assuming 'id' is the primary key, Django will create it automatically as an AutoField.
 
+
     start_date = models.DateField()
     end_date = models.DateField()
     approval_status = models.CharField(max_length=20, choices=[

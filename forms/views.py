@@ -18,6 +18,7 @@ def requests(request):
     """FILL IN"""
     return render(request, "requests.html")
 
+
 def submit_absence_request(request):
     if request.method == "POST":
         # Create an instance of your model and save the form data
@@ -37,6 +38,7 @@ def submit_absence_request(request):
 
     return render(request, 'absence_request.html')
 
+
 def view_requests(request):
-    requests = AbsenceRequest.objects.all()
-    return render(request, 'requests.html', {'requests': requests})
+    activeRequests = AbsenceRequest.objects.all()
+    return render(request, 'requests.html', {'requests': activeRequests})
