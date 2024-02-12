@@ -23,6 +23,15 @@
             </div>
         </nav>
     </header>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <div class="navigation-container">
         <div class="page-navigation">
@@ -49,7 +58,7 @@
             <div>
                 <hr class="form-separator">
             </div>
-            <form id="time-off-form" method="post" action="{% url 'absence-request' %}">
+            <form id="time-off-form" method="post" action="{% url 'submit_absence_request' %}">
                 {% csrf_token %}
                 <label for="clock">Clock:</label>
                 <input type="text" id="clock" name="clock">

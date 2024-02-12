@@ -24,20 +24,16 @@ def submit_absence_request(request):
         absence_request = AbsenceRequest(
             start_date=request.POST.get('first_day_absent'),
             end_date=request.POST.get('last_day_absent'),
-            approval_status="pending",  # Set default status as pending
+            approval_status="pending",  # Default to 'pending'
             shift_number=request.POST.get('shift'),
             hours_gone=request.POST.get('hours'),
             absence_type=request.POST.get('absence_type'),
-            # Assuming `approval` and `filled_by` should be set based on the logged-in user or some other logic
-            # approval= ... ,
-            # filled_by= ... ,
-            clock=request.POST.get('clock'),
-            full_name=request.POST.get('full_name'),
-            email=request.POST.get('email'),
+            # Omit the 'approval' and 'filled_by' fields if not logged in or not applicable
         )
         absence_request.save()
         messages.success(request, 'Request submitted successfully.')
-        return redirect('view-requests')
+
+        return redirect('requests')
 
     return render(request, 'absence_request.html')
 
