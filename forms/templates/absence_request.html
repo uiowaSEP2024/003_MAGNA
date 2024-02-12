@@ -60,38 +60,32 @@
             </div>
             <form id="time-off-form" method="post" action="{% url 'submit_absence_request' %}">
                 {% csrf_token %}
-                <label for="clock">Clock:</label>
-                <input type="text" id="clock" name="clock">
-
                 <label for="shift">Shift:</label>
-                <select id="shift" name="shift">
+                <select id="shift" name="shift_number">
                     <option value="1st">1st Shift</option>
                     <option value="2nd">2nd Shift</option>
                     <option value="3rd">3rd Shift</option>
                     <option value="4th">4th Shift</option>
                 </select>
 
-                <label for="full-name">Full Name: (Please include first and last name)</label>
+                <!-- Assuming full_name is used for filled_by or similar -->
+                <label for="full-name">Full Name:</label>
                 <input type="text" id="full-name" name="full_name">
 
                 <label for="first-day-absent">First Day Absent:</label>
-                <input type="date" id="first-day-absent" name="first_day_absent">
+                <input type="date" id="first-day-absent" name="start_date">
 
                 <label for="last-day-absent">Last Day Absent:</label>
-                <input type="date" id="last-day-absent" name="last_day_absent">
+                <input type="date" id="last-day-absent" name="end_date">
 
                 <label for="hours">Hours:</label>
-                <input type="number" id="hours" name="hours">
+                <input type="number" id="hours" name="hours_gone">
 
                 <label for="absence-type">Absence Type:</label>
                 <select id="absence-type" name="absence_type">
                     <option value="pto">PTO</option>
                     <!-- Add more absence types as needed -->
                 </select>
-
-                <!-- Assuming approving_supervisor field is handled in the backend -->
-                <!-- <label for="approving-supervisor">Approving Supervisor:</label> -->
-                <!-- <input type="text" id="approving-supervisor" name="approving_supervisor"> -->
 
                 <label for="email">Your Email Address:</label>
                 <input type="email" id="email" name="email">
