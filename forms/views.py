@@ -15,9 +15,8 @@ def absence_request(request):
 
 
 def requests(request):
-    """FILL IN"""
-    return render(request, "requests.html")
-
+    activeRequests = AbsenceRequest.objects.all()
+    return render(request, 'requests.html', {'requests': activeRequests})
 
 def submit_absence_request(request):
     if request.method == "POST":
@@ -39,6 +38,4 @@ def submit_absence_request(request):
     return render(request, 'absence_request.html')
 
 
-def view_requests(request):
-    activeRequests = AbsenceRequest.objects.all()
-    return render(request, 'requests.html', {'requests': activeRequests})
+
