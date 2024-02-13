@@ -35,7 +35,11 @@ jobs:
         poetry install
     - name: Install Heroku CLI
       run: |
-        curl https://cli-assets.heroku.com/install.sh | sudo sh
+        if [ "${RUNNER_OS}" != "Windows" ]; then
+          curl https://cli-assets.heroku.com/install.sh | sh
+        else
+          echo "Skipping Heroku CLI installation on Windows"
+        fi
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
