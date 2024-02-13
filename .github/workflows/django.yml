@@ -41,5 +41,5 @@ jobs:
         poetry run python manage.py test
     - name: Coverage Report
       run: |
-        poetry run coverage report -m unittest discover
+#        poetry run coverage report -m unittest discover
         poetry run coverage report -m
