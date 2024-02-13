@@ -56,3 +56,18 @@ function activateCurrentPageNav() {
 }
 
 window.onload = activateCurrentPageNav;
+
+/* Calendar Navigation */
+function navigateCalendar(direction) {
+    // Add logic to navigate the calendar (load previous or next month)
+    if (direction === 'prev') {
+        // Logic to load the previous month's data
+    } else {
+        // Logic to load the next month's data
+    }
+}
+
+// Call a function to fill the calendar with dates when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Logic to populate the calendar with dates
+});

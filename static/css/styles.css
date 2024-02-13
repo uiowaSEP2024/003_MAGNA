@@ -347,3 +347,35 @@ form select {
 .status-rejected .request-card-bottom .status-text {
     color: #F44336; /* Red for rejected */
 }
+
+
+/* Calendar Type Styles - used in calendar.html */
+
+.calendar-container {
+    /* Adjust the styles to fit your Figma design */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Spacing from the navigation bar */
+}
+
+.calendar-card {
+    /* Reuse card styles and adjust as needed for the calendar */
+}
+
+.calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+}
