@@ -143,3 +143,12 @@ MEDIA_URL = '/media/'
 
 # Set up a storage for messages
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # The host of your email service
+EMAIL_USE_TLS = True  # Use TLS encryption
+EMAIL_PORT = 587  # Port for sending email
+EMAIL_HOST_USER = 'sepgroup03@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'unsw bvaz dsbr jigj'  # Your email password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
