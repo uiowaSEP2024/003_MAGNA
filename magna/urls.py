@@ -30,6 +30,11 @@ urlpatterns = [
     path("", login.views.login_view, name="login"),
     path("home", home.views.index, name="home"),
     path("absence-request", forms.views.absence_request, name="absence-request"),
+    path(
+        "submit-absence-request/",
+        forms.views.submit_absence_request,
+        name="submit_absence_request",
+    ),
     path("requests", forms.views.requests, name="requests"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
