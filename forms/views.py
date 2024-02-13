@@ -4,6 +4,12 @@ from django.contrib import messages
 
 
 # Create your views here.
+
+def calendar(request):
+    """FILL IN"""
+    return render(request, "calendar.html")
+
+
 def home_page(request):
     """FILL IN"""
     return render(request, "home.html")
