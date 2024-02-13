@@ -140,3 +140,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Media Files Definition
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Set up a storage for messages
+MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'

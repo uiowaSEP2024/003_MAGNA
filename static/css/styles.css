@@ -250,7 +250,7 @@ form select {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.nav-button:hover {
+.nav-button.active {
     background-color: red;
     color: white;
     text-decoration: none; /* Ensures no underline on hover */
@@ -276,19 +276,74 @@ form select {
 }
 
 /* Request Type Specific Styles - Used in requests.html */
-.request-type-pto {
-    /* Styles specific to PTO request cards */
+.request-card {
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    overflow: hidden; /* Ensures child elements don't overflow */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Status Styles - Used in requests.html to indicate request status */
-.status-approved {
-    color: green;
+.request-card-top {
+    background-color: #FFEB3B; /* Default color, will be overridden based on status */
+    color: white;
+    padding: 10px;
+    position: relative; /* For positioning the X button */
+    flex-basis: 33.33%;
 }
 
-.status-pending {
-    color: orange;
+.request-card-top .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    cursor: pointer;
 }
 
-.status-rejected {
-    color: red;
+.request-card-top .issue-date {
+    font-size: 0.9rem;
+}
+
+.request-card-top .request-type {
+    font-weight: bold;
+    color: black;
+}
+
+.request-card-bottom {
+    padding: 20px;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.status-approved .request-card-top {
+    background-color: #4CAF50; /* Green for approved */
+}
+
+.status-pending .request-card-top {
+    background-color: #FFEB3B; /* Yellow for pending */
+}
+
+.status-rejected .request-card-top {
+    background-color: #F44336; /* Red for rejected */
+}
+
+/* Example of how to style the text for each status in the bottom section */
+.request-card-bottom .status-text {
+    /* Initially set default color, can be overridden based on status */
+    color: black;
+}
+
+.status-approved .request-card-bottom .status-text {
+    color: #4CAF50; /* Green for approved */
+}
+
+.status-pending .request-card-bottom .status-text {
+    color: #FFEB3B; /* Yellow for pending */
+}
+
+.status-rejected .request-card-bottom .status-text {
+    color: #F44336; /* Red for rejected */
 }

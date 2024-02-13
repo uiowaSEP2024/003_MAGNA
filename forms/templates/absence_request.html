@@ -11,8 +11,7 @@
     <header>
         <nav class="navbar">
             <a href="/" class="logo">
-                <!-- Assuming you have a logo image named 'logo.png' in the images folder -->
-                <img src="../templates/images/magnaLogoWhite.png" alt="Company Logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
             </a>
             <div class="nav-links">
                 <a href="/innovation">Innovation</a>
@@ -24,19 +23,29 @@
             </div>
         </nav>
     </header>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <div class="navigation-container">
         <div class="page-navigation">
-            <a href="/absence-request" class="nav-button" id="new-request">New Request</a>
-            <a href="/requests" class="nav-button" id="current-requests">Current Requests</a>
+            <a href="/absence-request" class="nav-button {% if request.path == '/absence-request' %}active{% endif %}" id="new-request">New Request</a>
+            <a href="/requests" class="nav-button {% if request.path == '/requests' %}active{% endif %}" id="current-requests">Current Requests</a>
         </div>
         <hr class="separator">
     </div>
+
     <div class="request-container">
         <div class="form-card">
             <div class="form-top">
                 <div class="form-logo">
-                    <img src="../templates/images/magnaLogo.png" alt="Company Logo" class="top-right-image">
+                    <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="top-right-image">
                 </div>
                 <div class="datetime-container">
                     <div class="current-time">Current Time: <span id="time"></span></div>
@@ -49,28 +58,28 @@
             <div>
                 <hr class="form-separator">
             </div>
-            <form id="time-off-form">
-                <label for="clock">Clock:</label>
-                <input type="text" id="clock" name="clock">
-
+            <form id="time-off-form" method="post" action="{% url 'submit_absence_request' %}">
+                {% csrf_token %}
                 <label for="shift">Shift:</label>
-                <select id="shift" name="shift">
-                    <option value="morning">Morning</option>
-                    <option value="evening">Evening</option>
-                    <option value="night">Night</option>
+                <select id="shift" name="shift_number">
+                    <option value="1st">1st Shift</option>
+                    <option value="2nd">2nd Shift</option>
+                    <option value="3rd">3rd Shift</option>
+                    <option value="4th">4th Shift</option>
                 </select>
 
-                <label for="full-name">Full Name: (Please include first and last name)</label>
+                <!-- Assuming full_name is used for filled_by or similar -->
+                <label for="full-name">Full Name:</label>
                 <input type="text" id="full-name" name="full_name">
 
                 <label for="first-day-absent">First Day Absent:</label>
-                <input type="date" id="first-day-absent" name="first_day_absent">
+                <input type="date" id="first-day-absent" name="start_date">
 
                 <label for="last-day-absent">Last Day Absent:</label>
-                <input type="date" id="last-day-absent" name="last_day_absent">
+                <input type="date" id="last-day-absent" name="end_date">
 
                 <label for="hours">Hours:</label>
-                <input type="number" id="hours" name="hours">
+                <input type="number" id="hours" name="hours_gone">
 
                 <label for="absence-type">Absence Type:</label>
                 <select id="absence-type" name="absence_type">
@@ -78,20 +87,14 @@
                     <!-- Add more absence types as needed -->
                 </select>
 
-                <label for="approving-supervisor">Approving Supervisor:</label>
-                <input type="text" id="approving-supervisor" name="approving_supervisor">
-
                 <label for="email">Your Email Address:</label>
                 <input type="email" id="email" name="email">
 
                 <button type="submit" id="submit">Save Request and Submit</button>
             </form>
         </div>
-
-        <!-- Right side with the calendar will go here but from has built in calendar so might not do this-->
-
     </div>
 
-<script src="../static/js/scripts.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>
