@@ -5,6 +5,7 @@ from django.urls import reverse
 from forms.models import AbsenceRequest
 from login.models import Employee
 
+from django.core import mail
 
 class AbsenceRequestTestCase(TestCase):
     """Testing class for absence request model"""
@@ -78,3 +79,18 @@ class AbsenceRequestTestCase(TestCase):
         # Check that the context contains AbsenceRequest objects
         self.assertTrue('requests' in response.context)
         self.assertEqual(len(response.context['requests']), 1)
+
+class AbsenceRequestEmailTest(TestCase):
+    def test_email_sent_on_valid_form_submission(self):
+        response = self.client.post(reverse('submit_absence_request'), {
+            'first_day_absent': '2024-02-14',
+            'last_day_absent': '2024-02-15',
+            'shift': '1',
+            'hours': '8',
+            'absence_type': 'sick',
+            'email': 'test@example.com',  # Update with the correct form field
+        })
+        self.assertEqual(response.status_code, 302)  # Assuming a redirect occurs
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Absence Request Submitted')
+        self.assertEqual(mail.outbox[0].to, ['test@example.com'])
