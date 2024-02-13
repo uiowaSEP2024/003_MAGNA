@@ -1,3 +1,5 @@
+import datetime
+
 import django.core.exceptions
 from cfgv import ValidationError
 from django.contrib.auth.models import User
@@ -25,6 +27,7 @@ class AbsenceRequestTestCase(TestCase):
         self.valid_form_data = {
             "start_date": "2024-01-01",
             "end_date": "2024-01-05",
+            "approval_status": "pending",
             "shift_number": "1st",
             "hours_gone": 8,
             "absence_type": "vacation",
@@ -51,8 +54,8 @@ class AbsenceRequestTestCase(TestCase):
             approval=self.manager,
             filled_by=self.floor,
         )
-        self.assertEqual(ar.start_date, "2024-02-08")
-        self.assertEqual(ar.end_date, "2024-02-10")
+        self.assertEqual(ar.start_date, datetime.date(2024, 2, 8))
+        self.assertEqual(ar.end_date, datetime.date(2024, 2, 10))
         self.assertEqual(ar.approval_status, "pending")
         self.assertEqual(ar.shift_number, "1st")
         self.assertEqual(ar.hours_gone, 16)
