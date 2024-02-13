@@ -35,7 +35,7 @@ jobs:
         poetry install
     - name: Install Heroku CLI
       run: |
-        curl https://cli-assets.heroku.com/install.sh | sh
+        curl https://cli-assets.heroku.com/install.sh | sudo sh
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
