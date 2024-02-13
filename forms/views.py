@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import AbsenceRequest
 from django.contrib import messages
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 def home_page(request):
@@ -26,6 +27,7 @@ def submit_absence_request(request):
         shift_number = request.POST.get('shift')
         hours_gone = request.POST.get('hours')
         absence_type = request.POST.get('absence_type')
+        email_address = request.POST.get('email')
 
         # Check if required fields are present
         if start_date and end_date and shift_number and hours_gone and absence_type:
@@ -40,6 +42,17 @@ def submit_absence_request(request):
                 # Omit the 'approval' and 'filled_by' fields if not logged in or not applicable
             )
             absence_request.save()
+
+            subject = "Absence Request Submitted"
+            message = f"Your absence request from {start_date} to {end_date} has been submitted and is pending approval."
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [email_address],
+                fail_silently=False
+            )
+
             messages.success(request, 'Request submitted successfully.')
             return redirect('requests')
         else:
