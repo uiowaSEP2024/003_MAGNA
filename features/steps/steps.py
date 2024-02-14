@@ -37,6 +37,10 @@ def step_impl(context):
     absence_request_button = context.browser.find_element(By.ID, "absence-request-link")
     absence_request_button.click()
 
+@given("they are on the home page")
+def step_impl(context):
+    context.browser.get("http://localhost:8000/home")
+
 
 @when("the user correctly fills out clock number")
 def step_impl(context):
