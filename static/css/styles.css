@@ -359,7 +359,25 @@ form select {
 }
 
 .calendar-card {
-    /* Reuse card styles and adjust as needed for the calendar */
+    background-color: #f0f0f0;
+    border: 1px solid #d0d0d0;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    cursor: default; /* Default cursor for calendar card */
+}
+
+/* Make sure to remove any unwanted hover effects if they are inherited from the .card class */
+.calendar-card:hover {
+    background-color: #f0f0f0; /* Keep the background color the same on hover */
 }
 
 .calendar-navigation {
@@ -376,6 +394,16 @@ form select {
 
 .calendar-dates {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr); /* 7 days per week */
     grid-gap: 10px;
+}
+
+.calendar-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px; /* or whatever height you want */
+    background-color: #f0f0f0;
+    border-radius: 5px; /* Optional, for rounded corners */
+    /* Add any other styles you want for the date boxes */
 }
