@@ -1,8 +1,13 @@
+import json
+
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+
 from .models import AbsenceRequest
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import AbsentDaysAllowed
+from datetime import datetime
 
 
 # Create your views here.
@@ -60,4 +65,19 @@ def submit_absence_request(request):
 def allowed_absent_data(request):
     data = AbsentDaysAllowed.objects.all().values('shiftDay', 'allowedAbsent')
     return JsonResponse(list(data), safe=False)
+
+
+@require_POST
+def update_allowed_absent(request):
+    try:
+        data = json.loads(request.body)
+        shift_day = datetime.strptime(data['shiftDay'], '%Y-%m-%d').date()
+        allowed_absent = int(data['allowedAbsent'])
+
+        obj, created = AbsentDaysAllowed.objects.update_or_create(
+            shiftDay=shift_day, defaults={'allowedAbsent': allowed_absent}
+        )
+        return JsonResponse({'status': 'success'})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
 

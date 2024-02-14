@@ -142,11 +142,64 @@ async function generateCalendar(year, month) {
         absentInfo.classList.add('absent-info');
         dateElement.appendChild(absentInfo);
 
+        // Add click event listener to each date
+        dateElement.addEventListener('click', function() {
+            const currentAllowedAbsent = absentDaysData.find(data => data.shiftDay === shiftDate)?.allowedAbsent || 'No data';
+            const newAllowedAbsent = prompt(`Enter new allowed absent value for ${shiftDate}:`, currentAllowedAbsent);
+
+            if (newAllowedAbsent !== null) {
+                updateAllowedAbsent(shiftDate, newAllowedAbsent, this);
+            }
+        });
+        
         calendarDatesElement.appendChild(dateElement);
     }
 
     // Call this function at the end of generateCalendar to style the current date
     highlightCurrentDate();
+}
+
+async function updateAllowedAbsent(shiftDate, newAllowedAbsent, dateElement) {
+    try {
+        const response = await fetch('/api/update-allowed-absent/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')  // Ensure CSRF token is sent
+            },
+            body: JSON.stringify({ shiftDay: shiftDate, allowedAbsent: newAllowedAbsent })
+        });
+        if (response.ok) {
+            // Find the absentInfo span within the clicked dateElement and update its text
+            const absentInfo = dateElement.querySelector('.absent-info');
+            if (absentInfo) {
+                absentInfo.textContent = `Allowed Absent: ${newAllowedAbsent}`;
+            }
+            alert('Update successful!');
+        } else {
+            throw new Error('Network response was not ok');
+        }
+    } catch (error) {
+        console.error('Failed to update allowed absent:', error);
+        alert('Update failed!');
+    }
+}
+
+
+// Helper function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 function highlightCurrentDate() {

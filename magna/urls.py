@@ -33,6 +33,7 @@ urlpatterns = [
     path("submit-absence-request/", forms.views.submit_absence_request, name='submit_absence_request'),
     path("requests", forms.views.requests, name="requests"),
     path('api/allowed-absent/', forms.views.allowed_absent_data, name='allowed-absent-data'),
+    path('api/update-allowed-absent/', forms.views.update_allowed_absent, name='update-allowed-absent'),
     path("calendar", forms.views.calendar, name="calendar")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
