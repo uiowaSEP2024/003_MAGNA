@@ -9,7 +9,7 @@ from .models import Employee
 class EmployeeAdmin(UserAdmin):
     model = Employee
     # Optionally customize the fields to be displayed in the admin interface
-    list_display = ['email', 'name', 'role', 'is_staff', 'is_active', ]
+    list_display = ['username', 'name', 'role', 'is_staff', 'is_active', ]
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('role', 'clock_number',)}),
     )
