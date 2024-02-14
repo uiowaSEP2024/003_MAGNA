@@ -287,6 +287,10 @@ form select {
     flex-direction: column;
 }
 
+.request-card:hover {
+    background-color: #fff; /* Keep the background color the same on hover */
+}
+
 .request-card-top {
     background-color: #FFEB3B; /* Default color, will be overridden based on status */
     color: white;
@@ -359,43 +363,67 @@ form select {
 }
 
 .calendar-card {
-    background-color: #f0f0f0;
+    background-color: #fff;
     border: 1px solid #d0d0d0;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 20px;
     text-align: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     cursor: default; /* Default cursor for calendar card */
+    flex-direction: column;
+
+}
+
+#calendar-title {
+    /* Style for the month and year */
+    margin-bottom: 0.5rem; /* Adjust space below the title */
 }
 
 /* Make sure to remove any unwanted hover effects if they are inherited from the .card class */
 .calendar-card:hover {
-    background-color: #f0f0f0; /* Keep the background color the same on hover */
+    background-color: #fff; /* Keep the background color the same on hover */
+}
+
+/* Specific separator for the calendar */
+.calendar-card .calendar-separator {
+    width: 100%; /* Make separator full width */
+    height: 2px; /* Adjust height as needed */
+    background: linear-gradient(to right, transparent, #333, transparent); /* Or any other style as per Figma */
+    margin: 10px 0; /* Space above and below the separator */
 }
 
 .calendar-navigation {
+    width: 100%; /* Full width */
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
-}
-
+.calendar-days,
 .calendar-dates {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 days per week */
-    grid-gap: 10px;
+    grid-template-columns: repeat(7, 1fr); /* Create 7 columns of equal width */
+    gap: 10px; /* This gap should be the same for both .calendar-days and .calendar-dates */
+    justify-items: center; /* This will center the content within each grid item */
+}
+
+.calendar-days div,
+.calendar-dates .calendar-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-days div {
+    /* Assign height or padding as needed to match the design */
+    padding: 5px 0; /* Example padding, adjust as needed */
 }
 
 .calendar-date {
@@ -406,4 +434,14 @@ form select {
     background-color: #f0f0f0;
     border-radius: 5px; /* Optional, for rounded corners */
     /* Add any other styles you want for the date boxes */
+    padding: 10px;
+    margin: 5px;
+}
+
+/* Style for the current date based on Figma */
+.calendar-date.current-date {
+    background-color: #ff3b30; /* Red background for the current date */
+    color: #fff; /* White text for the current date */
+    border-radius: 50%; /* Circular shape */
+    /* ... other styles */
 }
