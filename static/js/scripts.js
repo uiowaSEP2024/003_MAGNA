@@ -81,10 +81,16 @@ function navigateCalendar(direction) {
 }
 
 function generateCalendar(year, month) {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+    const calendarTitle = document.getElementById('calendar-title');
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const dateElement = document.createElement('div');
-    dateElement.classList.add('calendar-date');
+
+    // Update the calendar title
+    if (calendarTitle) {
+        calendarTitle.textContent = `${monthNames[month]} ${year}`;
+    }
 
     // Adjusting for the fact that JavaScript counts Sunday as 0
     const dayOffset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
@@ -100,7 +106,7 @@ function generateCalendar(year, month) {
     // Offset for the first day of the month
     for (let i = 0; i < dayOffset; i++) {
         const spacer = document.createElement('div');
-        spacer.classList.add('calendar-date');
+        spacer.classList.add('calendar-date', 'empty-date');
         calendarDatesElement.appendChild(spacer);
     }
 
@@ -111,6 +117,9 @@ function generateCalendar(year, month) {
         dateElement.textContent = day;
         calendarDatesElement.appendChild(dateElement);
     }
+
+    // Call this function at the end of generateCalendar to style the current date
+    highlightCurrentDate();
 }
 
 function highlightCurrentDate() {

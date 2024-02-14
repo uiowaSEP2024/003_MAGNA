@@ -399,19 +399,13 @@ form select {
     margin: 10px 0; /* Space above and below the separator */
 }
 
-.calendar-navigation {
-    width: 100%; /* Full width */
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
 .calendar-days,
 .calendar-dates {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* Create 7 columns of equal width */
-    gap: 10px; /* This gap should be the same for both .calendar-days and .calendar-dates */
-    justify-items: center; /* This will center the content within each grid item */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    justify-items: center;
+    width: 100%;
 }
 
 .calendar-days div,
@@ -422,26 +416,49 @@ form select {
 }
 
 .calendar-days div {
-    /* Assign height or padding as needed to match the design */
-    padding: 5px 0; /* Example padding, adjust as needed */
+    padding: 5px 0;
 }
 
 .calendar-date {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px; /* or whatever height you want */
+    height: 50px; /* Set a fixed height */
+    width: 50px; /* Set a fixed width to ensure all backgrounds are the same size */
     background-color: #f0f0f0;
-    border-radius: 5px; /* Optional, for rounded corners */
-    /* Add any other styles you want for the date boxes */
-    padding: 10px;
-    margin: 5px;
+    border-radius: 5px; /* Keeps the shape consistent for all dates */
+    margin: 5px; /* Adjust margin as needed */
 }
 
 /* Style for the current date based on Figma */
 .calendar-date.current-date {
     background-color: #ff3b30; /* Red background for the current date */
     color: #fff; /* White text for the current date */
-    border-radius: 50%; /* Circular shape */
-    /* ... other styles */
+}
+
+/* Adjusting the calendar navigation container */
+.calendar-navigation {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Style for the calendar navigation buttons */
+.calendar-nav-button {
+    background-color: #ff3b30; /* Red background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px; /* Increased padding */
+    margin: 0 15px; /* Adjust margin as needed */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: larger; /* Optionally increase the font size */
+    transition: background-color 0.3s;
+}
+
+/* Style for the calendar navigation buttons on hover */
+.calendar-nav-button:hover {
+    background-color: #cc2a25; /* Darker red for hover effect */
 }
