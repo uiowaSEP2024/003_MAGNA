@@ -37,6 +37,14 @@ def step_impl(context):
     absence_request_button = context.browser.find_element(By.ID, "absence-request-link")
     absence_request_button.click()
 
+@given("the user is not logged in")
+def step_impl(context):
+    context.browser = webdriver.Chrome()
+    context.browser.get("http://localhost:8000/")
+
+@when("the user tries to navigate to the home page")
+def step_impl(context):
+    context.browser.get("http://localhost:8000/")
 
 @when("the user correctly fills out clock number")
 def step_impl(context):
@@ -197,6 +205,14 @@ def step_impl(context):
     """Checks if the test env is not on the home page"""
     assert context.browser.current_url != "http://localhost:8000/home", (
         f"Expected url to be on login page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
+
+@then("the user is redirected to the login page")
+def step_impl(context):
+    assert context.browser.current_url != "http://localhost:8000/home", (
+        f"expected to be on login page, "
         f"instead is on {context.browser.current_url}"
     )
     context.browser.quit()
