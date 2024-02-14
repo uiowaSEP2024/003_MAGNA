@@ -8,3 +8,4 @@ class Employee(models.Model):
     role = models.CharField(max_length=100)
     clock_number = models.CharField(max_length=10, unique=True)
     email = models.EmailField(unique=True)
+    password = models.CharField(max_length=15)
