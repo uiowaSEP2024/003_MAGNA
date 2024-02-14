@@ -5,7 +5,7 @@ Feature: Home Page Functionality
     Then the user is redirected to the login page
 
   Scenario: User goes to fill out PTO form
-    Given the user has navigated to the home page
+    Given the user has logged in
     When the user clicks on the absence request button
     Then the user is redirected to the absence request form
 

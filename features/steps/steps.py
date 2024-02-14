@@ -18,6 +18,16 @@ def step_impl(context):
     context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/home")
 
+@given("the user has logged in")
+def step_impl(context):
+    context.browser = webdriver.Chrome()
+    context.browser.get("http://localhost:8000/home")
+    username_input = context.browser.find_element(By.ID, "id_username")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    username_input.send_keys("kiosk1")
+    password_input.send_keys("freestand1")
+    login_button = context.browser.find_element(By.ID, "log-in")
+    login_button.click()
 
 @given("a user is logged in and on the absence request form")
 def step_impl(context):

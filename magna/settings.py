@@ -111,6 +111,8 @@ AUTH_USER_MODEL = "login.Employee"
 
 LOGIN_REDIRECT_URL = '/'
 
+LOGIN_URL = "/"
+
 
 
 # Internationalization
