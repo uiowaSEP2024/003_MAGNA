@@ -18,6 +18,9 @@ def requests(request):
     activeRequests = AbsenceRequest.objects.all()
     return render(request, 'requests.html', {'requests': activeRequests})
 
+def travel_auth(request):
+    return render(request, "travel_auth.html")
+
 def submit_absence_request(request):
     if request.method == "POST":
         # Extract form data
