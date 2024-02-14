@@ -1,44 +1,70 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from login.models import Employee
 
 
 class AbsenceRequest(models.Model):
-    # Assuming 'id' is the primary key, Django will create it automatically as an AutoField.
+    """Model for the absence request form"""
 
-
-    start_date = models.DateField()
-    end_date = models.DateField()
-    approval_status = models.CharField(max_length=20, choices=[
+    APPROVAL_CHOICES = [
         ("pending", "Pending"),
         ("approved", "Approved"),
         ("rejected", "Rejected"),
-    ])
-    shift_number = models.CharField(max_length=10, choices=[
+    ]
+
+    SHIFT_CHOICES = [
         ("1st", "1st Shift"),
         ("2nd", "2nd Shift"),
         ("3rd", "3rd Shift"),
         ("4th", "4th Shift"),
-    ])
+    ]
+
+    start_date = models.DateField()
+    end_date = models.DateField()
+    approval_status = models.CharField(
+        max_length=20,
+        choices=APPROVAL_CHOICES,
+    )
+    shift_number = models.CharField(
+        max_length=10,
+        choices=SHIFT_CHOICES,
+    )
     hours_gone = models.IntegerField()
     absence_type = models.CharField(max_length=50)
     approval = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
         related_name="approved_forms",
-        db_column='approval_id',
+        db_column="approval_id",
         null=True,  # Allow null values
-        blank=True  # Allow the field to be blank in forms and admin
+        blank=True,  # Allow the field to be blank in forms and admin
     )
 
     filled_by = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
         related_name="filled_forms",
-        db_column='filled_by_id',
+        db_column="filled_by_id",
         null=True,  # Allow null values
-        blank=True  # Allow the field to be blank in forms and admin
+        blank=True,  # Allow the field to be blank in forms and admin
     )
 
+    def clean(self):
+        """Clean method for validation of approval status and shift number"""
+        super().clean()
+        approval_choice = dict(self._meta.get_field("approval_status").choices)
+        shift_choices = dict(self._meta.get_field("shift_number").choices)
+
+        if self.approval_status not in approval_choice:
+            raise ValidationError({"approval_status": "Invalid approval."})
+        if self.shift_number not in shift_choices:
+            raise ValidationError({"shift_number": "Invalid shift number."})
+
+    def save(self, *args, **kwargs):
+        """Overridden clean method in order to ensure clean method is run"""
+        self.full_clean()
+        super().save(*args, **kwargs)
+
     class Meta:
-        db_table = 'forms_absencerequest'
+        db_table = "forms_absencerequest"
