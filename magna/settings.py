@@ -107,7 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "login."
+AUTH_USER_MODEL = "login.Employee"
+
+LOGIN_REDIRECT_URL = '/'
+
 
 
 # Internationalization
