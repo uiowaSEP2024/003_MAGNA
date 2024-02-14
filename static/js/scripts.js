@@ -1,30 +1,14 @@
-// Wait for the DOM to be fully loaded
+ // You might add JavaScript code if you need to handle something before submit, for example:
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the login form
-    initializeLoginForm();
-
-    // Setup card hover effects
-    setupCardHoverEffects();
-
-    // Fill the calendar with dates
-    try {
-        generateCalendar(2024, 0); // January is month 0 in JavaScript
-    } catch (error) {
-        console.error('Error generating calendar:', error);
-    }
-});
-
-// Initialize login form functionality
-function initializeLoginForm() {
     var loginForm = document.querySelector('form');
 
     loginForm.onsubmit = function() {
         // Perform validation or pre-submit actions if necessary
     };
-}
+});
 
-// Set up hover effects for cards
-function setupCardHoverEffects() {
+document.addEventListener('DOMContentLoaded', (event) => {
     const cards = document.querySelectorAll('.card');
 
     cards.forEach(card => {
@@ -36,23 +20,34 @@ function setupCardHoverEffects() {
             card.style.backgroundColor = ''; // Or set it to the original color if needed
         });
     });
-}
+});
 
-// Update the date and time on the webpage
+let currentYear;
+let currentMonth;
 function updateDateTime() {
     var now = new Date();
+
+    //Get current year and date for calendar
+    currentYear = now.getFullYear(); // Update the current year
+    currentMonth = now.getMonth(); // Update the current month
+
+    // Format the date as you like
     var dateString = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     var timeString = now.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 
+    // Update the HTML elements
     document.getElementById('date').textContent = dateString;
     document.getElementById('time').textContent = timeString;
 }
-updateDateTime(); // Update on page load
-setInterval(updateDateTime, 60000); // Update every minute
 
-// Highlight the current page in navigation
+// Optionally, set it to update every minute
+setInterval(updateDateTime, 60000);
+
+
+
 function activateCurrentPageNav() {
     const currentPage = window.location.pathname.split('/').pop();
+
     const navButtonIdMap = {
         'pto.html': 'new-request',
         'requests.html': 'current-requests',
@@ -63,36 +58,51 @@ function activateCurrentPageNav() {
         document.getElementById(activeButtonId).classList.add('active');
     }
 }
-window.onload = activateCurrentPageNav;
 
-// Navigate through the calendar
+window.onload = activateCurrentPageNav;
+/* Calendar Navigation */
 function navigateCalendar(direction) {
     if (direction === 'prev') {
-        // Logic to load the previous month's data
+        if (currentMonth === 0) {
+            currentMonth = 11; // December
+            currentYear--;
+        } else {
+            currentMonth--;
+        }
     } else {
-        // Logic to load the next month's data
+        if (currentMonth === 11) {
+            currentMonth = 0; // January
+            currentYear++;
+        } else {
+            currentMonth++;
+        }
     }
+    generateCalendar(currentYear, currentMonth);
 }
 
-// Generate the calendar for a given month and year
 function generateCalendar(year, month) {
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const dayOffset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
-    const calendarDatesElement = document.querySelector('.calendar-dates');
 
+    // Adjusting for the fact that JavaScript counts Sunday as 0
+    const dayOffset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+
+    // The calendar HTML element
+    const calendarDatesElement = document.querySelector('.calendar-dates');
     if (!calendarDatesElement) {
         console.error('Calendar dates element not found.');
         return;
     }
-    calendarDatesElement.innerHTML = ''; // Clear existing elements
+    calendarDatesElement.innerHTML = ''; // Clear any existing elements
 
+    // Offset for the first day of the month
     for (let i = 0; i < dayOffset; i++) {
         const spacer = document.createElement('div');
         spacer.classList.add('calendar-date');
         calendarDatesElement.appendChild(spacer);
     }
 
+    // Days of the month
     for (let day = 1; day <= daysInMonth; day++) {
         const dateElement = document.createElement('div');
         dateElement.classList.add('calendar-date');
@@ -100,3 +110,20 @@ function generateCalendar(year, month) {
         calendarDatesElement.appendChild(dateElement);
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Update the date/time on page load
+    updateDateTime()
+    try {
+        generateCalendar(currentYear, currentMonth); // January is month 0 in JavaScript
+    } catch (error) {
+        console.error('Error generating calendar:', error);
+    }
+    document.getElementById('prevMonth').addEventListener('click', function() {
+        navigateCalendar('prev');
+    });
+    document.getElementById('nextMonth').addEventListener('click', function() {
+        navigateCalendar('next');
+    });
+});
