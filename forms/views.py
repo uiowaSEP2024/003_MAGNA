@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import AbsenceRequest
 from django.contrib import messages
+from django.http import JsonResponse
+from .models import AbsentDaysAllowed
 
 
 # Create your views here.
@@ -55,5 +57,7 @@ def submit_absence_request(request):
 
     return render(request, 'absence_request.html')
 
-
+def allowed_absent_data(request):
+    data = AbsentDaysAllowed.objects.all().values('shiftDay', 'allowedAbsent')
+    return JsonResponse(list(data), safe=False)
 

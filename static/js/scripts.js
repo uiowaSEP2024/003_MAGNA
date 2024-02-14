@@ -80,9 +80,22 @@ function navigateCalendar(direction) {
     generateCalendar(currentYear, currentMonth);
 }
 
-function generateCalendar(year, month) {
+async function fetchAbsentDays() {
+    try {
+        const response = await fetch('/api/allowed-absent/'); // Adjust the URL as necessary
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Failed to fetch absent days:', error);
+        return []; // Return an empty array in case of error
+    }
+}
+async function generateCalendar(year, month) {
+    const absentDaysData = await fetchAbsentDays();
     const monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+        "July", "August", "September", "October", "November", "December"];
     const calendarTitle = document.getElementById('calendar-title');
     const firstDayOfMonth = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -115,6 +128,20 @@ function generateCalendar(year, month) {
         const dateElement = document.createElement('div');
         dateElement.classList.add('calendar-date');
         dateElement.textContent = day;
+
+        // Format the date string for each day
+        const shiftDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+        // Find the corresponding absent day data
+        const absentDay = absentDaysData.find(data => data.shiftDay === shiftDate);
+        const allowedAbsent = absentDay ? absentDay.allowedAbsent : 'No data';
+
+        // Create a span to show the allowedAbsent info
+        const absentInfo = document.createElement('span');
+        absentInfo.textContent = `Allowed Absent: ${allowedAbsent}`;
+        absentInfo.classList.add('absent-info');
+        dateElement.appendChild(absentInfo);
+
         calendarDatesElement.appendChild(dateElement);
     }
 

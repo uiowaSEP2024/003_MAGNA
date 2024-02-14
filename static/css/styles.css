@@ -428,6 +428,7 @@ form select {
     background-color: #f0f0f0;
     border-radius: 5px; /* Keeps the shape consistent for all dates */
     margin: 5px; /* Adjust margin as needed */
+    position: relative; /* Needed for absolute positioning of child elements */
 }
 
 /* Style for the current date based on Figma */
@@ -461,4 +462,22 @@ form select {
 /* Style for the calendar navigation buttons on hover */
 .calendar-nav-button:hover {
     background-color: #cc2a25; /* Darker red for hover effect */
+}
+
+.absent-info {
+    display: none;
+    position: absolute;
+    bottom: 100%; /* Show above the date */
+    left: 50%;
+    transform: translateX(-50%); /* Center align */
+    background-color: #fff; /* Background color */
+    border: 1px solid #ccc; /* Border around the tooltip */
+    border-radius: 5px;
+    padding: 5px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    /* Additional styling for the tooltip as needed */
+}
+
+.calendar-date:hover .absent-info {
+    display: block;
 }

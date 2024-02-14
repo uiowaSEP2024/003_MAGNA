@@ -41,4 +41,21 @@ class AbsenceRequest(models.Model):
     )
 
     class Meta:
-        db_table = 'forms_absencerequest'
+        db_table = 'forms_absence_request'
+
+
+class AbsentDaysAllowed(models.Model):
+    shiftDay = models.DateField(unique=True)  # Ensures each date is only entered once
+    allowedAbsent = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.shiftDay}: {self.allowedAbsent} allowed absents"
+
+    class Meta:
+        db_table = 'absent_days_allowed'
+
+
+
+
+
+
