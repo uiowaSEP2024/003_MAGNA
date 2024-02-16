@@ -61,8 +61,12 @@
             </div>
             <form id="time-off-form" method="post" action="{% url 'submit_absence_request' %}">
                 {% csrf_token %}
-                <label for="shift">Shift:</label>
-                <select id="shift" name="shift_number">
+
+                <label for="clock_number">Clock Number:</label>
+                <input type="text" id="clock_number" name="clock_number">
+
+                <label for="shift_number">Shift:</label>
+                <select id="shift_number" name="shift_number">
                     <option value="1st">1st Shift</option>
                     <option value="2nd">2nd Shift</option>
                     <option value="3rd">3rd Shift</option>
@@ -73,23 +77,29 @@
                 <label for="full-name">Full Name:</label>
                 <input type="text" id="full-name" name="full_name">
 
-                <label for="first-day-absent">First Day Absent:</label>
-                <input type="date" id="first-day-absent" name="start_date">
+                <label for="start_date">First Day Absent:</label>
+                <input type="date" id="start_date" name="start_date">
 
-                <label for="last-day-absent">Last Day Absent:</label>
-                <input type="date" id="last-day-absent" name="end_date">
+                <label for="end_date">Last Day Absent:</label>
+                <input type="date" id="end_date" name="end_date">
 
-                <label for="hours">Hours:</label>
-                <input type="number" id="hours" name="hours_gone">
+                <label for="hours_gone">Hours:</label>
+                <input type="number" id="hours_gone" name="hours_gone">
 
-                <label for="absence-type">Absence Type:</label>
-                <select id="absence-type" name="absence_type">
+                <label for="absence_type">Absence Type:</label>
+                <select id="absence_type" name="absence_type">
                     <option value="pto">PTO</option>
                     <!-- Add more absence types as needed -->
                 </select>
 
                 <label for="email">Your Email Address:</label>
                 <input type="email" id="email" name="email">
+
+                <label for="advisor_name">Advisor Name:</label>
+                <select id="advisor_name" name="advisor_name">
+                    <option value="advisor1">Chuck</option>
+                    <option value="advisor2">Megatron</option>
+                </select>
 
                 <button type="submit" id="submit">Save Request and Submit</button>
             </form>

@@ -34,16 +34,18 @@ def requests(request):
 def submit_absence_request(request):
     if request.method == "POST":
         # Extract form data
-        start_date = request.POST.get('first_day_absent')
-        end_date = request.POST.get('last_day_absent')
-        shift_number = request.POST.get('shift')
-        hours_gone = request.POST.get('hours')
+        clock_number = request.POST.get('clock_number')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('start_date')
+        shift_number = request.POST.get('shift_number')
+        hours_gone = request.POST.get('hours_gone')
         absence_type = request.POST.get('absence_type')
 
         # Check if required fields are present
-        if start_date and end_date and shift_number and hours_gone and absence_type:
+        if start_date and end_date and shift_number and hours_gone and absence_type and clock_number:
             # Create and save the AbsenceRequest object
             absence_request = AbsenceRequest(
+                clock_number=clock_number,
                 start_date=start_date,
                 end_date=end_date,
                 approval_status="pending",  # Default to 'pending'
@@ -61,6 +63,7 @@ def submit_absence_request(request):
             return render(request, 'absence_request.html')
 
     return render(request, 'absence_request.html')
+
 
 def allowed_absent_data(request):
     data = AbsentDaysAllowed.objects.all().values('shiftDay', 'allowedAbsent')
