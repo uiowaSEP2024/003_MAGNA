@@ -502,3 +502,23 @@ form select {
 .calendar-date:hover .request-info {
     display: block;
 }
+
+/* Style for date information */
+.date-info {
+    display: none; /* Hide by default */
+    position: absolute;
+    bottom: 100%; /* Show above the date */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff; /* Background color */
+    border: 1px solid #ccc; /* Border around the tooltip */
+    border-radius: 5px;
+    padding: 5px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    /* Additional styling for the tooltip as needed */
+    font-size: 0.75rem;
+}
+
+.calendar-date:hover .date-info {
+    display: block;
+}

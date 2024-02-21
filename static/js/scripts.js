@@ -151,6 +151,7 @@ async function generateCalendar(year, month) {
 
     // Days of the month
     for (let day = 1; day <= daysInMonth; day++) {
+
         const dateElement = document.createElement('div');
         dateElement.classList.add('calendar-date');
         dateElement.textContent = day;
@@ -158,24 +159,18 @@ async function generateCalendar(year, month) {
         // Format the date string for each day
         const shiftDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-        // Find the corresponding absent day data
+        // Find the corresponding day data
         const absentDay = absentDaysData.find(data => data.shiftDay === shiftDate);
         const allowedAbsent = absentDay ? absentDay.allowedAbsent : 'No data';
+        const requestedOffCount = requestedDaysCount[shiftDate] || 0;
 
-
-        // Create a span to show the allowedAbsent info
-        const absentInfo = document.createElement('span');
-        absentInfo.textContent = `Allowed Absent: ${allowedAbsent}`;
-        absentInfo.classList.add('absent-info');
-        dateElement.appendChild(absentInfo);
-
-        const requestedOffCount = requestedDaysCount[shiftDate];
-        if (requestedOffCount) {
-            const requestInfo = document.createElement('span');
-            requestInfo.textContent = `Requested Off: ${requestedOffCount}`;
-            requestInfo.classList.add('request-info');
-            dateElement.appendChild(requestInfo);
-        }
+        // Create a span to show info
+        const infoSpan = document.createElement('span');
+        infoSpan.classList.add('date-info');
+        const absentInfo = `Allowed Absent: ${allowedAbsent}`;
+        const requestInfo = `Requested Off: ${requestedOffCount}`;
+        infoSpan.textContent = `${absentInfo}, ${requestInfo}`;
+        dateElement.appendChild(infoSpan);
 
         // Add click event listener to each date
         dateElement.addEventListener('click', function() {
