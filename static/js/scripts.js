@@ -164,6 +164,11 @@ async function generateCalendar(year, month) {
         const allowedAbsent = absentDay ? absentDay.allowedAbsent : 'No data';
         const requestedOffCount = requestedDaysCount[shiftDate] || 0;
 
+        // Check for too many requests and makes day yellow
+        if (requestedOffCount > allowedAbsent) {
+            dateElement.classList.add('high-request');
+        }
+
         // Create a span to show info
         const infoSpan = document.createElement('span');
         infoSpan.classList.add('date-info');
@@ -200,10 +205,19 @@ async function updateAllowedAbsent(shiftDate, newAllowedAbsent, dateElement) {
             body: JSON.stringify({ shiftDay: shiftDate, allowedAbsent: newAllowedAbsent })
         });
         if (response.ok) {
-            // Find the absentInfo span within the clicked dateElement and update its text
-            const absentInfo = dateElement.querySelector('.absent-info');
-            if (absentInfo) {
-                absentInfo.textContent = `Allowed Absent: ${newAllowedAbsent}`;
+            // Find the date-info span within the clicked dateElement and update its text
+            const dateInfo = dateElement.querySelector('.date-info');
+            if (dateInfo) {
+                const requestedOffText = dateInfo.textContent.split(', ')[1]; // Keep the existing Requested Off text
+                dateInfo.textContent = `Allowed Absent: ${newAllowedAbsent}, ${requestedOffText}`;
+
+                // Check if the requested off count is higher than the new allowed absent
+                const requestedOffCount = requestedOffText.split(': ')[1];
+                if (parseInt(requestedOffCount) > parseInt(newAllowedAbsent)) {
+                    dateElement.classList.add('high-request');
+                } else {
+                    dateElement.classList.remove('high-request');
+                }
             }
             alert('Update successful!');
         } else {
@@ -214,6 +228,9 @@ async function updateAllowedAbsent(shiftDate, newAllowedAbsent, dateElement) {
         alert('Update failed!');
     }
 }
+
+
+
 
 
 // Helper function to get CSRF token from cookies

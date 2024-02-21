@@ -522,3 +522,7 @@ form select {
 .calendar-date:hover .date-info {
     display: block;
 }
+
+.calendar-date.high-request {
+    background-color: yellow !important; /* Use !important to override other styles */
+}
