@@ -71,7 +71,7 @@ def allowed_absent_data(request):
 
 def days_requested_data(request):
     all_dates = []
-    absence_requests = AbsenceRequest.objects.all()
+    absence_requests = AbsenceRequest.objects.exclude(approval_status='rejected')
 
     for request in absence_requests:
         start_date = request.start_date
