@@ -4,6 +4,7 @@ from django.utils.datetime_safe import datetime
 from login.models import Employee
 
 
+# Model for the AbsenceRequest form to keep track of all information
 class AbsenceRequest(models.Model):
     # Assuming 'id' is the primary key, Django will create it automatically as an AutoField.
 
@@ -42,17 +43,21 @@ class AbsenceRequest(models.Model):
     )
 
     class Meta:
+        # Set the table name
         db_table = 'forms_absence_request'
 
 
+# Model to keep track of allowed absent days on the Calendar
 class AbsentDaysAllowed(models.Model):
     shiftDay = models.DateField(unique=True)  # Ensures each date is only entered once
     allowedAbsent = models.IntegerField(default=0)
 
     def __str__(self):
+        # Return a string representing the shift schedule
         return f"{self.shiftDay}: {self.allowedAbsent} allowed absents"
 
     class Meta:
+        # Set the table name
         db_table = 'absent_days_allowed'
 
 
