@@ -78,3 +78,13 @@ class AbsenceRequestTestCase(TestCase):
         # Check that the context contains AbsenceRequest objects
         self.assertTrue('requests' in response.context)
         self.assertEqual(len(response.context['requests']), 1)
+
+
+class CalendarViewTestCase(TestCase):
+    """Testing class for calendar view"""
+    def test_calendar_view(self):
+        """Test for calendar view"""
+        response = self.client.get(reverse('calendar'))
+        self.assertEqual(response.status_code, 200)
+
+    
