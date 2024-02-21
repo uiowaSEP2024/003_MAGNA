@@ -92,8 +92,34 @@ async function fetchAbsentDays() {
         return []; // Return an empty array in case of error
     }
 }
+
+async function fetchRequestedDays() {
+    try {
+        const response = await fetch('/api/days-requested/'); // Adjust the URL as necessary
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Failed to fetch requested days:', error);
+        return []; // Return an empty array in case of error
+    }
+}
+
+function countRequestedDays(data) {
+    return data.reduce((acc, date) => {
+        acc[date] = (acc[date] || 0) + 1;
+        return acc;
+    }, {});
+}
+
+
 async function generateCalendar(year, month) {
     const absentDaysData = await fetchAbsentDays();
+    const daysRequestedData = await fetchRequestedDays();
+    const requestedDaysCount = countRequestedDays(daysRequestedData);
+
+
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
     const calendarTitle = document.getElementById('calendar-title');
@@ -136,11 +162,20 @@ async function generateCalendar(year, month) {
         const absentDay = absentDaysData.find(data => data.shiftDay === shiftDate);
         const allowedAbsent = absentDay ? absentDay.allowedAbsent : 'No data';
 
+
         // Create a span to show the allowedAbsent info
         const absentInfo = document.createElement('span');
         absentInfo.textContent = `Allowed Absent: ${allowedAbsent}`;
         absentInfo.classList.add('absent-info');
         dateElement.appendChild(absentInfo);
+
+        const requestedOffCount = requestedDaysCount[shiftDate];
+        if (requestedOffCount) {
+            const requestInfo = document.createElement('span');
+            requestInfo.textContent = `Requested Off: ${requestedOffCount}`;
+            requestInfo.classList.add('request-info');
+            dateElement.appendChild(requestInfo);
+        }
 
         // Add click event listener to each date
         dateElement.addEventListener('click', function() {

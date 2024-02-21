@@ -7,7 +7,7 @@ from .models import AbsenceRequest
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import AbsentDaysAllowed
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 # Create your views here.
@@ -68,6 +68,21 @@ def submit_absence_request(request):
 def allowed_absent_data(request):
     data = AbsentDaysAllowed.objects.all().values('shiftDay', 'allowedAbsent')
     return JsonResponse(list(data), safe=False)
+
+def days_requested_data(request):
+    all_dates = []
+    absence_requests = AbsenceRequest.objects.all()
+
+    for request in absence_requests:
+        start_date = request.start_date
+        end_date = request.end_date
+        delta = end_date - start_date
+
+        for i in range(delta.days + 1):
+            day = start_date + timedelta(days=i)
+            all_dates.append(day.strftime('%Y-%m-%d'))
+
+    return JsonResponse(all_dates, safe=False)
 
 
 @require_POST

@@ -424,7 +424,7 @@ form select {
     align-items: center;
     justify-content: center;
     height: 50px; /* Set a fixed height */
-    width: 50px; /* Set a fixed width to ensure all backgrounds are the same size */
+    width: 60px; /* Set a fixed width to ensure all backgrounds are the same size */
     background-color: #f0f0f0;
     border-radius: 5px; /* Keeps the shape consistent for all dates */
     margin: 5px; /* Adjust margin as needed */
@@ -479,5 +479,26 @@ form select {
 }
 
 .calendar-date:hover .absent-info {
+    display: block;
+}
+
+
+/* Style for 'Requested Off' information */
+.request-info {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50; /* Green background to indicate requested off */
+    color: white; /* White text for visibility */
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    white-space: nowrap; /* Prevents text from wrapping */
+    margin-bottom: 5px; /* Space from the bottom of the calendar date */
+    z-index: 1; /* Ensures the label appears above other elements */
+}
+
+.calendar-date:hover .request-info {
     display: block;
 }
