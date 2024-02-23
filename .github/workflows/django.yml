@@ -37,10 +37,10 @@ jobs:
       run: |
         poetry install
     - name: Run Tests
-      run: |
-        export DJANGO_SETTINGS_MODULE=magna.settings
-        poetry run pytest
+      run: poetry run pytest
+      env:
+        DJANGO_SETTINGS_MODULE: magna.settings
     - name: Get Coverage Report
-      run: |
-        export DJANGO_SETTINGS_MODULE=magna.settings
-        poetry run pytest --cov-report term-missing --cov
+      run: poetry run pytest --cov-report term-missing --cov
+      env:
+        DJANGO_SETTINGS_MODULE: magna.settings
