@@ -51,7 +51,7 @@ class AbsenceRequestTestCase(TestCase):
             filled_by=self.floor,
         )
         self.assertEqual(ar.start_date.strftime("%Y-%m-%d"), "2024-02-08")
-        self.assertEqual(ar.end_date, "2024-02-10")
+        self.assertEqual(ar.end_date.strftime('%Y-%m-%d'), "2024-02-10")
         self.assertEqual(ar.approval_status, "pending")
         self.assertEqual(ar.shift_number, "1st")
         self.assertEqual(ar.hours_gone, 16)

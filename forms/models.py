@@ -16,7 +16,8 @@ class AbsenceRequest(models.Model):
         ("pending", "Pending"),
         ("approved", "Approved"),
         ("rejected", "Rejected"),
-    ])
+    ],
+        default="pending")
     shift_number = models.CharField(max_length=10, choices=[
         ("1st", "1st Shift"),
         ("2nd", "2nd Shift"),
