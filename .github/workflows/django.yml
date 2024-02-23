@@ -42,4 +42,5 @@ jobs:
         poetry run pytest
     - name: Get Coverage Report
       run: |
+        export DJANGO_SETTINGS_MODULE=magna.settings
         poetry run pytest --cov-report term-missing --cov
