@@ -118,6 +118,7 @@ class TestHrReview:
         assert response.template_name == 'workflows/review.html'
         assert response.context_data['absence_request'] == absence_request
 
+
     #  Returns a 404 response if the 'AbsenceRequest' object with the given 'pk' does not exist
     def test_returns_404_if_absence_request_does_not_exist(self):
         # Arrange
