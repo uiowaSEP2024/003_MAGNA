@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-z7()@wfnkf3fwo2u0k+d-otlk8gd&h65l9sca#@==u_9(gxavx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'yourdomain.com', '.herokuapp.com']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "yourdomain.com", ".herokuapp.com"]
 
 
 # Application definition
@@ -125,9 +125,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -138,17 +140,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Media Files Definition
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 # Set up a storage for messages
-MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
+MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
 
 # Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # The host of your email service
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"  # The host of your email service
 EMAIL_USE_TLS = True  # Use TLS encryption
 EMAIL_PORT = 587  # Port for sending email
-EMAIL_HOST_USER = 'sepgroup03@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'unsw bvaz dsbr jigj'  # Your email password
+EMAIL_HOST_USER = "sepgroup03@gmail.com"  # Your email address
+EMAIL_HOST_PASSWORD = "unsw bvaz dsbr jigj"  # Your email password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
