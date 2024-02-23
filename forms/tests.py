@@ -163,7 +163,7 @@ class AbsenceRequestEmailTest(TestCase):
         response = self.client.post(reverse("submit_absence_request"), {
             "first_day_absent": "2024-02-14",
             "last_day_absent": "2024-02-15",
-            "shift": "1",
+            "shift": "1st",
             "hours": "8",
             "absence_type": "sick",
             "email": "test@example.com",  # Update with the correct form field
