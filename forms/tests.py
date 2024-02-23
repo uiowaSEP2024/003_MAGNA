@@ -18,8 +18,8 @@ class AbsenceRequestTestCase(TestCase):
 
     def setUp(self):
         """Set up initial test data for all tests in this class"""
-        self.manager = Employee.objects.create(clock_number="123456", email="manager@email.com")
-        self.floor = Employee.objects.create(clock_number="654321", email="floor@email.com")
+        self.manager = Employee.objects.create(clock_number="123456", email="manager@email.com", name="Manager Name", role="Manager")
+        self.floor = Employee.objects.create(clock_number="654321", email="floor@email.com", name="Floor Employee", role="Floor Role")
 
         self.valid_form_data = {
             'clock_number': '123456',
@@ -135,30 +135,6 @@ class JavaScriptTests(StaticLiveServerTestCase):
         self.assertEqual(next_month_year.year, expected_next_month_year.year)
         self.assertEqual(next_month_year.month, expected_next_month_year.month)
 
-    def test_fetch_absent_days(self):
-        # Load the calendar page
-        self.selenium.get(self.live_server_url + '/calendar')
-
-        # Wait until the calendar is loaded
-        WebDriverWait(self.selenium, 10).until(
-            EC.presence_of_element_located((By.ID, 'calendar-title'))
-        )
-
-        # Fetch the absent days data displayed on the calendar
-        calendar_dates = self.selenium.find_elements(By.CLASS_NAME, 'calendar-date')
-        fetched_data = []
-
-        for date in calendar_dates:
-            if date.text != '':
-                # Check for the presence of 'Allowed Absent' data
-                allowed_absent_info = date.get_attribute('innerHTML')
-                if 'Allowed Absent:' in allowed_absent_info:
-                    fetched_data.append(allowed_absent_info)
-
-        # Assertions
-        # Ensure that data is fetched
-        self.assertTrue(len(fetched_data) > 0, "Absent days data should be fetched and displayed")
-
     def test_fetch_absent_and_requested_days(self):
         # Create some AbsentDaysAllowed data
         AbsentDaysAllowed.objects.create(shiftDay=datetime.date.today(), allowedAbsent=2)
@@ -166,7 +142,7 @@ class JavaScriptTests(StaticLiveServerTestCase):
         # Create an AbsenceRequest that is not rejected
         AbsenceRequest.objects.create(
             start_date=datetime.date.today(),
-            end_date=datetime.date.today(),
+            end_date=datetime.date.today() + datetime.timedelta(days=1),
             approval_status="approved",  # or "pending"
             shift_number="1st",
             hours_gone=8,

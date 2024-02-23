@@ -1,5 +1,5 @@
 import datetime
-
+from datetime import date  # Import date directly
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.datetime_safe import datetime
@@ -56,9 +56,7 @@ class AbsenceRequest(models.Model):
             raise ValidationError({"approval_status": "Invalid approval."})
         if self.shift_number not in shift_choices:
             raise ValidationError({"shift_number": "Invalid shift number."})
-        if not isinstance(self.end_date, datetime.date) or not isinstance(
-            self.start_date, datetime.date
-        ):
+        if not isinstance(self.end_date, date) or not isinstance(self.start_date, date):
             raise ValidationError("Start and end date must be a date.")
         if self.end_date <= self.start_date:
             raise ValidationError("End date must be after the start date.")
