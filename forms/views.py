@@ -8,23 +8,27 @@ from .models import AbsenceRequest
 
 # Create your views here.
 def home_page(request):
-    """FILL IN"""
+    """Render the home page of the web application."""
     return render(request, "home.html")
 
 
 def absence_request(request):
-    """FILL IN"""
+    """Display the absence request form to the user."""
     return render(request, "absence_request.html")
 
 
 def requests(request):
-    """FILL IN"""
+    """Display a list of all active absence requests to the user."""
     activeRequests = AbsenceRequest.objects.all()
     return render(request, "requests.html", {"requests": activeRequests})
 
 
 def submit_absence_request(request):
-    """FILL IN"""
+    """
+    Process the submission of the absence request form.
+    Validates the form data, saves a new AbsenceRequest object, sends a confirmation email to the user,
+    and redirects to the list of requests on success. Shows an error message on invalid form submission.
+    """
     if request.method == "POST":
         # Extract form data
         s_date = request.POST.get("first_day_absent")
