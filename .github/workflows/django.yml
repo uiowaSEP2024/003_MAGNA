@@ -36,9 +36,9 @@ jobs:
     - name: Install Dependencies
       run: |
         poetry install
-        export DJANGO_SETTINGS_MODULE=magna.settings
     - name: Run Tests
       run: |
+        export DJANGO_SETTINGS_MODULE=magna.settings
         poetry run pytest
     - name: Get Coverage Report
       run: |
