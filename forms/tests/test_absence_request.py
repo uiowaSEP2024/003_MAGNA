@@ -319,3 +319,10 @@ class TestAbsenceRequest:
         with pytest.raises(ValidationError):
             absence_request = AbsenceRequest(absence_type=absence_type)
             absence_request.full_clean()
+
+    @pytest.mark.django_db
+    def test_absence_request_with_empty_absence_type(self):
+        """Creating a new AbsenceRequest object with an empty absence_type should raise a ValidationError."""
+        with pytest.raises(ValidationError):
+            absence_request = AbsenceRequest(absence_type="")
+            absence_request.full_clean()
