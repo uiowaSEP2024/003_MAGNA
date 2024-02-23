@@ -26,8 +26,8 @@ class AbsenceRequestTestCase(TestCase):
         )
 
         self.valid_form_data = {
-            "start_date": "2024-01-01",
-            "end_date": "2024-01-05",
+            "s_date": "2024-01-01",
+            "e_date": "2024-01-05",
             "approval_status": "pending",
             "shift_number": "1st",
             "hours_gone": 8,
@@ -35,8 +35,8 @@ class AbsenceRequestTestCase(TestCase):
         }
 
         self.invalid_form_data = {
-            # Example of invalid form data: missing 'end_date'
-            "start_date": "2024-01-01",
+            # Example of invalid form data: missing 'e_date'
+            "s_date": "2024-01-01",
             "shift_number": "1st",
             "hours_gone": 8,
             "absence_type": "vacation",
@@ -46,8 +46,8 @@ class AbsenceRequestTestCase(TestCase):
         """Test for valid absence request creation"""
 
         ar = AbsenceRequest.objects.create(
-            start_date="2024-02-08",
-            end_date="2024-02-10",
+            s_date="2024-02-08",
+            e_date="2024-02-10",
             approval_status="pending",
             shift_number="1st",
             hours_gone=16,
@@ -55,8 +55,8 @@ class AbsenceRequestTestCase(TestCase):
             approval=self.manager,
             filled_by=self.floor,
         )
-        self.assertEqual(ar.start_date, datetime.date(2024, 2, 8))
-        self.assertEqual(ar.end_date, datetime.date(2024, 2, 10))
+        self.assertEqual(ar.s_date, datetime.date(2024, 2, 8))
+        self.assertEqual(ar.e_date, datetime.date(2024, 2, 10))
         self.assertEqual(ar.approval_status, "pending")
         self.assertEqual(ar.shift_number, "1st")
         self.assertEqual(ar.hours_gone, 16)
@@ -69,8 +69,8 @@ class AbsenceRequestTestCase(TestCase):
         with self.assertRaises(django.core.exceptions.ValidationError):
             # Providing invalid date format
             AbsenceRequest.objects.create(
-                start_date="2024/02/08",
-                end_date="2024/02/10",
+                s_date="2024/02/08",
+                e_date="2024/02/10",
                 approval_status="pending",
                 shift_number="1st",
                 hours_gone=16,
@@ -82,8 +82,8 @@ class AbsenceRequestTestCase(TestCase):
     def test_approval_status_transition(self):
         """Test for approval status transition"""
         ar = AbsenceRequest.objects.create(
-            start_date="2024-02-08",
-            end_date="2024-02-10",
+            s_date="2024-02-08",
+            e_date="2024-02-10",
             approval_status="pending",
             shift_number="1st",
             hours_gone=16,
@@ -111,8 +111,8 @@ class AbsenceRequestTestCase(TestCase):
         """Test for raising error if invalid shift is given"""
         with self.assertRaises(django.core.exceptions.ValidationError):
             AbsenceRequest.objects.create(
-                start_date="2024-02-08",
-                end_date="2024-02-10",
+                s_date="2024-02-08",
+                e_date="2024-02-10",
                 approval_status="pending",
                 shift_number="invalid option",
                 hours_gone=16,
@@ -125,8 +125,8 @@ class AbsenceRequestTestCase(TestCase):
         """Test for raising error if invalid approval status is given"""
         with self.assertRaises(django.core.exceptions.ValidationError):
             AbsenceRequest.objects.create(
-                start_date="2024-02-08",
-                end_date="2024-02-10",
+                s_date="2024-02-08",
+                e_date="2024-02-10",
                 approval_status="not valid",
                 shift_number="1st",
                 hours_gone=16,
