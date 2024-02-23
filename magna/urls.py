@@ -1,3 +1,4 @@
+from django.contrib.auth import views as auth_views
 """
 URL configuration for magna project.
 
@@ -30,9 +31,14 @@ urlpatterns = [
     path("", login.views.login_view, name="login"),
     path("home", home.views.index, name="home"),
     path("absence-request", forms.views.absence_request, name="absence-request"),
-    path("submit-absence-request/", forms.views.submit_absence_request, name='submit_absence_request'),
-    path("requests", forms.views.requests, name="requests")
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path(
+        "submit-absence-request/",
+        forms.views.submit_absence_request,
+        name="submit_absence_request",
+    ),
+    path("requests", forms.views.requests, name="requests"),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

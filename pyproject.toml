@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11.7"
+python = "^3.11.7"
 django = "~=4.2.8"
 behave = "~=1.2.6"
 gunicorn = "^20.0.4"
@@ -19,6 +19,9 @@ black = "^24.1.1"
 flake8 = "^7.0.0"
 pre-commit = "^3.6.0"
 tox = "^4.12.1"
+pytest = "^8.0.1"
+pytest-django = "^4.8.0"
+pytest-cov = "^4.1.0"
 
 [tool.djlint]
 profile="django"
@@ -41,6 +44,17 @@ verbose = 0
 quiet = false
 whitelist-regex = []
 color = true
+
+[tool.coverage.report]
+include = [
+    "login/*.py",
+    "home/*.py",
+    "forms/*.py",
+]
+omit = [
+    "*/__init__.py",
+    "*/tests.py",
+]
 
 [build-system]
 requires = ["poetry-core"]
