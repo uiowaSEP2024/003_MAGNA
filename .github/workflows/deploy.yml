@@ -1,0 +1,40 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Node.js 20
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11.7'
+    - name: Install poetry
+      uses: abatilo/actions-poetry@v2
+      with:
+        version: '1.2.2' # Choose the preferred version of Poetry here
+    - uses: actions/cache@v3
+      name: Cache Python virtual environment
+      with:
+        path: ~/.cache/pypoetry/virtualenvs
+        key: venv-${{ hashFiles('poetry.lock') }}
+    - name: Install Dependencies
+      run: |
+        poetry install
+    - name: Install Heroku CLI
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
+    - name: Deploy to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}

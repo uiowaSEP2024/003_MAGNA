@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.datetime_safe import datetime
 
@@ -6,7 +7,7 @@ from login.models import Employee
 
 # Model for the AbsenceRequest form to keep track of all information
 class AbsenceRequest(models.Model):
-    # Assuming 'id' is the primary key, Django will create it automatically as an AutoField.
+    """Model for the absence request form"""
 
     clock_number = models.IntegerField()
     start_date = models.DateField()
@@ -41,6 +42,22 @@ class AbsenceRequest(models.Model):
         null=True,  # Allow null values
         blank=True  # Allow the field to be blank in forms and admin
     )
+
+    def clean(self):
+        """Clean method for validation of approval status and shift number"""
+        super().clean()
+        approval_choice = dict(self._meta.get_field("approval_status").choices)
+        shift_choices = dict(self._meta.get_field("shift_number").choices)
+
+        if self.approval_status not in approval_choice:
+            raise ValidationError({"approval_status": "Invalid approval."})
+        if self.shift_number not in shift_choices:
+            raise ValidationError({"shift_number": "Invalid shift number."})
+
+    def save(self, *args, **kwargs):
+        """Overridden clean method in order to ensure clean method is run"""
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     class Meta:
         # Set the table name

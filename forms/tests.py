@@ -50,7 +50,7 @@ class AbsenceRequestTestCase(TestCase):
             approval=self.manager,
             filled_by=self.floor,
         )
-        self.assertEqual(ar.start_date, "2024-02-08")
+        self.assertEqual(ar.start_date.strftime("%Y-%m-%d"), "2024-02-08")
         self.assertEqual(ar.end_date, "2024-02-10")
         self.assertEqual(ar.approval_status, "pending")
         self.assertEqual(ar.shift_number, "1st")
@@ -120,7 +120,7 @@ class JavaScriptTests(StaticLiveServerTestCase):
         prev_button.click()
 
         prev_month_year = self.get_displayed_month_year()
-        expected_prev_month_year = current_month_year - datetime.timedelta(days=1)
+        expected_prev_month_year = current_month_year.replace(day=1) - datetime.timedelta(days=1)
         self.assertEqual(prev_month_year.year, expected_prev_month_year.year)
         self.assertEqual(prev_month_year.month, expected_prev_month_year.month)
 
