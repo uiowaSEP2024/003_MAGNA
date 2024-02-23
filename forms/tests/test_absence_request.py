@@ -143,7 +143,12 @@ class TestAbsenceRequest:
     def test_update_approval_id_field(self):
         """Setting the approval field of an AbsenceRequest object to a valid Employee object and saving it should update the approval_id field in the corresponding record in the database."""  # noqa: E501
         # Create a valid Employee object
-        employee = Employee.objects.create(name="John Doe")
+        employee = Employee.objects.create(
+            name="John Doe",
+            role="Manager",
+            clock_number="12345",
+            email="johndoe@email.com",
+        )
 
         # Create an AbsenceRequest object
         absence_request = AbsenceRequest.objects.create(
@@ -172,7 +177,12 @@ class TestAbsenceRequest:
     def test_update_filled_by_id(self):
         """Setting the filled_by field of an AbsenceRequest object to a valid Employee object and saving it should update the filled_by_id field in the corresponding record in the database."""  # noqa: E501
         # Create a valid Employee object
-        employee = Employee.objects.create(name="John Doe")
+        employee = Employee.objects.create(
+            name="John Doe",
+            role="Manager",
+            clock_number="12345",
+            email="johndoe@email.com",
+        )
 
         # Create an AbsenceRequest object
         absence_request = AbsenceRequest.objects.create(
