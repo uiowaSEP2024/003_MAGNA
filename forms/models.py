@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -30,7 +32,7 @@ class AbsenceRequest(models.Model):
         max_length=10,
         choices=SHIFT_CHOICES,
     )
-    hours_gone = models.IntegerField()
+    hours_gone = models.PositiveIntegerField()
     absence_type = models.CharField(max_length=50)
     approval = models.ForeignKey(
         Employee,
@@ -60,6 +62,16 @@ class AbsenceRequest(models.Model):
             raise ValidationError({"approval_status": "Invalid approval."})
         if self.shift_number not in shift_choices:
             raise ValidationError({"shift_number": "Invalid shift number."})
+        if not isinstance(self.end_date, datetime.date) or not isinstance(
+            self.start_date, datetime.date
+        ):
+            raise ValidationError("Start and end date must be a date.")
+        if self.end_date <= self.start_date:
+            raise ValidationError("End date must be after the start date.")
+        if self.hours_gone < 0:
+            raise ValidationError("Hours gone must be greater than 0.")
+        if self.absence_type == "":
+            raise ValidationError("Absence type cannot be empty.")
 
     def save(self, *args, **kwargs):
         """Overridden clean method in order to ensure clean method is run"""
