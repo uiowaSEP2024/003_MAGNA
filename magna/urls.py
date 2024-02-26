@@ -23,6 +23,7 @@ from django.urls import include, path
 import forms.views
 import home.views
 import login.views
+import workflows.views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -36,6 +37,9 @@ urlpatterns = [
     path('api/days-requested/', forms.views.days_requested_data, name='days-requested-data'),
     path('api/update-allowed-absent/', forms.views.update_allowed_absent, name='update-allowed-absent'),
     path("calendar", forms.views.calendar, name="calendar")
+    path("", workflows.views.view_workflows, name='list'),
+    path("", workflows.views.edit_workflow, name='edit'),
+    path("", workflows.views.delete_workflow, name='delete'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
