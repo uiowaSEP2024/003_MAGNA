@@ -12,7 +12,6 @@ from selenium.webdriver.common.alert import Alert
 from selenium.common.exceptions import TimeoutException
 
 
-
 class AbsenceRequestTestCase(TestCase):
     """Testing class for absence request model"""
 
@@ -253,7 +252,6 @@ class JavaScriptTests(StaticLiveServerTestCase):
             )
             self.assertIn("February 2024", calendar_title.text,
                           "Calendar title does not match the expected month and year.")
-
 
         except TimeoutException:
             self.fail("Calendar generation failed or took too long.")
