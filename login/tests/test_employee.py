@@ -14,6 +14,7 @@ class TestEmployee:
         employee = Employee(
             name="John Doe",
             username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -29,6 +30,7 @@ class TestEmployee:
         employee = Employee(
             name="John Doe",
             username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -43,6 +45,7 @@ class TestEmployee:
         employee = Employee(
             name="John Doe",
             username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -63,6 +66,7 @@ class TestEmployee:
         employee = Employee(
             name="John Doe",
             username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -79,6 +83,7 @@ class TestEmployee:
             Employee(
                 name="101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960",
                 username="johndoe",
+                password="password",
                 role="Manager",
                 clock_number="12345",
                 email="john.doe@example.com",
@@ -92,6 +97,7 @@ class TestEmployee:
                 name="John Doe",
                 role="101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960",
                 username="johndoe",
+                password="password",
                 clock_number="12345",
                 email="john.doe@example.com",
             ).full_clean()
@@ -102,6 +108,7 @@ class TestEmployee:
         Employee(
             name="John Doe",
             username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -110,6 +117,7 @@ class TestEmployee:
             Employee(
                 name="Jane Smith",
                 username="johndoe",
+                password="password",
                 role="Supervisor",
                 clock_number="12345",
                 email="jane.smith@example.com",
@@ -122,6 +130,7 @@ class TestEmployee:
             Employee(
                 name="John Doe",
                 username="johndoe",
+                password="password",
                 role="Manager",
                 clock_number="12345",
                 email="invalid_email",
@@ -139,6 +148,7 @@ class TestEmployee:
         Employee(
             name="John Doe",
             username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -146,6 +156,7 @@ class TestEmployee:
         employee = Employee(
             name="Jane Smith",
             username="johndoe",
+            password="password",
             role="Supervisor",
             clock_number="54321",
             email="jane.smith@example.com",
@@ -162,6 +173,7 @@ class TestEmployee:
         employee = Employee(
             name="John Doe",
             username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="johndoe@example.com",
@@ -180,7 +192,7 @@ class TestEmployee:
         """Creating an employee with a blank name should raise a validation error"""
         with pytest.raises(ValidationError):
             employee = Employee(
-                name="", username="johndoe", role="Manager", clock_number="12345", email="test@example.com"
+                name="", username="johndoe", password="password", role="Manager", clock_number="12345", email="test@example.com"
             )
             employee.full_clean()
 
@@ -191,6 +203,7 @@ class TestEmployee:
             employee = Employee(
                 name="John Doe",
                 username="johndoe",
+                password="password",
                 role="",
                 clock_number="12345",
                 email="john.doe@example.com",
@@ -204,6 +217,7 @@ class TestEmployee:
             employee = Employee(
                 name="John Doe",
                 username="johndoe",
+                password="password",
                 role="Manager",
                 clock_number="",
                 email="john.doe@example.com",
@@ -215,6 +229,6 @@ class TestEmployee:
         """Creating an employee with a blank email address should raise a validation error"""
         with pytest.raises(ValidationError):
             employee = Employee(
-                name="John Doe", username="johndoe", role="Manager", clock_number="12345", email=""
+                name="John Doe", username="johndoe", password="password", role="Manager", clock_number="12345", email=""
             )
             employee.full_clean()
