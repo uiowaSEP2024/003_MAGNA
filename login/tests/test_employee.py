@@ -155,7 +155,7 @@ class TestEmployee:
         ).save()
         employee = Employee(
             name="Jane Smith",
-            username="johndoe",
+            username="johndoe2",
             password="password",
             role="Supervisor",
             clock_number="54321",
@@ -229,6 +229,6 @@ class TestEmployee:
         """Creating an employee with a blank email address should raise a validation error"""
         with pytest.raises(ValidationError):
             employee = Employee(
-                name="John Doe", username="johndoe", password="password", role="Manager", clock_number="12345", email=""
+                name="John Doe", username="", password="password", role="Manager", clock_number="12345", email=""
             )
             employee.full_clean()
