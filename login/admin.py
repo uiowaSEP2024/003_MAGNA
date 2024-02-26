@@ -11,10 +11,10 @@ class EmployeeAdmin(UserAdmin):
     # Optionally customize the fields to be displayed in the admin interface
     list_display = ['username', 'name', 'role', 'is_staff', 'is_active', ]
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('role', 'clock_number',)}),
+        (None, {'fields': ('role', 'clock_number', 'name')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('role', 'clock_number',)}),
+        (None, {'fields': ('role', 'clock_number', 'name')}),
     )
 
 
