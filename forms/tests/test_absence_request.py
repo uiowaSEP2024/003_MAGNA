@@ -15,7 +15,6 @@ class TestAbsenceRequest:
     def test_create_new_absence_request(self):
         """Creating a new AbsenceRequest object with valid data and saving it should create a new record in the database."""  # noqa: E501
         absence_request = AbsenceRequest(
-            name="John Doe",
             start_date="2022-01-01",
             end_date="2022-01-02",
             approval_status="pending",
