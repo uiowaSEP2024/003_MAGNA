@@ -144,9 +144,11 @@ class TestAbsenceRequest:
         """Setting the approval field of an AbsenceRequest object to a valid Employee object and saving it should update the approval_id field in the corresponding record in the database."""  # noqa: E501
         # Create a valid Employee object
         employee = Employee.objects.create(
+            username="johndoe",
+            password="password",
+            clock_number="12345",
             name="John Doe",
             role="Manager",
-            clock_number="12345",
             email="johndoe@email.com",
         )
 
@@ -178,9 +180,11 @@ class TestAbsenceRequest:
         """Setting the filled_by field of an AbsenceRequest object to a valid Employee object and saving it should update the filled_by_id field in the corresponding record in the database."""  # noqa: E501
         # Create a valid Employee object
         employee = Employee.objects.create(
+            username="johndoe",
+            password="password",
+            clock_number="12345",
             name="John Doe",
             role="Manager",
-            clock_number="12345",
             email="johndoe@email.com",
         )
 
