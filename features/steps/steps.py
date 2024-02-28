@@ -25,7 +25,7 @@ def step_impl(context):
     context.browser.get("http://localhost:8000/home")
     username_input = context.browser.find_element(By.ID, "id_username")
     password_input = context.browser.find_element(By.ID, "id_password")
-    username_input.send_keys("kiosk1")
+    username_input.send_keys("Kiosk1")
     password_input.send_keys("freestand1")
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()

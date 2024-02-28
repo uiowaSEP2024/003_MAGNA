@@ -9,4 +9,10 @@ Feature: Home Page Functionality
     When the user clicks on the absence request button
     Then the user is redirected to the absence request form
 
+  Scenario: User goes to fill out travel authorization form
+    Given the user has logged in
+    And is on the home page
+    When the user clicks on the traavel authorization button
+    Then the user is redirected to the travel authorization form
+
 

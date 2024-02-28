@@ -19,7 +19,7 @@ class AbsenceRequest(models.Model):
         ("approved", "Approved"),
         ("rejected", "Rejected"),
     ],
-        default="pending")
+                                       default="pending")
     shift_number = models.CharField(max_length=10, choices=[
         ("1st", "1st Shift"),
         ("2nd", "2nd Shift"),
@@ -75,6 +75,28 @@ class AbsenceRequest(models.Model):
         db_table = 'forms_absence_request'
 
 
+class TravelAuthorization(models.Model):
+    clock_number = models.IntegerField()
+    name = models.CharField(max_length=100)
+    department = models.CharField(max_length=20, choices=[
+        ("hr", "HR"),
+        ("floor_staff", "Floor Staff")
+    ])
+    destination = models.CharField(max_length=50)
+    departure_date = models.DateField()
+    return_date = models.DateField()
+    personal_car = models.BooleanField()
+    company_car = models.BooleanField()
+    car_rental = models.BooleanField()
+    airfare = models.BooleanField()
+    nights_lodging = models.IntegerField()
+    department_manager = models.CharField(max_length=100, choices=[
+        ("example", "Example")
+    ])
+    email = models.EmailField()
+    signature = models.CharField(max_length=100)
+
+
 # Model to keep track of allowed absent days on the Calendar
 class AbsentDaysAllowed(models.Model):
     shiftDay = models.DateField(unique=True)  # Ensures each date is only entered once
@@ -87,10 +109,3 @@ class AbsentDaysAllowed(models.Model):
     class Meta:
         # Set the table name
         db_table = 'absent_days_allowed'
-
-
-
-
-
-
-
