@@ -4,8 +4,8 @@ from django.db import migrations
 from django.contrib.auth.hashers import make_password
 
 
-def create_kiosk1_user(apps, schema_editor):
-    Employee = apps.get_model('magna', 'Employee')
+def create_kiosk1_user(apps):
+    Employee = apps.get_model('your_app_name', 'YourUserModel')
     Employee.objects.create(username='Kiosk1', password=make_password('freestand1'))
 
 
