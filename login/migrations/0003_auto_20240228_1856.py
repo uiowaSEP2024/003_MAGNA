@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 
 
 def create_kiosk1_user(apps, schema_editor):
-    Employee = apps.get_model('magna', 'Employee')
+    Employee = apps.get_model('login', 'Employee')
     Employee.objects.create(username='Kiosk1', password=make_password('freestand1'))
 
 
