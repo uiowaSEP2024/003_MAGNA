@@ -15,6 +15,7 @@ class TestAbsenceRequest:
     def test_create_new_absence_request(self):
         """Creating a new AbsenceRequest object with valid data and saving it should create a new record in the database."""  # noqa: E501
         absence_request = AbsenceRequest(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-02",
             approval_status="pending",
@@ -32,6 +33,7 @@ class TestAbsenceRequest:
         """Creating a new AbsenceRequest object with an invalid start_date should raise a ValidationError."""  # noqa: E501
         with pytest.raises(ValidationError):
             absence_request = AbsenceRequest(
+                clock_number=123445,
                 start_date="2022-01-32",
                 end_date="2022-01-02",
                 approval_status="pending",
@@ -45,6 +47,7 @@ class TestAbsenceRequest:
     def test_clean_method_with_valid_data(self):
         """Calling the clean() method on an AbsenceRequest object with valid data should not raise any exceptions."""  # noqa: E501
         absence_request = AbsenceRequest(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-05",
             approval_status="pending",
@@ -62,6 +65,7 @@ class TestAbsenceRequest:
         """Deleting an existing AbsenceRequest object should remove the corresponding record from the database."""  # noqa: E501
         # Create a new AbsenceRequest object
         absence_request = AbsenceRequest.objects.create(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-05",
             approval_status="pending",
@@ -87,6 +91,7 @@ class TestAbsenceRequest:
         """Calling the save() method on an AbsenceRequest object with valid data should save the object to the database."""  # noqa: E501
         # Create a valid AbsenceRequest object
         absence_request = AbsenceRequest(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-05",
             approval_status="pending",
@@ -109,6 +114,7 @@ class TestAbsenceRequest:
         """Updating an existing AbsenceRequest object with valid data and saving it should update the corresponding record in the database."""  # noqa: E501
         # Create an AbsenceRequest object
         absence_request = AbsenceRequest.objects.create(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-05",
             approval_status="pending",
@@ -154,6 +160,7 @@ class TestAbsenceRequest:
 
         # Create an AbsenceRequest object
         absence_request = AbsenceRequest.objects.create(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-05",
             approval_status="pending",
@@ -190,6 +197,7 @@ class TestAbsenceRequest:
 
         # Create an AbsenceRequest object
         absence_request = AbsenceRequest.objects.create(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-02",
             approval_status="pending",
@@ -215,6 +223,7 @@ class TestAbsenceRequest:
         """Creating a new AbsenceRequest object with an invalid end_date should raise a ValidationError."""  # noqa: E501
         with pytest.raises(ValidationError):
             AbsenceRequest.objects.create(
+                clock_number=123445,
                 start_date="2022-01-01",
                 end_date="2021-12-31",
                 approval_status="pending",
@@ -230,6 +239,7 @@ class TestAbsenceRequest:
         """Creating a new AbsenceRequest object with an invalid approval_status should raise a ValidationError."""  # noqa: E501
         with pytest.raises(ValidationError):
             AbsenceRequest.objects.create(
+                clock_number=123445,
                 start_date="2022-01-01",
                 end_date="2022-01-02",
                 approval_status="invalid",
@@ -243,6 +253,7 @@ class TestAbsenceRequest:
         """Creating a new AbsenceRequest object with an invalid shift_number should raise a ValidationError."""  # noqa: E501
         with pytest.raises(ValidationError):
             AbsenceRequest.objects.create(
+                clock_number=123445,
                 start_date="2022-01-01",
                 end_date="2022-01-02",
                 approval_status="pending",
@@ -258,6 +269,7 @@ class TestAbsenceRequest:
         """Creating a new AbsenceRequest object with an invalid hours_gone should raise a ValidationError."""  # noqa: E501
         with pytest.raises(ValidationError):
             absence_request = AbsenceRequest(
+                clock_number=123445,
                 start_date="2022-01-01",
                 end_date="2022-01-02",
                 approval_status="pending",
@@ -271,6 +283,7 @@ class TestAbsenceRequest:
     def test_null_approval_field(self):
         """Creating a new AbsenceRequest object with a null approval field should not raise a ValidationError."""  # noqa: E501
         absence_request = AbsenceRequest(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-02",
             approval_status="pending",
@@ -289,6 +302,7 @@ class TestAbsenceRequest:
     def test_create_absence_request_with_null_filled_by(self):
         """Creating a new AbsenceRequest object with a null filled_by field should not raise a ValidationError."""  # noqa: E501
         absence_request = AbsenceRequest(
+            clock_number=123445,
             start_date="2022-01-01",
             end_date="2022-01-02",
             approval_status="pending",
@@ -305,7 +319,7 @@ class TestAbsenceRequest:
         """Creating a new AbsenceRequest object with a start_date that is after the end_date should raise a ValidationError."""  # noqa: E501
         with pytest.raises(ValidationError):
             absence_request = AbsenceRequest(
-                start_date="2022-1-1", end_date="2021-12-31"
+                start_date="2022-1-1", end_date="2021-12-31",clock_number=123445
             )
             absence_request.full_clean()
 
