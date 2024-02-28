@@ -13,11 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import os.path
 from pathlib import Path
-import dj_database_url
-from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -29,6 +28,7 @@ SECRET_KEY = "django-insecure-z7()@wfnkf3fwo2u0k+d-otlk8gd&h65l9sca#@==u_9(gxavx
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "yourdomain.com", ".herokuapp.com"]
+
 
 # Application definition
 
@@ -82,36 +82,13 @@ WSGI_APPLICATION = "magna.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-# Function to get environment variables
-def get_env_variable(var_name, default=None):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        if default is None:
-            error_msg = f"Set the {var_name} environment variable"
-            raise ImproperlyConfigured(error_msg)
-        else:
-            return default
-
-
-# Default local database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
-# Override with DATABASE_URL environment variable if it exists (for Heroku)
-DATABASE_URL = get_env_variable('DATABASE_URL', default=None)
-if DATABASE_URL:
-    DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -137,6 +114,8 @@ LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = "/"
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -147,6 +126,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -166,18 +146,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 # Media Files Definition
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 # Set up a storage for messages
 MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
-
-# Email settings
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"  # The host of your email service
-EMAIL_USE_TLS = True  # Use TLS encryption
-EMAIL_PORT = 587  # Port for sending email
-EMAIL_HOST_USER = "sepgroup03@gmail.com"  # Your email address
-EMAIL_HOST_PASSWORD = "unsw bvaz dsbr jigj"  # Your email password
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
