@@ -13,6 +13,8 @@ class TestEmployee:
         """Creating a new employee with valid name, role, clock number and email should succeed"""
         employee = Employee(
             name="John Doe",
+            username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -27,6 +29,8 @@ class TestEmployee:
         """Retrieving an existing employee by their clock number should return the correct employee object"""
         employee = Employee(
             name="John Doe",
+            username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -40,6 +44,8 @@ class TestEmployee:
         """Updating an existing employee's name, role or email should succeed"""
         employee = Employee(
             name="John Doe",
+            username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -59,6 +65,8 @@ class TestEmployee:
         """Deleting an existing employee should remove them from the database"""
         employee = Employee(
             name="John Doe",
+            username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -74,6 +82,8 @@ class TestEmployee:
         with pytest.raises(ValidationError):
             Employee(
                 name="101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960",
+                username="johndoe",
+                password="password",
                 role="Manager",
                 clock_number="12345",
                 email="john.doe@example.com",
@@ -86,6 +96,8 @@ class TestEmployee:
             Employee(
                 name="John Doe",
                 role="101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960",
+                username="johndoe",
+                password="password",
                 clock_number="12345",
                 email="john.doe@example.com",
             ).full_clean()
@@ -95,6 +107,8 @@ class TestEmployee:
         """Creating an employee with a clock number that is already in use should raise a unique constraint error"""
         Employee(
             name="John Doe",
+            username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
@@ -102,6 +116,8 @@ class TestEmployee:
         with pytest.raises(ValidationError):
             Employee(
                 name="Jane Smith",
+                username="johndoe",
+                password="password",
                 role="Supervisor",
                 clock_number="12345",
                 email="jane.smith@example.com",
@@ -113,6 +129,8 @@ class TestEmployee:
         with pytest.raises(ValidationError):
             Employee(
                 name="John Doe",
+                username="johndoe",
+                password="password",
                 role="Manager",
                 clock_number="12345",
                 email="invalid_email",
@@ -129,12 +147,16 @@ class TestEmployee:
         """Updating an existing employee's clock number to one that is already in use should raise a unique constraint error"""
         Employee(
             name="John Doe",
+            username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="john.doe@example.com",
         ).save()
         employee = Employee(
             name="Jane Smith",
+            username="johndoe2",
+            password="password",
             role="Supervisor",
             clock_number="54321",
             email="jane.smith@example.com",
@@ -150,6 +172,8 @@ class TestEmployee:
         # Create a new employee
         employee = Employee(
             name="John Doe",
+            username="johndoe",
+            password="password",
             role="Manager",
             clock_number="12345",
             email="johndoe@example.com",
@@ -168,7 +192,7 @@ class TestEmployee:
         """Creating an employee with a blank name should raise a validation error"""
         with pytest.raises(ValidationError):
             employee = Employee(
-                name="", role="Manager", clock_number="12345", email="test@example.com"
+                name="", username="johndoe", password="password", role="Manager", clock_number="12345", email="test@example.com"
             )
             employee.full_clean()
 
@@ -178,6 +202,8 @@ class TestEmployee:
         with pytest.raises(ValidationError):
             employee = Employee(
                 name="John Doe",
+                username="johndoe",
+                password="password",
                 role="",
                 clock_number="12345",
                 email="john.doe@example.com",
@@ -190,6 +216,8 @@ class TestEmployee:
         with pytest.raises(ValidationError):
             employee = Employee(
                 name="John Doe",
+                username="johndoe",
+                password="password",
                 role="Manager",
                 clock_number="",
                 email="john.doe@example.com",
@@ -201,6 +229,6 @@ class TestEmployee:
         """Creating an employee with a blank email address should raise a validation error"""
         with pytest.raises(ValidationError):
             employee = Employee(
-                name="John Doe", role="Manager", clock_number="12345", email=""
+                name="John Doe", username="", password="password", role="Manager", clock_number="12345", email=""
             )
             employee.full_clean()
