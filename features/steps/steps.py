@@ -19,6 +19,16 @@ def step_impl(context):
     context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/home")
 
+@given("the user has logged in")
+def step_impl(context):
+    context.browser = webdriver.Chrome()
+    context.browser.get("http://localhost:8000/home")
+    username_input = context.browser.find_element(By.ID, "id_username")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    username_input.send_keys("kiosk1")
+    password_input.send_keys("freestand1")
+    login_button = context.browser.find_element(By.ID, "log-in")
+    login_button.click()
 
 @given("a user is logged in and on the absence request form")
 def step_impl(context):
@@ -38,6 +48,14 @@ def step_impl(context):
     absence_request_button = context.browser.find_element(By.ID, "absence-request-link")
     absence_request_button.click()
 
+@given("the user is not logged in")
+def step_impl(context):
+    context.browser = webdriver.Chrome()
+    context.browser.get("http://localhost:8000/")
+
+@when("the user tries to navigate to the home page")
+def step_impl(context):
+    context.browser.get("http://localhost:8000/")
 
 @when("the user correctly fills out clock number")
 def step_impl(context):
@@ -159,11 +177,11 @@ def step_impl(context):
 def step_impl(context):
     """Fills in the login form with valid credentials and submits it"""
     # context.browser.fill("username", "user")
-    username_input = context.browser.find_element(By.ID, "username")
-    username_input.send_keys("user")
+    username_input = context.browser.find_element(By.ID, "id_username")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    username_input.send_keys("kiosk1")
     # context.browser.fill("password", "pass")
-    password_input = context.browser.find_element(By.ID, "password")
-    password_input.send_keys("pass")
+    password_input.send_keys("freestand1")
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
 
@@ -171,9 +189,9 @@ def step_impl(context):
 @when("the user submits the login form with incorrect credentials")
 def step_impl(context):
     """Fills in the login form with incorrect credentials and submits it"""
-    username_input = context.browser.find_element(By.ID, "username")
+    username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("user_wrong")
-    password_input = context.browser.find_element(By.ID, "password")
+    password_input = context.browser.find_element(By.ID, "id_password")
     password_input.send_keys("pass_wrong")
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
@@ -200,6 +218,15 @@ def step_impl(context):
         f"Expected url to be on login page, "
         f"instead is on {context.browser.current_url}"
     )
+    context.browser.quit()
+
+@then("the user is redirected to the login page")
+def step_impl(context):
+    assert context.browser.current_url != "http://localhost:8000/home", (
+        f"expected to be on login page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
 
 
 @then("the user should be redirected to the home page")
@@ -209,6 +236,7 @@ def step_impl(context):
         f"Expected url to be on home page, "
         f"instead is on {context.browser.current_url}"
     )
+    context.browser.quit()
 
 
 @then("the user is redirected to the absence request form")
@@ -218,6 +246,7 @@ def step_impl(context):
         f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
+    context.browser.quit()
 
 
 @then("the form should be submitted")
@@ -227,6 +256,7 @@ def step_impl(context):
         f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
+    context.browser.quit()
 
 
 @then("the form should not be submitted")
@@ -236,6 +266,7 @@ def step_impl(context):
         f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
+    context.browser.quit()
 
 @given('a user has filled out the absence request form')
 def step_user_filled_out_form(context):

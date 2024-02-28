@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "login",
     "management",
     "home",
+    "workflows",
 ]
 
 MIDDLEWARE = [
@@ -106,6 +107,13 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+AUTH_USER_MODEL = "login.Employee"
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGIN_URL = "/"
+
 
 
 # Internationalization
