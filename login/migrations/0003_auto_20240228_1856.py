@@ -11,7 +11,7 @@ def create_kiosk1_user(apps):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('login', '0002_alter_employee_options_alter_employee_managers_and_more'),
+        ('login', '0001_initial', '0002_alter_employee_options_alter_employee_managers_and_more'),
     ]
 
     operations = [
