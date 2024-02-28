@@ -1,131 +1,135 @@
-from django.test import TestCase
+class TestWorkflow:
 
-class TestViewWorkflows:
+    #  Workflow status is set to 'submitted' by default
+    def test_workflow_status_default(self):
+        workflow = Workflow()
+        assert workflow.status == 'submitted'
 
-    #  Returns a HTTP response with status code 200.
-    def test_returns_http_response_with_status_code_200(self):
-        response = self.client.get('/view_workflows/')
-        assert response.status_code == 200
+    #  Workflow status cannot be updated to an invalid choice in STATUS_CHOICES
+    def test_workflow_status_invalid_choice(self):
+        workflow = Workflow()
+        with pytest.raises(ValueError):
+            workflow.status = 'invalid_choice'
 
-    #  No workflows exist in the database.
-    def test_no_workflows_exist_in_database(self):
-        Workflow.objects.all().delete()
-        response = self.client.get('/view_workflows/')
-        assert response.status_code == 200
-        assert len(response.context['workflows']) == 0
 
-class TestEditWorkflow:
+class TestWorkflowDelete:
 
-    #  The function should retrieve the Workflow object with the given primary key.
-    def test_retrieve_workflow(self):
+    #  Deletes the workflow object with the given primary key.
+    def test_delete_workflow(self):
         # Arrange
-        request = None
-        pk = 1
+        request = RequestFactory().post('/workflows/delete/1')
+        workflow = Workflow.objects.create(pk=1)
 
         # Act
-        result = edit_workflow(request, pk)
+        response = workflow_delete(request, pk=1)
 
         # Assert
-        assert result == get_object_or_404(Workflow, pk=pk)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/workflows/list/')
+        self.assertFalse(Workflow.objects.filter(pk=1).exists())
 
-    #  If the Workflow object with the given primary key does not exist, the function should return a 404 error.
-    def test_nonexistent_workflow(self):
+    #  Returns a 404 status code if the workflow object with the given primary key does not exist.
+    def test_delete_nonexistent_workflow(self):
+        # Arrange
+        request = RequestFactory().post('/workflows/delete/1')
+
+        # Act
+        response = workflow_delete(request, pk=1)
+
+        # Assert
+        self.assertEqual(response.status_code, 404)
+
+
+class TestWorkflowEdit:
+
+    #  Retrieve a Workflow object with the given pk.
+    def test_retrieve_workflow_object(self):
         # Arrange
         request = None
-        pk = 999
-
-        # Act
-        with pytest.raises(Http404):
-            edit_workflow(request, pk)
-
-
-class TestDeleteWorkflow:
-
-    #  Deletes a workflow when a POST request is received
-    def test_delete_workflow_post_request(self):
-        # Create a mock request object with method set to POST
-        request = type('Request', (object,), {'method': 'POST'})
-
-        # Create a mock workflow object
-        workflow = type('Workflow', (object,), {'delete': lambda: None})
-
-        # Mock the get_object_or_404 function to return the mock workflow object
-        with patch('path.to.get_object_or_404', return_value=workflow):
-            # Call the delete_workflow function with the mock request object and a valid pk
-            response = delete_workflow(request, 1)
-
-            # Assert that the workflow.delete() method was called
-            workflow.delete.assert_called_once()
-
-            # Assert that the response is a redirect to the 'workflows:list' URL
-            assert response.url == 'workflows:list'
-
-    #  Returns a 404 error if the workflow with the given pk does not exist
-    def test_delete_workflow_invalid_pk(self):
-        # Create a mock request object with method set to POST
-        request = type('Request', (object,), {'method': 'POST'})
-
-        # Mock the get_object_or_404 function to raise a 404 error
-        with patch('path.to.get_object_or_404', side_effect=Http404):
-            # Call the delete_workflow function with the mock request object and an invalid pk
-            response = delete_workflow(request, 999)
-
-            # Assert that the response status code is 404
-            assert response.status_code == 404
-
-class TestManagerReview:
-
-    #  The function correctly retrieves the absence request object with the given primary key and 'submitted' workflow status.
-    def test_retrieve_absence_request(self):
-        # Arrange
-        request = HttpRequest()
-        request.method = 'GET'
         pk = 1
-        absence_request = AbsenceRequest.objects.create(pk=pk, workflow__status='submitted')
 
         # Act
-        response = manager_review(request, pk)
+        result = workflow_edit(request, pk)
+
+        # Assert
+        assert result.status_code == 200
+        assert result.context['workflow'] == Workflow.objects.get(pk=pk)
+
+    #  If the given pk does not correspond to an existing Workflow object, return a 404 error.
+    def test_non_existing_workflow_object(self):
+        # Arrange
+        request = None
+        pk = 100
+
+        # Act
+        result = workflow_edit(request, pk)
+
+        # Assert
+        assert result.status_code == 404
+
+
+class TestWorkflowCreate:
+
+    #  Form is submitted with valid data
+    def test_form_submitted_with_valid_data(self):
+        # Initialize
+        request = RequestFactory().post('/workflow/create')
+        form_data = {
+            'field1': 'value1',
+            'field2': 'value2',
+            # Add more fields as necessary
+        }
+        form = WorkflowForm(data=form_data)
+        request.method = 'POST'
+        request.POST = form_data
+
+        # Invoke
+        response = workflow_create(request)
+
+        # Assert
+        assert response.status_code == 302
+        assert response.url == '/workflow/detail/1'  # Assuming the workflow pk is 1
+
+    #  Form is submitted with empty data
+    def test_form_submitted_with_empty_data(self):
+        # Initialize
+        request = RequestFactory().post('/workflow/create')
+        form_data = {}
+        form = WorkflowForm(data=form_data)
+        request.method = 'POST'
+        request.POST = form_data
+
+        # Invoke
+        response = workflow_create(request)
+
+        # Assert
+        assert response.status_code == 200
+        assert response.template_name == 'workflows/workflow_form.html'
+
+
+class TestWorkflowDetail:
+
+    #  Renders the 'workflow_detail.html' template with the requested workflow object
+    def test_renders_template_with_requested_workflow_object(self):
+        # Arrange
+        request = RequestFactory().get('/')
+        workflow = Workflow.objects.create(name='Test Workflow')
+        kwargs = {'pk': workflow.pk}
+
+        # Act
+        response = workflow_detail(request, **kwargs)
 
         # Assert
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['absence_request'], absence_request)
+        self.assertTemplateUsed(response, 'workflows/workflow_detail.html')
+        self.assertEqual(response.context['workflow'], workflow)
 
-    #  The absence request object with the given primary key does not exist, and a 404 error is raised.
-    def test_absence_request_not_found(self):
+    #  Requests a workflow object with an invalid primary key (pk)
+    def test_requests_workflow_object_with_invalid_pk(self):
         # Arrange
-        request = HttpRequest()
-        request.method = 'GET'
-        pk = 1
+        request = RequestFactory().get('/')
+        kwargs = {'pk': 999}
 
         # Act
         with self.assertRaises(Http404):
-            manager_review(request, pk)
-
-
-class TestHrReview:
-
-    #  Renders the 'workflows/review.html' template with the 'absence_request' object as context when the request method is GET
-    def test_renders_template_with_context(self):
-        # Arrange
-        request = RequestFactory().get('/')
-        absence_request = AbsenceRequest.objects.create(pk=1, workflow__status='manager_review')
-
-        # Act
-        response = HR_review(request, 1)
-
-        # Assert
-        assert response.status_code == 200
-        assert response.template_name == 'workflows/review.html'
-        assert response.context_data['absence_request'] == absence_request
-
-
-    #  Returns a 404 response if the 'AbsenceRequest' object with the given 'pk' does not exist
-    def test_returns_404_if_absence_request_does_not_exist(self):
-        # Arrange
-        request = RequestFactory().get('/')
-
-        # Act
-        response = HR_review(request, 1)
-
-        # Assert
-        assert response.status_code == 404
+            workflow_detail(request, **kwargs)

@@ -1,6 +1,13 @@
 from django.db import models
 
+
 class Workflow(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
     STATUS_CHOICES = [
         ('submitted', 'Submitted'),
         ('manager_review', 'Manager Review'),

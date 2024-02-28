@@ -39,9 +39,11 @@ urlpatterns = [
     path('api/update-allowed-absent/', forms.views.update_allowed_absent, name='update-allowed-absent'),
     path("calendar", forms.views.calendar, name="calendar"),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
-    path("view-workflows/", workflows.views.view_workflows, name='list'),
-    path("edit-workflows/", workflows.views.edit_workflow, name='edit'),
-    path("delete-workflows/", workflows.views.delete_workflow, name='delete')
+    path('workflows/', views.workflow_list, name='workflow_list'),
+    path('workflows/<int:pk>/', views.workflow_detail, name='workflow_detail'),
+    path('workflows/create/', views.workflow_create, name='workflow_create'),
+    path('workflows/<int:pk>/edit/', views.workflow_edit, name='workflow_edit'),
+    path('workflows/<int:pk>/delete/', views.workflow_delete, name='workflow_delete'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
