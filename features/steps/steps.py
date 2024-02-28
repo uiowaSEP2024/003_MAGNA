@@ -2,6 +2,7 @@
 from behave import given, then, when
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from django.core import mail
 
 
 @given("the user has navigated to the login page")
@@ -266,3 +267,25 @@ def step_impl(context):
         f"instead is on {context.browser.current_url}"
     )
     context.browser.quit()
+
+@given('a user has filled out the absence request form')
+def step_user_filled_out_form(context):
+    context.form_data = {
+        'first_day_absent': '2024-02-14',
+        'last_day_absent': '2024-02-15',
+        'shift': '1',
+        'hours': '8',
+        'absence_type': 'sick',
+        'email': 'test@example.com',
+    }
+
+@when('they submit the form')
+def step_user_submits_form(context):
+    context.response = context.test.client.post('/submit_absence_request/', context.form_data)
+
+@then('an email should be sent to the user with the pending status')
+def step_email_is_sent(context):
+    assert len(mail.outbox) == 1
+    assert mail.outbox[0].subject == 'Absence Request Submission'
+    assert 'pending' in mail.outbox[0].body
+    assert mail.outbox[0].to == [context.form_data['email']]

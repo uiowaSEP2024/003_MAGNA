@@ -2,6 +2,10 @@ import json
 
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import redirect, render
 
 from .models import AbsenceRequest
 from django.contrib import messages
@@ -71,6 +75,11 @@ def submit_absence_request(request):
     Returns:
     HTTP response object
     """
+    """
+    Process the submission of the absence request form.
+    Validates the form data, saves a new AbsenceRequest object, sends a confirmation email to the user,
+    and redirects to the list of requests on success. Shows an error message on invalid form submission.
+    """
     if request.method == "POST":
         # Extract form data
         clock_number = request.POST.get('clock_number')
@@ -96,6 +105,18 @@ def submit_absence_request(request):
             absence_request.save()
             messages.success(request, 'Request submitted successfully.')
             return redirect('requests')
+
+            subject = "Absence Request Submitted"
+            message = f"Your absence request from {start_date} to {end_date} has been submitted and is pending approval."
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [email_address],
+                fail_silently=False
+            )
+            messages.success(request, "Request submitted successfully.")
+            return redirect("requests")
         else:
             # Handle the invalid form case
             messages.error(request, 'Invalid form submission.')
