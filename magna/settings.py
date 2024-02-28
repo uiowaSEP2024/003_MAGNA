@@ -89,8 +89,9 @@ WSGI_APPLICATION = "magna.wsgi.application"
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
-DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
