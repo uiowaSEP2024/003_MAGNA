@@ -8,9 +8,7 @@ class Employee(AbstractUser):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
     clock_number = models.CharField(max_length=10, unique=True)
-    REQUIRED_FIELDS = ['name', 'role', 'clock_number']
-    # email = models.EmailField(unique=True)
-    # password = models.CharField(max_length=15)
+    REQUIRED_FIELDS = ["name", "role", "clock_number"]
 
     def clean(self):
         """Clean method for validation of approval status and shift number"""

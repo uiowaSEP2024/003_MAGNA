@@ -1,20 +1,17 @@
 import json
-
-from django.shortcuts import render, redirect
-from django.views.decorators.http import require_POST
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
-from django.shortcuts import redirect, render
-
-from .models import AbsenceRequest
-from django.contrib import messages
-from django.http import JsonResponse
-from .models import AbsentDaysAllowed
 from datetime import datetime, timedelta
 
+from django.conf import settings
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.views.decorators.http import require_POST
+
+from .models import AbsenceRequest, AbsentDaysAllowed
 
 # Create your views here.
+
 
 def calendar(request):
     """
@@ -64,7 +61,7 @@ def requests(request):
     - HttpResponse object with the rendered HTML content.
     """
     activeRequests = AbsenceRequest.objects.all()
-    return render(request, 'requests.html', {'requests': activeRequests})
+    return render(request, "requests.html", {"requests": activeRequests})
 
 
 def submit_absence_request(request):
@@ -82,15 +79,22 @@ def submit_absence_request(request):
     """
     if request.method == "POST":
         # Extract form data
-        clock_number = request.POST.get('clock_number')
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
-        shift_number = request.POST.get('shift_number')
-        hours_gone = request.POST.get('hours_gone')
-        absence_type = request.POST.get('absence_type')
+        clock_number = request.POST.get("clock_number")
+        start_date = request.POST.get("start_date")
+        end_date = request.POST.get("end_date")
+        shift_number = request.POST.get("shift_number")
+        hours_gone = request.POST.get("hours_gone")
+        absence_type = request.POST.get("absence_type")
 
         # Check if required fields are present
-        if start_date and end_date and shift_number and hours_gone and absence_type and clock_number:
+        if (
+            start_date
+            and end_date
+            and shift_number
+            and hours_gone
+            and absence_type
+            and clock_number
+        ):
             # Create and save the AbsenceRequest object
             absence_request = AbsenceRequest(
                 clock_number=clock_number,
@@ -103,8 +107,8 @@ def submit_absence_request(request):
                 # Omit the 'approval' and 'filled_by' fields until log in feature fully implemented
             )
             absence_request.save()
-            messages.success(request, 'Request submitted successfully.')
-            return redirect('requests')
+            messages.success(request, "Request submitted successfully.")
+            return redirect("requests")
 
             subject = "Absence Request Submitted"
             message = f"Your absence request from {start_date} to {end_date} has been submitted and is pending approval."
@@ -112,17 +116,17 @@ def submit_absence_request(request):
                 subject,
                 message,
                 settings.DEFAULT_FROM_EMAIL,
-                [email_address],
-                fail_silently=False
+                [email_address],  # noqa: F821
+                fail_silently=False,
             )
             messages.success(request, "Request submitted successfully.")
             return redirect("requests")
         else:
             # Handle the invalid form case
-            messages.error(request, 'Invalid form submission.')
-            return render(request, 'absence_request.html')
+            messages.error(request, "Invalid form submission.")
+            return render(request, "absence_request.html")
 
-    return render(request, 'absence_request.html')
+    return render(request, "absence_request.html")
 
 
 def allowed_absent_data(request):
@@ -133,7 +137,7 @@ def allowed_absent_data(request):
     Returns:
     JsonResponse: a JSON response containing the data of all AbsentDaysAllowed objects
     """
-    data = AbsentDaysAllowed.objects.all().values('shiftDay', 'allowedAbsent')
+    data = AbsentDaysAllowed.objects.all().values("shiftDay", "allowedAbsent")
     return JsonResponse(list(data), safe=False)
 
 
@@ -150,7 +154,7 @@ def days_requested_data(request):
     all_dates = []
 
     # Retrieve absence requests that are not rejected
-    absence_requests = AbsenceRequest.objects.exclude(approval_status='rejected')
+    absence_requests = AbsenceRequest.objects.exclude(approval_status="rejected")
 
     # Iterate through each absence request and retrieve all dates within the request period
     for request in absence_requests:
@@ -160,7 +164,7 @@ def days_requested_data(request):
 
         for i in range(delta.days + 1):
             day = start_date + timedelta(days=i)
-            all_dates.append(day.strftime('%Y-%m-%d'))
+            all_dates.append(day.strftime("%Y-%m-%d"))
 
     return JsonResponse(all_dates, safe=False)
 
@@ -180,19 +184,18 @@ def update_allowed_absent(request):
         data = json.loads(request.body)
 
         # Convert the shift day string to a datetime object
-        shift_day = datetime.strptime(data['shiftDay'], '%Y-%m-%d').date()
+        shift_day = datetime.strptime(data["shiftDay"], "%Y-%m-%d").date()
 
         # Retrieve the allowed absent value
-        allowed_absent = int(data['allowedAbsent'])
+        allowed_absent = int(data["allowedAbsent"])
 
         # Update or create the AbsentDaysAllowed object for the specified shift day
         obj, created = AbsentDaysAllowed.objects.update_or_create(
-            shiftDay=shift_day, defaults={'allowedAbsent': allowed_absent}
+            shiftDay=shift_day, defaults={"allowedAbsent": allowed_absent}
         )
 
-        return JsonResponse({'status': 'success'})
+        return JsonResponse({"status": "success"})
     except Exception as e:
 
         # Handle any exceptions and return an error response
-        return JsonResponse({'status': 'error', 'message': str(e)})
-
+        return JsonResponse({"status": "error", "message": str(e)})

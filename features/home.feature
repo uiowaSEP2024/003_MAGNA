@@ -8,5 +8,3 @@ Feature: Home Page Functionality
     Given the user has logged in
     When the user clicks on the absence request button
     Then the user is redirected to the absence request form
-
-

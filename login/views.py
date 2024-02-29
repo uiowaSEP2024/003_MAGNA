@@ -6,7 +6,7 @@ from .forms import LoginForm
 
 
 def login_view(request):
-    """FILL IN"""
+    """View for logging in a user."""
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
