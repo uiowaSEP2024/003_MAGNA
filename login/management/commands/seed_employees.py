@@ -15,7 +15,7 @@ class Command(BaseCommand):
         # Create a superuser
         admin_username = "admin"
         admin_name = "Admin"
-        admin_clock_number = "001"
+        admin_clock_number = "0000"
         Employee.objects.create_superuser(
             username=admin_username,
             name=admin_name,
@@ -23,6 +23,26 @@ class Command(BaseCommand):
             clock_number=admin_clock_number,
             password="adminpass123",
         )
+
+        # Create manager employees
+        for i in range(5):
+            Employee.objects.create(
+                username=f"manager{i+1}",
+                name=f"Manager {i+1}",
+                role="manager",
+                clock_number=f"100{i+1}",
+                password=f"managerpass{i+1}",
+            )
+
+        # Create HR employees
+        for i in range(5):
+            Employee.objects.create(
+                username=f"hr{i+1}",
+                name=f"HR Employee {i+1}",
+                role="hr",
+                clock_number=f"200{i+1}",
+                password=f"hrpass{i+1}",
+            )
 
         self.stdout.write(
             self.style.SUCCESS("Successfully seeded database with employees")
