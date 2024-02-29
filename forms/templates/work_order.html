@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Order</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a>Innovations</a>
+                <a>Products</a>
+                <a>Stories</a>
+                <a>Company</a>
+                <a>Careers</a>
+                <a>Contact</a>
+            </div>
+        </nav>
+    </header>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="request-container">
+        <div class="form-card">
+            <div class="form-top">
+                <h1>Work Order</h1>
+                <button id="close">Close</button>
+            </div>
+            <form id="work-order-form" method="post" action="{% url 'submit_work_order' %}">
+                {% csrf_token %}
+
+                <div class="form-section">
+                    <label for="today_date">Today's Date:</label>
+                    <input type="text" id="today_date" name="today_date" readonly value="{{ current_date }}">
+
+                    <label for="work_order_number">Work Order #:</label>
+                    <input type="text" id="work_order_number" name="work_order_number">
+
+                    <label for="shift">Shift:</label>
+                    <select id="shift" name="shift">
+                        <!-- Shift options -->
+                    </select>
+
+                    <label for="department_affected">Department affected:</label>
+                    <input type="text" id="department_affected" name="department_affected">
+                </div>
+
+                <!-- ... More fields based on the screenshot ... -->
+
+                <div class="form-section">
+                    <label for="describe_problem">Describe Problem:</label>
+                    <textarea id="describe_problem" name="describe_problem"></textarea>
+
+                    <label for="root_cause">Root Cause:</label>
+                    <textarea id="root_cause" name="root_cause"></textarea>
+
+                    <label for="work_requested">Work Requested:</label>
+                    <textarea id="work_requested" name="work_requested"></textarea>
+                </div>
+
+                <button type="submit" id="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}">defer</script>
+</body>
+</html>
