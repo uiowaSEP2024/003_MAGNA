@@ -45,6 +45,5 @@ repos:
         - -v
         - -i
         - --fail-under=100
-        - --ignore=tests
         - --exclude=**/migrations/**
         - --exclude=**/features/**
