@@ -41,9 +41,4 @@ repos:
   rev: 1.5.0
   hooks:
     - id: interrogate
-      args:
-        - -v
-        - -i
-        - --fail-under=100
-        - --exclude=**/migrations/**
-        - --exclude=**/features/**
+      args: [-v, -i, --fail-under=100, --exclude=**/migrations/**, --exclude=**/features/**]
