@@ -49,7 +49,20 @@ def absence_request(request):
     Returns:
     - Rendered absence_request.html template
     """
-    return render(request, "absence_request.html")
+    return render(request, "work_order.html")
+
+
+def work_order(request):
+    """
+    Renders the absence_request page.
+
+    Args:
+    - request: the HTTP request object
+
+    Returns:
+    - Rendered work_order.html template
+    """
+    return render(request, "work_order.html")
 
 
 def requests(request):
@@ -127,6 +140,10 @@ def submit_absence_request(request):
             return render(request, "absence_request.html")
 
     return render(request, "absence_request.html")
+
+
+def submit_work_order(request):
+    return render(request, "work_order.html")
 
 
 def allowed_absent_data(request):
