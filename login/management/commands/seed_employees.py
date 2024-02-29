@@ -32,6 +32,7 @@ class Command(BaseCommand):
                 role="manager",
                 clock_number=f"100{i+1}",
                 password=f"managerpass{i+1}",
+                is_staff=True,
             )
 
         # Create HR employees
@@ -42,6 +43,7 @@ class Command(BaseCommand):
                 role="hr",
                 clock_number=f"200{i+1}",
                 password=f"hrpass{i+1}",
+                is_staff=True,
             )
 
         # Create floor employees
@@ -62,6 +64,7 @@ class Command(BaseCommand):
                 role="kiosk",
                 clock_number=f"400{i+1}",
                 password=f"kioskpass{i+1}",
+                is_staff=True,
             )
 
         self.stdout.write(
