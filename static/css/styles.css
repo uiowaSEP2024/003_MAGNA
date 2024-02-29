@@ -17,6 +17,10 @@ form h2 {
     text-align: center;
 }
 
+h2 {
+    text-align: center;
+}
+
 form label,
 form input,
 form button {
@@ -287,6 +291,10 @@ form select {
     flex-direction: column;
 }
 
+.request-card:hover {
+    background-color: #fff; /* Keep the background color the same on hover */
+}
+
 .request-card-top {
     background-color: #FFEB3B; /* Default color, will be overridden based on status */
     color: white;
@@ -346,4 +354,179 @@ form select {
 
 .status-rejected .request-card-bottom .status-text {
     color: #F44336; /* Red for rejected */
+}
+
+
+/* Calendar Type Styles - used in calendar.html */
+
+.calendar-container {
+    /* Adjust the styles to fit your Figma design */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Spacing from the navigation bar */
+}
+
+.calendar-card {
+    background-color: #fff;
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    cursor: default; /* Default cursor for calendar card */
+    flex-direction: column;
+
+}
+
+#calendar-title {
+    /* Style for the month and year */
+    margin-bottom: 0.5rem; /* Adjust space below the title */
+}
+
+/* Make sure to remove any unwanted hover effects if they are inherited from the .card class */
+.calendar-card:hover {
+    background-color: #fff; /* Keep the background color the same on hover */
+}
+
+/* Specific separator for the calendar */
+.calendar-card .calendar-separator {
+    width: 100%; /* Make separator full width */
+    height: 2px; /* Adjust height as needed */
+    background: linear-gradient(to right, transparent, #333, transparent); /* Or any other style as per Figma */
+    margin: 10px 0; /* Space above and below the separator */
+}
+
+.calendar-days,
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    justify-items: center;
+    width: 100%;
+}
+
+.calendar-days div,
+.calendar-dates .calendar-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-days div {
+    padding: 5px 0;
+}
+
+.calendar-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px; /* Set a fixed height */
+    width: 60px; /* Set a fixed width to ensure all backgrounds are the same size */
+    background-color: #f0f0f0;
+    border-radius: 5px; /* Keeps the shape consistent for all dates */
+    margin: 5px; /* Adjust margin as needed */
+    position: relative; /* Needed for absolute positioning of child elements */
+}
+
+/* Style for the current date based on Figma */
+.calendar-date.current-date {
+    background-color: #ff3b30; /* Red background for the current date */
+    color: #fff; /* White text for the current date */
+}
+
+/* Adjusting the calendar navigation container */
+.calendar-navigation {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Style for the calendar navigation buttons */
+.calendar-nav-button {
+    background-color: #ff3b30; /* Red background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px; /* Increased padding */
+    margin: 0 15px; /* Adjust margin as needed */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: larger; /* Optionally increase the font size */
+    transition: background-color 0.3s;
+}
+
+/* Style for the calendar navigation buttons on hover */
+.calendar-nav-button:hover {
+    background-color: #cc2a25; /* Darker red for hover effect */
+}
+
+.absent-info {
+    display: none;
+    position: absolute;
+    bottom: 100%; /* Show above the date */
+    left: 50%;
+    transform: translateX(-50%); /* Center align */
+    background-color: #fff; /* Background color */
+    border: 1px solid #ccc; /* Border around the tooltip */
+    border-radius: 5px;
+    padding: 5px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    /* Additional styling for the tooltip as needed */
+}
+
+.calendar-date:hover .absent-info {
+    display: block;
+}
+
+
+/* Style for 'Requested Off' information */
+.request-info {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50; /* Green background to indicate requested off */
+    color: white; /* White text for visibility */
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    white-space: nowrap; /* Prevents text from wrapping */
+    margin-bottom: 5px; /* Space from the bottom of the calendar date */
+    z-index: 1; /* Ensures the label appears above other elements */
+}
+
+.calendar-date:hover .request-info {
+    display: block;
+}
+
+/* Style for date information */
+.date-info {
+    display: none; /* Hide by default */
+    position: absolute;
+    bottom: 100%; /* Show above the date */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff; /* Background color */
+    border: 1px solid #ccc; /* Border around the tooltip */
+    border-radius: 5px;
+    padding: 5px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    /* Additional styling for the tooltip as needed */
+    font-size: 0.75rem;
+}
+
+.calendar-date:hover .date-info {
+    display: block;
+}
+
+.calendar-date.high-request {
+    background-color: yellow !important; /* Use !important to override other styles */
 }

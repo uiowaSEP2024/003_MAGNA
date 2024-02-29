@@ -34,8 +34,11 @@ jobs:
         path: ~/.cache/pypoetry/virtualenvs
         key: venv-${{ hashFiles('poetry.lock') }}
     - name: Install Dependencies
-      run: |
-        poetry install
+      run: poetry install
+    - name: Run Migrations
+      run: poetry run python manage.py migrate
+      env:
+          DJANGO_SETTINGS_MODULE: magna.settings
     - name: Run Tests
       run: poetry run pytest
       env:

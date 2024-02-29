@@ -29,13 +29,14 @@
     <div class="page-navigation">
         <a href="/absence-request" class="nav-button {% if request.path == '/absence-request' %}active{% endif %}" id="new-request">New Request</a>
         <a href="/requests" class="nav-button {% if request.path == '/requests' %}active{% endif %}" id="current-requests">Current Requests</a>
+        <a href="/calendar" class="nav-button {% if request.path == '/calendar' %}active{% endif %}" id="calendar">Calendar</a>
     </div>
     <hr class="separator">
 </div>
 
 <div class="container">
     {% for request in requests %}
-    <div class="card request-card status-{{ request.approval_status }}">
+    <div class="request-card status-{{ request.approval_status }}">
         <div class="request-card-top">
             <span class="close-btn">X</span>
             <div class="issue-date">Issue Date: {{ request.start_date|date:"m/d/Y" }}</div>
@@ -52,5 +53,6 @@
     <p>No requests found.</p>
     {% endfor %}
 </div>
+<script src="{% static 'js/scripts.js' %}" defer></script>
 </body>
 </html>
