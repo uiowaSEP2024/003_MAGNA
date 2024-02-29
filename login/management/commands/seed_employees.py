@@ -54,6 +54,16 @@ class Command(BaseCommand):
                 password=f"floorpass{i+1}",
             )
 
+        # Create kiosk users
+        for i in range(5):
+            Employee.objects.create(
+                username=f"kiosk{i+1}",
+                name=f"Kiosk {i+1}",
+                role="kiosk",
+                clock_number=f"400{i+1}",
+                password=f"kioskpass{i+1}",
+            )
+
         self.stdout.write(
             self.style.SUCCESS("Successfully seeded database with employees")
         )
