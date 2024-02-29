@@ -162,10 +162,7 @@ Feature: Absence Request form functionality
     When the user submits the absence request form
     Then the form should not be submitted
 
-  Feature: Absence Request Email Notification
-    In order to confirm submission of absence requests
-    As a user
-    I want to receive an email notification when I submit an absence request
+    # Tests for email - does not support multiple feature files so left it in here
 
     Scenario: User submits an absence request and receives an email
       Given a user has filled out the absence request form

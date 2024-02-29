@@ -19,6 +19,7 @@ def step_impl(context):
     context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/home")
 
+
 @given("the user has logged in")
 def step_impl(context):
     context.browser = webdriver.Chrome()
@@ -29,6 +30,7 @@ def step_impl(context):
     password_input.send_keys("freestand1")
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
+
 
 @given("a user is logged in and on the absence request form")
 def step_impl(context):
@@ -48,14 +50,17 @@ def step_impl(context):
     absence_request_button = context.browser.find_element(By.ID, "absence-request-link")
     absence_request_button.click()
 
+
 @given("the user is not logged in")
 def step_impl(context):
     context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/")
 
-@when("the user tries to navigate to the home page")
+
+@given("the user tries to navigate to the home page")
 def step_impl(context):
-    context.browser.get("http://localhost:8000/")
+    context.browser.get("http://localhost:8000/home")
+
 
 @when("the user correctly fills out clock number")
 def step_impl(context):
@@ -220,6 +225,7 @@ def step_impl(context):
     )
     context.browser.quit()
 
+
 @then("the user is redirected to the login page")
 def step_impl(context):
     assert context.browser.current_url != "http://localhost:8000/home", (
@@ -268,6 +274,7 @@ def step_impl(context):
     )
     context.browser.quit()
 
+
 @given('a user has filled out the absence request form')
 def step_user_filled_out_form(context):
     context.form_data = {
@@ -279,9 +286,11 @@ def step_user_filled_out_form(context):
         'email': 'test@example.com',
     }
 
+
 @when('they submit the form')
 def step_user_submits_form(context):
     context.response = context.test.client.post('/submit_absence_request/', context.form_data)
+
 
 @then('an email should be sent to the user with the pending status')
 def step_email_is_sent(context):
