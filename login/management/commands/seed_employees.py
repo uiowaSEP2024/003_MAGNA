@@ -38,10 +38,20 @@ class Command(BaseCommand):
         for i in range(5):
             Employee.objects.create(
                 username=f"hr{i+1}",
-                name=f"HR Employee {i+1}",
+                name=f"HR {i+1}",
                 role="hr",
                 clock_number=f"200{i+1}",
                 password=f"hrpass{i+1}",
+            )
+
+        # Create floor employees
+        for i in range(25):
+            Employee.objects.create(
+                username=f"floor{i+1}",
+                name=f"Floor {i+1}",
+                role="floor",
+                clock_number="3" + str(i + 1).zfill(3),
+                password=f"floorpass{i+1}",
             )
 
         self.stdout.write(
