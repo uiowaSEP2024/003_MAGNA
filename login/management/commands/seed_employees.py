@@ -26,7 +26,7 @@ class Command(BaseCommand):
 
         # Create manager employees
         for i in range(5):
-            Employee.objects.create(
+            Employee.objects.create_user(
                 username=f"manager{i+1}",
                 name=f"Manager {i+1}",
                 role="manager",
@@ -37,7 +37,7 @@ class Command(BaseCommand):
 
         # Create HR employees
         for i in range(5):
-            Employee.objects.create(
+            Employee.objects.create_user(
                 username=f"hr{i+1}",
                 name=f"HR {i+1}",
                 role="hr",
@@ -48,7 +48,7 @@ class Command(BaseCommand):
 
         # Create floor employees
         for i in range(25):
-            Employee.objects.create(
+            Employee.objects.create_user(
                 username=f"floor{i+1}",
                 name=f"Floor {i+1}",
                 role="floor",
@@ -58,7 +58,7 @@ class Command(BaseCommand):
 
         # Create kiosk users
         for i in range(5):
-            Employee.objects.create(
+            Employee.objects.create_user(
                 username=f"kiosk{i+1}",
                 name=f"Kiosk {i+1}",
                 role="kiosk",

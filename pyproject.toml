@@ -24,6 +24,7 @@ pytest = "^8.0.1"
 pytest-django = "^4.8.0"
 pytest-cov = "^4.1.0"
 poetry-plugin-export = "^1.6.0"
+interrogate = "^1.5.0"
 
 [tool.djlint]
 profile="django"
@@ -40,7 +41,7 @@ ignore-nested-functions = false
 ignore-nested-classes = true
 ignore-setters = false
 fail-under = 95
-exclude = ["setup.py", "docs", "build"]
+exclude = ["setup.py", "docs", "build", "*/site-packages/*", "*/migrations/", "features/*"]
 ignore-regex = ["^get$", "^mock_.*", ".*BaseClass.*"]
 verbose = 0
 quiet = false
