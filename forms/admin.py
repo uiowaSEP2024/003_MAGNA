@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import AbsentDaysAllowed
 
 # Register your models here.
