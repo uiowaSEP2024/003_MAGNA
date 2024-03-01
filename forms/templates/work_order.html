@@ -50,11 +50,11 @@
             <div>
                 <hr class="form-separator">
             </div>
-            <form id="time-off-form" method="post" action="{% url 'submit_absence_request' %}">
+            <form id="work-order-form" method="post" action="{% url 'submit-work-order' %}">
                 {% csrf_token %}
 
                 <label for="order_number">Work Order #:</label>
-                <input type="text" id="order_number" name="clock_number">
+                <input type="text" id="order_number" name="order_number">
 
                 <label for="shift_number">Shift:</label>
                 <select id="shift_number" name="shift_number">
@@ -72,8 +72,8 @@
                     <option value="finance">Finance</option>
                 </select>
 
-                <label for="full-name">Requested By:</label>
-                <input type="text" id="full-name" name="full_name">
+                <label for="full_name">Requested By:</label>
+                <input type="text" id="full_name" name="full_name">
 
                 <label for="machine_affected">Machine affected:</label>
                 <select id="machine_affected" name="machine_affected">
@@ -113,7 +113,7 @@
                 <label for="requested_date">Requested Completion Date:</label>
                 <input type="date" id="requested_date" name="requested_date">
 
-                <label for="operation_affected">Type of Work:</label>
+                <label for="operation_affected">Operation Affected:</label>
                 <select id="operation_affected" name="operation_affected">
                     <option value="operation1">Operation 1</option>
                     <option value="operation2">Operation 2</option>

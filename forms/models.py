@@ -83,7 +83,7 @@ class AbsenceRequest(models.Model):
 
 # Model for the WorkOrder form
 class WorkOrder(models.Model):
-    order_number = models.CharField(max_length=255)
+    order_number = models.IntegerField()
     shift_number = models.CharField(max_length=100)
     department_affected = models.CharField(max_length=100)
     full_name = models.CharField(max_length=255)
@@ -109,7 +109,7 @@ class WorkOrder(models.Model):
 
     def save(self, *args, **kwargs):
         self.full_clean()
-        super(WorkOrder, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Work Order #{self.order_number} by {self.full_name}"

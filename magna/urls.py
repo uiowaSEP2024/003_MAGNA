@@ -33,18 +33,10 @@ urlpatterns = [
     path("home", home.views.index, name="home"),
     path("absence-request", forms.views.absence_request, name="absence-request"),
     path("work-order", forms.views.work_order, name="work-order"),
-    path(
-        "submit-absence-request/",
-        forms.views.submit_absence_request,
-        name="submit_absence_request",
-    ),
+    path("submit-absence-request/", forms.views.submit_absence_request, name="submit_absence_request"),
     path("submit-work-order/", forms.views.submit_work_order, name="submit-work-order"),
     path("requests", forms.views.requests, name="requests"),
-    path(
-        "api/allowed-absent/",
-        forms.views.allowed_absent_data,
-        name="allowed-absent-data",
-    ),
+    path("api/allowed-absent/", forms.views.allowed_absent_data, name="allowed-absent-data"),
     path(
         "api/days-requested/",
         forms.views.days_requested_data,
