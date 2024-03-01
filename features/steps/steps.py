@@ -81,6 +81,42 @@ def step_impl(context):
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
 
+@when("the floor employee user correctly logs in")
+def step_impl(context):
+    username_input = context.browser.find_element(By.ID, "id_username")
+    username_input.send_keys("floor1")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    password_input.send_keys("floorpass1")
+    login_button = context.browser.find_element(By.ID, "log-in")
+    login_button.click()
+
+@when("the manager user correctly logs in")
+def step_impl(context):
+    username_input = context.browser.find_element(By.ID, "id_username")
+    username_input.send_keys("manager1")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    password_input.send_keys("managerpass1")
+    login_button = context.browser.find_element(By.ID, "log-in")
+    login_button.click()
+
+@when("the HR user correctly logs in")
+def step_impl(context):
+    username_input = context.browser.find_element(By.ID, "id_username")
+    username_input.send_keys("hr1")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    password_input.send_keys("hrpass1")
+    login_button = context.browser.find_element(By.ID, "log-in")
+    login_button.click()
+
+@when("the admin user correctly logs in")
+def step_impl(context):
+    username_input = context.browser.find_element(By.ID, "id_username")
+    username_input.send_keys("admin")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    password_input.send_keys("adminpass123")
+    login_button = context.browser.find_element(By.ID, "log-in")
+    login_button.click()
+
 
 # login feature then steps are here
 @then("the user should be on the home page")

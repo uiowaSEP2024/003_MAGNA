@@ -13,11 +13,35 @@ Feature: Login functionality
 
   #Newer tests designed to be more modular
 
-  # tests on chrome for correct login
+  # tests on chrome for correct login, user variants
   Scenario: Kiosk user tries to login on chrome with correct credentials
     Given the user is using chrome
     And the user has navigated to the login page
     When the kiosk user correctly logs in
+    Then the user should be on the home page
+
+  Scenario: Floor employee tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the floor employee user correctly logs in
+    Then the user should be on the home page
+
+    Scenario: HR tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the HR user correctly logs in
+    Then the user should be on the home page
+
+    Scenario: Manager tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the manager user correctly logs in
+    Then the user should be on the home page
+
+    Scenario: Admin tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the admin user correctly logs in
     Then the user should be on the home page
 
 
