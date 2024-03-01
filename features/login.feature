@@ -146,3 +146,22 @@ Feature: Login functionality
     When the user presses the login button
     Then the user should be on the login page
 
+  # tests on edge for correct login, user variants
+
+  # tests incorrect login where there is a missing username
+  # Using edge for webdriver in these tests, with different user variants
+
+  # tests incorrect login where there is a missing password
+  # Using edge for webdriver in these tests, with different user variants
+
+  # tests incorrect login with mistyped username
+  # Using edge, all user variants
+
+  # tests incorrect login with mistyped password
+  # Using edge, all user variants
+
+  # tests incorrect login with no fields
+  # using edge, no user variants needed
+
+
+
