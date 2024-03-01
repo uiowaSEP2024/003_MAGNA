@@ -72,7 +72,7 @@ def step_impl(context):
 
 
 # login feature when steps are here
-@when("the kiosk user tries to login")
+@when("the kiosk user correctly logs in")
 def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("kiosk1")
