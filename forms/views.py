@@ -49,7 +49,7 @@ def absence_request(request):
     Returns:
     - Rendered absence_request.html template
     """
-    return render(request, "work_order.html")
+    return render(request, "absence_request.html")
 
 
 def work_order(request):
@@ -121,7 +121,6 @@ def submit_absence_request(request):
             )
             absence_request.save()
             messages.success(request, "Request submitted successfully.")
-            return redirect("requests")
 
             subject = "Absence Request Submitted"
             message = f"Your absence request from {start_date} to {end_date} has been submitted and is pending approval."
