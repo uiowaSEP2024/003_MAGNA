@@ -22,20 +22,17 @@ def step_impl(context):
 def step_impl(context):
     """The step for putting the test env on the login page"""
     # context.browser.visit(context.get_url("login"))
-    context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/")
 
 
 @given("the user has navigated to the home page")
 def step_impl(context):
     """Putting the test environment on the home page"""
-    context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/home")
 
 
 @given("the user has logged in")
 def step_impl(context):
-    context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/home")
     username_input = context.browser.find_element(By.ID, "id_username")
     password_input = context.browser.find_element(By.ID, "id_password")
@@ -43,6 +40,7 @@ def step_impl(context):
     password_input.send_keys("freestand1")
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
+
 
 
 @given("a user is logged in and on the absence request form")
@@ -71,6 +69,28 @@ def step_impl(context):
 @given("the user tries to navigate to the home page")
 def step_impl(context):
     context.browser.get("http://localhost:8000/home")
+
+
+# login feature when steps are here
+@when("the kiosk user tries to login")
+def step_impl(context):
+    username_input = context.browser.find_element(By.ID, "id_username")
+    username_input.send_keys("kiosk1")
+    password_input = context.browser.find_element(By.ID, "id_password")
+    password_input.send_keys("kioskpass1")
+    login_button = context.browser.find_element(By.ID, "log-in")
+    login_button.click()
+
+
+# login feature then steps are here
+@then("the user should be on the home page")
+def step_impl(context):
+    assert context.browser.current_url == "http://localhost:8000/home", (
+        f"Expected url to be on home page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    # temporary until I can get after scenario steps work
+    context.browser.quit()
 
 
 
