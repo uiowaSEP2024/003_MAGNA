@@ -140,7 +140,7 @@ Feature: Login functionality
   # tests incorrect login with no fields
   # chrome webdriver, no user variants needed
 
-  Scenario: user tries to login with no fields
+  Scenario: user tries to login with no fields on Chrome
     Given the user is using chrome
     And the user has navigated to the login page
     When the user presses the login button
@@ -162,6 +162,12 @@ Feature: Login functionality
 
   # tests incorrect login with no fields
   # using edge, no user variants needed
+
+  Scenario: user tries to login with no fields on edge
+    Given the user is using edge
+    And the user has navigated to the login page
+    When the user presses the login button
+    Then the user should be on the login page
 
   # tests on firefox for correct login, user variants
 
