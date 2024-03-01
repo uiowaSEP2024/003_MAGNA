@@ -4,6 +4,19 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from django.core import mail
 
+# tests for different browsers
+@given("The user is using chrome")
+def step_impl(context):
+    context.browser = webdriver.Chrome
+
+@given("The user is using edge")
+def step_impl(context):
+    context.browser = webdriver.Edge
+
+@given("The user is using firefox")
+def step_impl(context):
+    context.browser = webdriver.Firefox
+
 
 @given("the user has navigated to the login page")
 def step_impl(context):
@@ -38,7 +51,6 @@ def step_impl(context):
     This is a temporary fix until I can get a before run function set up.
     It didn't want to work earlier
     """
-    context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/")
     username_input = context.browser.find_element(By.ID, "username")
     username_input.send_keys("user")
@@ -53,7 +65,6 @@ def step_impl(context):
 
 @given("the user is not logged in")
 def step_impl(context):
-    context.browser = webdriver.Chrome()
     context.browser.get("http://localhost:8000/")
 
 
