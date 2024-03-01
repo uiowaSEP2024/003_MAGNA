@@ -140,3 +140,9 @@ Feature: Login functionality
   # tests incorrect login with no fields
   # chrome webdriver, no user variants needed
 
+  Scenario: user tries to login with no fields
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the user presses the login button
+    Then the user should be on the login page
+
