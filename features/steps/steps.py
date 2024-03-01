@@ -4,23 +4,26 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from django.core import mail
 
+
 # tests for different browsers
 @given("The user is using chrome")
 def step_impl(context):
     context.browser = webdriver.Chrome()
 
+
 @given("The user is using edge")
 def step_impl(context):
     context.browser = webdriver.Edge()
+
 
 @given("The user is using firefox")
 def step_impl(context):
     context.browser = webdriver.Firefox()
 
+
 @given("The user is using internet explorer")
 def step_impl(context):
     context.browser = webdriver.Ie()
-
 
 
 @given("the user has navigated to the login page")
@@ -45,7 +48,6 @@ def step_impl(context):
     password_input.send_keys("freestand1")
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
-
 
 
 @given("a user is logged in and on the absence request form")
@@ -77,48 +79,68 @@ def step_impl(context):
 
 
 # login feature when steps are here
-@when("the kiosk user correctly logs in")
+@when("the kiosk user correctly enters the username")
 def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("kiosk1")
+
+
+@when("the kiosk user correctly enters the password")
+def step_impl(context):
     password_input = context.browser.find_element(By.ID, "id_password")
     password_input.send_keys("kioskpass1")
-    login_button = context.browser.find_element(By.ID, "log-in")
-    login_button.click()
 
-@when("the floor employee user correctly logs in")
+
+@when("the floor employee user correctly enters the username")
 def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("floor1")
+
+
+@when("the floor employee user correctly enters the password")
+def step_impl(context):
     password_input = context.browser.find_element(By.ID, "id_password")
     password_input.send_keys("floorpass1")
-    login_button = context.browser.find_element(By.ID, "log-in")
-    login_button.click()
 
-@when("the manager user correctly logs in")
+
+@when("the manager user correctly enters the username")
 def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("manager1")
+
+
+@when("the manager user correctly enters the password")
+def step_impl(context):
     password_input = context.browser.find_element(By.ID, "id_password")
     password_input.send_keys("managerpass1")
-    login_button = context.browser.find_element(By.ID, "log-in")
-    login_button.click()
 
-@when("the HR user correctly logs in")
+
+@when("the HR user correctly enters the username")
 def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("hr1")
+
+
+@when("the HR user correctly enters the password")
+def step_impl(context):
     password_input = context.browser.find_element(By.ID, "id_password")
     password_input.send_keys("hrpass1")
-    login_button = context.browser.find_element(By.ID, "log-in")
-    login_button.click()
 
-@when("the admin user correctly logs in")
+
+@when("the admin user correctly enters the username")
 def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("admin")
+
+
+@when("the admin user correctly enters the password")
+def step_impl(context):
     password_input = context.browser.find_element(By.ID, "id_password")
     password_input.send_keys("adminpass123")
+
+
+@when("the user presses the login button")
+def step_impl(context):
     login_button = context.browser.find_element(By.ID, "log-in")
     login_button.click()
 
@@ -132,7 +154,6 @@ def step_impl(context):
     )
     # temporary until I can get after scenario steps work
     context.browser.quit()
-
 
 
 @when("the user correctly fills out clock number")
