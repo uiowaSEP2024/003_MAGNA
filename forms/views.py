@@ -137,12 +137,78 @@ def submit_absence_request(request):
         else:
             # Handle the invalid form case
             messages.error(request, "Invalid form submission.")
-            return render(request, "absence_request.html")
 
     return render(request, "absence_request.html")
 
 
 def submit_work_order(request):
+    """
+    Process the form submission for work order.
+    Args:
+    request: the HTTP request object
+    Returns:
+    HTTP response object
+    """
+    if request.method == "POST":
+        # Extract form data
+        order_number = request.POST.get("order_number")
+        shift_number = request.POST.get("shift_number")
+        department_affected = request.POST.get("department_affected")
+        full_name = request.POST.get("full_name")
+        machine_affected = request.POST.get("machine_affected")
+        quality_issue = request.POST.get("boolean_var1") == 'true'
+        safety_issue = request.POST.get("boolean_var2") == 'true'
+        planned = request.POST.get("boolean_var3") == 'true'
+        sensor_issue = request.POST.get("boolean_var4") == 'true'
+        work_type = request.POST.get("work_type")
+        requested_date = request.POST.get("requested_date")
+        operation_affected = request.POST.get("operation_affected")
+        email = request.POST.get("email")
+        describe_problem = request.POST.get("describe_problem")
+        root_cause = request.POST.get("root_cause")
+        work_requested = request.POST.get("work_requested")
+
+        # Check if required fields are present
+        if (
+            order_number
+            and shift_number
+            and department_affected
+            and full_name
+            and machine_affected
+            and work_type
+            and operation_affected
+            and email
+            and describe_problem
+            and root_cause
+            and work_requested
+        ):
+            # Create and save the WorkOrder object
+            work_order = WorkOrder(
+                order_number=order_number,
+                shift_number=shift_number,
+                department_affected=department_affected,
+                full_name=full_name,
+                machine_affected=machine_affected,
+                quality_issue=quality_issue,
+                safety_issue=safety_issue,
+                planned=planned,
+                sensor_issue=sensor_issue,
+                work_type=work_type,
+                requested_date=requested_date,
+                operation_affected=operation_affected,
+                email=email,
+                describe_problem=describe_problem,
+                root_cause=root_cause,
+                work_requested=work_requested,
+            )
+            work_order.save()
+            messages.success(request, "Work order submitted successfully.")
+            # Redirect to an appropriate page
+            return redirect("some_page_to_redirect_to_after_submission")
+        else:
+            # Handle the invalid form case
+            messages.error(request, "Invalid form submission.")
+
     return render(request, "work_order.html")
 
 

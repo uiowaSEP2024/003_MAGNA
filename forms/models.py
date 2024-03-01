@@ -81,6 +81,44 @@ class AbsenceRequest(models.Model):
         db_table = "forms_absence_request"
 
 
+# Model for the WorkOrder form
+class WorkOrder(models.Model):
+    order_number = models.CharField(max_length=255)
+    shift_number = models.CharField(max_length=100)
+    department_affected = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=255)
+    machine_affected = models.CharField(max_length=255)
+    quality_issue = models.BooleanField(default=False)
+    safety_issue = models.BooleanField(default=False)
+    planned = models.BooleanField(default=False)
+    sensor_issue = models.BooleanField(default=False)
+    work_type = models.CharField(max_length=255)
+    requested_date = models.DateField()
+    operation_affected = models.CharField(max_length=255)
+    email = models.EmailField()
+    describe_problem = models.TextField()
+    root_cause = models.TextField()
+    work_requested = models.TextField()
+
+    def clean(self):
+        # Check if at least one checkbox is checked
+        if not any([self.quality_issue, self.safety_issue, self.planned, self.sensor_issue]):
+            raise ValidationError('At least one issue type must be selected.')
+
+        # Here you can add more validation if needed
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(WorkOrder, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Work Order #{self.order_number} by {self.full_name}"
+
+    class Meta:
+        # Set the table name
+        db_table = "forms_work_order"
+
+
 class AbsentDaysAllowed(models.Model):
     """Model for the allowed absent days on the calendar"""
 
