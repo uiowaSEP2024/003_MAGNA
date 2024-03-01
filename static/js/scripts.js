@@ -238,7 +238,7 @@ async function generateCalendar(year, month) {
                 updateAllowedAbsent(shiftDate, newAllowedAbsent, this);
             }
         });
-        
+
         calendarDatesElement.appendChild(dateElement);
     }
 

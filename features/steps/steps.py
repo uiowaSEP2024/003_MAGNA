@@ -62,6 +62,7 @@ def step_impl(context):
     context.browser.get("http://localhost:8000/home")
 
 
+
 @when("the user correctly fills out clock number")
 def step_impl(context):
     """The test env correctly fills out the clock number"""
@@ -229,8 +230,7 @@ def step_impl(context):
 @then("the user is redirected to the login page")
 def step_impl(context):
     assert context.browser.current_url != "http://localhost:8000/home", (
-        f"expected to be on login page, "
-        f"instead is on {context.browser.current_url}"
+        f"expected to be on login page, " f"instead is on {context.browser.current_url}"
     )
     context.browser.quit()
 
@@ -275,26 +275,28 @@ def step_impl(context):
     context.browser.quit()
 
 
-@given('a user has filled out the absence request form')
+@given("a user has filled out the absence request form")
 def step_user_filled_out_form(context):
     context.form_data = {
-        'first_day_absent': '2024-02-14',
-        'last_day_absent': '2024-02-15',
-        'shift': '1',
-        'hours': '8',
-        'absence_type': 'sick',
-        'email': 'test@example.com',
+        "first_day_absent": "2024-02-14",
+        "last_day_absent": "2024-02-15",
+        "shift": "1",
+        "hours": "8",
+        "absence_type": "sick",
+        "email": "test@example.com",
     }
 
 
-@when('they submit the form')
+@when("they submit the form")
 def step_user_submits_form(context):
-    context.response = context.test.client.post('/submit_absence_request/', context.form_data)
+    context.response = context.test.client.post(
+        "/submit_absence_request/", context.form_data
+    )
 
 
-@then('an email should be sent to the user with the pending status')
+@then("an email should be sent to the user with the pending status")
 def step_email_is_sent(context):
     assert len(mail.outbox) == 1
-    assert mail.outbox[0].subject == 'Absence Request Submission'
-    assert 'pending' in mail.outbox[0].body
-    assert mail.outbox[0].to == [context.form_data['email']]
+    assert mail.outbox[0].subject == "Absence Request Submission"
+    assert "pending" in mail.outbox[0].body
+    assert mail.outbox[0].to == [context.form_data["email"]]

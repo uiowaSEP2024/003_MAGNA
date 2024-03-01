@@ -319,7 +319,7 @@ class TestAbsenceRequest:
         """Creating a new AbsenceRequest object with a start_date that is after the end_date should raise a ValidationError."""  # noqa: E501
         with pytest.raises(ValidationError):
             absence_request = AbsenceRequest(
-                start_date="2022-1-1", end_date="2021-12-31",clock_number=123445
+                start_date="2022-1-1", end_date="2021-12-31", clock_number=123445
             )
             absence_request.full_clean()
 
