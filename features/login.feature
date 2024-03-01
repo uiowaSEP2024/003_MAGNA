@@ -57,35 +57,35 @@ Feature: Login functionality
     # tests on chrome for incorrect login where there is a missing username
     # Using chrome for webdriver in these tests, with different user variants
 
-  Scenario: Kiosk user tries to login on chrome with correct credentials
+  Scenario: Kiosk user tries to login on chrome with missing username
     Given the user is using chrome
     And the user has navigated to the login page
     When the kiosk user correctly enters the password
     When the user presses the login button
     Then the user should be on the login page
 
-  Scenario: Floor employee tries to login on chrome with correct credentials
+  Scenario: Floor employee tries to login on chrome with missing username
     Given the user is using chrome
     And the user has navigated to the login page
     When the floor employee user correctly enters the password
     When the user presses the login button
     Then the user should be on the login page
 
-  Scenario: HR tries to login on chrome with correct credentials
+  Scenario: HR tries to login on chrome with missing username
     Given the user is using chrome
     And the user has navigated to the login page
     When the HR user correctly enters the password
     When the user presses the login button
     Then the user should be on the login page
 
-  Scenario: Manager tries to login on chrome with correct credentials
+  Scenario: Manager tries to login on chrome with missing username
     Given the user is using chrome
     And the user has navigated to the login page
     When the manager user correctly enters the password
     When the user presses the login button
     Then the user should be on the login page
 
-  Scenario: Admin tries to login on chrome with correct credentials
+  Scenario: Admin tries to login on chrome with missing username
     Given the user is using chrome
     And the user has navigated to the login page
     When the admin user correctly enters the password
@@ -96,37 +96,37 @@ Feature: Login functionality
   # Using chrome for webdriver in these tests, with different user variants
 
 
-    Scenario: Kiosk user tries to login on chrome with correct credentials
+    Scenario: Kiosk user tries to login on chrome with missing password
     Given the user is using chrome
     And the user has navigated to the login page
     When the kiosk user correctly enters the username
     When the user presses the login button
-    Then the user should be on the home page
+    Then the user should be on the login page
 
-  Scenario: Floor employee tries to login on chrome with correct credentials
+  Scenario: Floor employee tries to login on chrome with missing password
     Given the user is using chrome
     And the user has navigated to the login page
     When the floor employee user correctly enters the username
     When the user presses the login button
-    Then the user should be on the home page
+    Then the user should be on the login page
 
-  Scenario: HR tries to login on chrome with correct credentials
+  Scenario: HR tries to login on chrome with missing password
     Given the user is using chrome
     And the user has navigated to the login page
     When the HR user correctly enters the username
     When the user presses the login button
-    Then the user should be on the home page
+    Then the user should be on the login page
 
-  Scenario: Manager tries to login on chrome with correct credentials
+  Scenario: Manager tries to login on chrome with missing password
     Given the user is using chrome
     And the user has navigated to the login page
     When the manager user correctly enters the username
     When the user presses the login button
-    Then the user should be on the home page
+    Then the user should be on the login page
 
-  Scenario: Admin tries to login on chrome with correct credentials
+  Scenario: Admin tries to login on chrome with missing password
     Given the user is using chrome
     And the user has navigated to the login page
     When the admin user correctly enters the username
     When the user presses the login button
-    Then the user should be on the home page
+    Then the user should be on the login page
