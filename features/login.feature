@@ -163,5 +163,39 @@ Feature: Login functionality
   # tests incorrect login with no fields
   # using edge, no user variants needed
 
+  # tests on firefox for correct login, user variants
+
+  # tests incorrect login where there is a missing username
+  # Using firefox for webdriver in these tests, with different user variants
+
+  # tests incorrect login where there is a missing password
+  # Using firefox for webdriver in these tests, with different user variants
+
+  # tests incorrect login with mistyped username
+  # Using firefox, all user variants
+
+  # tests incorrect login with mistyped password
+  # Using firefox, all user variants
+
+  # tests incorrect login with no fields
+  # using firefox, no user variants needed
+
+  # tests on internet explorer for correct login, user variants
+
+  # tests incorrect login where there is a missing username
+  # Using internet explorer for webdriver in these tests, with different user variants
+
+  # tests incorrect login where there is a missing password
+  # Using internet explorer for webdriver in these tests, with different user variants
+
+  # tests incorrect login with mistyped username
+  # Using internet explorer, all user variants
+
+  # tests incorrect login with mistyped password
+  # Using internet explorer, all user variants
+
+  # tests incorrect login with no fields
+  # using internet explorer, no user variants needed
+
 
 
