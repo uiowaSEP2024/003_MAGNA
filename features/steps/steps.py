@@ -155,6 +155,13 @@ def step_impl(context):
     # temporary until I can get after scenario steps work
     context.browser.quit()
 
+@then("the user should be on the login page")
+def step_impl(context):
+    assert context.browser.current_url == "http://localhost:8000/", (
+        f"Expected url to be on login page, "
+        f"instead is on {context.browser.current_url}"
+    )
+
 
 @when("the user correctly fills out clock number")
 def step_impl(context):

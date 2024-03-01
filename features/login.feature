@@ -30,7 +30,7 @@ Feature: Login functionality
     When the user presses the login button
     Then the user should be on the home page
 
-    Scenario: HR tries to login on chrome with correct credentials
+  Scenario: HR tries to login on chrome with correct credentials
     Given the user is using chrome
     And the user has navigated to the login page
     When the HR user correctly enters the username
@@ -38,7 +38,7 @@ Feature: Login functionality
     When the user presses the login button
     Then the user should be on the home page
 
-    Scenario: Manager tries to login on chrome with correct credentials
+  Scenario: Manager tries to login on chrome with correct credentials
     Given the user is using chrome
     And the user has navigated to the login page
     When the manager user correctly enters the username
@@ -46,7 +46,7 @@ Feature: Login functionality
     When the user presses the login button
     Then the user should be on the home page
 
-    Scenario: Admin tries to login on chrome with correct credentials
+  Scenario: Admin tries to login on chrome with correct credentials
     Given the user is using chrome
     And the user has navigated to the login page
     When the admin user correctly enters the username
@@ -57,3 +57,37 @@ Feature: Login functionality
     # tests on chrome for incorrect login where there is a missing username
     # Using chrome for webdriver in these tests, with different user variants
 
+  Scenario: Kiosk user tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the kiosk user correctly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: Floor employee tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the floor employee user correctly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: HR tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the HR user correctly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: Manager tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the manager user correctly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: Admin tries to login on chrome with correct credentials
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the admin user correctly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
