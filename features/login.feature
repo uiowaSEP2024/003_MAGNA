@@ -54,7 +54,7 @@ Feature: Login functionality
     When the user presses the login button
     Then the user should be on the home page
 
-    # tests on chrome for incorrect login where there is a missing username
+    # tests incorrect login where there is a missing username
     # Using chrome for webdriver in these tests, with different user variants
 
   Scenario: Kiosk user tries to login on chrome with missing username
@@ -92,7 +92,7 @@ Feature: Login functionality
     When the user presses the login button
     Then the user should be on the login page
 
-  # tests on chrome for incorrect login where there is a missing password
+  # tests incorrect login where there is a missing password
   # Using chrome for webdriver in these tests, with different user variants
 
 
@@ -130,3 +130,13 @@ Feature: Login functionality
     When the admin user correctly enters the username
     When the user presses the login button
     Then the user should be on the login page
+
+  # tests incorrect login with mistyped username
+  # Chrome webdriver, all user variants
+
+  # tests incorrect login with mistyped password
+  # chrome webdriver, all user variants
+
+  # tests incorrect login with no fields
+  # chrome webdriver, no user variants needed
+
