@@ -81,6 +81,23 @@ def view_job_postings(request):
     pdfs = JobPDFs.objects.all()
     return render(request, 'view_job_postings.html', {'pdfs': pdfs})
 
+
+def create_job_postings(request):
+    if request.method == 'POST':
+        form = PDFUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_pdf = UploadedPDF(
+                title=form.cleaned_data['title'],
+                pdf_file=request.FILES['pdf_file']
+            )
+            new_pdf.save()
+            # Redirect to PDF list or success page
+            return redirect('list_pdfs')
+    else:
+        form = PDFUploadForm()
+    return render(request, 'create_job_postings.html', {'form': form})
+
+
 def submit_absence_request(request):
     """
     Process the form submission for absence request.
@@ -285,3 +302,5 @@ def update_allowed_absent(request):
 
         # Handle any exceptions and return an error response
         return JsonResponse({"status": "error", "message": str(e)})
+
+
