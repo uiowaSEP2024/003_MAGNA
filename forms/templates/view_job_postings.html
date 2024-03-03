@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Off Request</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a>Innovations</a>
+                <a>Products</a>
+                <a>Stories</a>
+                <a>Company</a>
+                <a>Careers</a>
+                <a>Contact</a>
+            </div>
+        </nav>
+    </header>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="request-container">
+        <div class="form-card">
+            <div class="form-top">
+                <div class="form-logo">
+                    <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="top-right-image">
+                </div>
+                <div class="datetime-container">
+                    <div class="current-time">Current Time: <span id="time"></span></div>
+                    <div class="current-date">Current Date: <span id="date"></span></div>
+                </div>
+            </div>
+            <div class="form-header">
+                <h2>Job Postings</h2>
+            </div>
+            <div>
+                <hr class="form-separator">
+            </div>
+            <ul>
+                {% for pdf in pdfs %}
+                    <li>
+                        <a href="{{ pdf.file.url }}" target="_blank">{{ pdf.title }}</a>
+                    </li>
+                    {% empty %}
+                        <li>No PDFs available.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}">defer</script>
+</body>
+</html>

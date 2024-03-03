@@ -133,3 +133,14 @@ class AbsentDaysAllowed(models.Model):
         """Meta class for the AbsentDaysAllowed model."""
 
         db_table = "absent_days_allowed"
+
+
+class JobPDFs(models.Model):
+    title = models.CharField(max_length=200)
+    pdf_file = models.FileField(upload_to='pdfs/')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = "job_posting_pdfs"

@@ -77,6 +77,10 @@ def requests(request):
     return render(request, "requests.html", {"requests": activeRequests})
 
 
+def view_job_postings(request):
+    pdfs = JobPDFs.objects.all()
+    return render(request, 'view_job_postings.html', {'pdfs': pdfs})
+
 def submit_absence_request(request):
     """
     Process the form submission for absence request.
