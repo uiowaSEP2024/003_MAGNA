@@ -117,6 +117,7 @@ def submit_absence_request(request):
         start_date = request.POST.get("start_date")
         end_date = request.POST.get("end_date")
         shift_number = request.POST.get("shift_number")
+        email = request.POST.get("email")
         hours_gone = request.POST.get("hours_gone")
         absence_type = request.POST.get("absence_type")
 
@@ -128,6 +129,7 @@ def submit_absence_request(request):
             and hours_gone
             and absence_type
             and clock_number
+            and email
         ):
             # Create and save the AbsenceRequest object
             absence_request = AbsenceRequest(
@@ -136,6 +138,7 @@ def submit_absence_request(request):
                 end_date=end_date,
                 approval_status="pending",  # Default to 'pending' as approval is not instant
                 shift_number=shift_number,
+                email_address=email,
                 hours_gone=hours_gone,
                 absence_type=absence_type,
                 # Omit the 'approval' and 'filled_by' fields until log in feature fully implemented

@@ -34,6 +34,7 @@ class AbsenceRequest(models.Model):
     )
     hours_gone = models.IntegerField()
     absence_type = models.CharField(max_length=50)
+    email_address = models.EmailField()
     approval = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
