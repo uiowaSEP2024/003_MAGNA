@@ -176,6 +176,46 @@ Feature: Login functionality
   # tests incorrect login with mistyped password
   # chrome webdriver, all user variants
 
+  Scenario: Kiosk user tries to login on chrome with mistyped password
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the kiosk user correctly enters the username
+    When the kiosk user incorrectly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: Floor Employee user tries to login on chrome with mistyped password
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the floor employee user correctly enters the username
+    When the floor employee user incorrectly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: Manager user tries to login on chrome with mistyped password
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the manager user correctly enters the username
+    When the manager user incorrectly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: HR user tries to login on chrome with mistyped password
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the HR user correctly enters the username
+    When the HR user incorrectly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
+  Scenario: Admin user tries to login on chrome with mistyped password
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the Admin user correctly enters the username
+    When the Admin user incorrectly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
   # tests incorrect login with no fields
   # chrome webdriver, no user variants needed
 
