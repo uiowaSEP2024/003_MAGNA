@@ -19,6 +19,19 @@ def step_impl(context):
     context.browser.get("http://localhost:8000/home")
 
 
+# new given variants for scenario outline
+@given("the user enters {username} as the username")
+def step_impl(context, username):
+    username_input = context.browser.find_element(By.ID, "id_username")
+    username_input.send_keys(username)
+
+
+@given("the user enters {password} as the password")
+def step_impl(context, password):
+    password_input = context.browser.find_element(By.ID, "id_password")
+    password_input.send_keys(password)
+
+
 # login feature when steps are here
 
 # Kiosk user
