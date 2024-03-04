@@ -4,27 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from django.core import mail
 
-
-# tests for different browsers
-# @given("The user is using chrome")
-# def step_impl(context):
-#     context.browser = webdriver.Chrome()
-#
-#
-# @given("The user is using edge")
-# def step_impl(context):
-#     context.browser = webdriver.Edge()
-#
-#
-# @given("The user is using firefox")
-# def step_impl(context):
-#     context.browser = webdriver.Firefox()
-#
-#
-# @given("The user is using internet explorer")
-# def step_impl(context):
-#     context.browser = webdriver.Ie()
-
+# if you are looking for the steps for initializing the browser,
+# those have been moved to BrowserInitSteps.py in the steps folder.
 
 @given("the user has navigated to the login page")
 def step_impl(context):
@@ -68,81 +49,8 @@ def step_impl(context):
     absence_request_button.click()
 
 
-# @given("the user is not logged in")
-# def step_impl(context):
-#     context.browser.get("http://localhost:8000/")
-#
-#
-# @given("the user tries to navigate to the home page")
-# def step_impl(context):
-#     context.browser.get("http://localhost:8000/home")
-#
-#
-# # login feature when steps are here
-# @when("the kiosk user correctly enters the username")
-# def step_impl(context):
-#     username_input = context.browser.find_element(By.ID, "id_username")
-#     username_input.send_keys("kiosk1")
-#
-#
-# @when("the kiosk user correctly enters the password")
-# def step_impl(context):
-#     password_input = context.browser.find_element(By.ID, "id_password")
-#     password_input.send_keys("kioskpass1")
-#
-#
-# @when("the floor employee user correctly enters the username")
-# def step_impl(context):
-#     username_input = context.browser.find_element(By.ID, "id_username")
-#     username_input.send_keys("floor1")
-#
-#
-# @when("the floor employee user correctly enters the password")
-# def step_impl(context):
-#     password_input = context.browser.find_element(By.ID, "id_password")
-#     password_input.send_keys("floorpass1")
-#
-#
-# @when("the manager user correctly enters the username")
-# def step_impl(context):
-#     username_input = context.browser.find_element(By.ID, "id_username")
-#     username_input.send_keys("manager1")
-#
-#
-# @when("the manager user correctly enters the password")
-# def step_impl(context):
-#     password_input = context.browser.find_element(By.ID, "id_password")
-#     password_input.send_keys("managerpass1")
-#
-#
-# @when("the HR user correctly enters the username")
-# def step_impl(context):
-#     username_input = context.browser.find_element(By.ID, "id_username")
-#     username_input.send_keys("hr1")
-#
-#
-# @when("the HR user correctly enters the password")
-# def step_impl(context):
-#     password_input = context.browser.find_element(By.ID, "id_password")
-#     password_input.send_keys("hrpass1")
-#
-#
-# @when("the admin user correctly enters the username")
-# def step_impl(context):
-#     username_input = context.browser.find_element(By.ID, "id_username")
-#     username_input.send_keys("admin")
-#
-#
-# @when("the admin user correctly enters the password")
-# def step_impl(context):
-#     password_input = context.browser.find_element(By.ID, "id_password")
-#     password_input.send_keys("adminpass123")
-#
-#
-# @when("the user presses the login button")
-# def step_impl(context):
-#     login_button = context.browser.find_element(By.ID, "log-in")
-#     login_button.click()
+# If you are looking for all of the steps for different user's username and passwords,  those
+# have been moved to LoginSteps.py, in the steps folder.
 
 
 # login feature then steps are here
