@@ -133,6 +133,13 @@ Feature: Login functionality
 
   # tests incorrect login with mistyped username
   # Chrome webdriver, all user variants
+  Scenario: Kiosk user tries to login on chrome with mistyped username
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the kiosk user incorrectly enters the username
+    When the kiosk user correctly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
 
   # tests incorrect login with mistyped password
   # chrome webdriver, all user variants
