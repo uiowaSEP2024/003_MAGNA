@@ -40,6 +40,7 @@ def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
     username_input.send_keys("kiosk")
 
+
 @when("the kiosk user incorrectly enters the password")
 def step_impl(context):
     password_input = context.browser.find_element(By.ID, "id_password")
@@ -48,6 +49,7 @@ def step_impl(context):
 
 # Floor employee user
 
+    # correct variants
 @when("the floor employee user correctly enters the username")
 def step_impl(context):
     username_input = context.browser.find_element(By.ID, "id_username")
@@ -58,6 +60,20 @@ def step_impl(context):
 def step_impl(context):
     password_input = context.browser.find_element(By.ID, "id_password")
     password_input.send_keys("floorpass1")
+
+    # incorrect variants
+
+
+@when("the floor employee user incorrectly enters the username")
+def step_impl(context):
+    username_input = context.browser.find_element(By.ID, "id_username")
+    username_input.send_keys("floor")
+
+
+@when("the floor employee user incorrectly enters the password")
+def step_impl(context):
+    password_input = context.browser.find_element(By.ID, "id_password")
+    password_input.send_keys("floorpass")
 
 
 @when("the manager user correctly enters the username")

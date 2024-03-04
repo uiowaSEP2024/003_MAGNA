@@ -141,6 +141,14 @@ Feature: Login functionality
     When the user presses the login button
     Then the user should be on the login page
 
+  Scenario: Floor Employee user tries to login on chrome with mistyped username
+    Given the user is using chrome
+    And the user has navigated to the login page
+    When the floor employee user incorrectly enters the username
+    When the kiosk user correctly enters the password
+    When the user presses the login button
+    Then the user should be on the login page
+
   # tests incorrect login with mistyped password
   # chrome webdriver, all user variants
 
