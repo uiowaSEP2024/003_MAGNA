@@ -6,24 +6,24 @@ from django.core import mail
 
 
 # tests for different browsers
-@given("The user is using chrome")
-def step_impl(context):
-    context.browser = webdriver.Chrome()
-
-
-@given("The user is using edge")
-def step_impl(context):
-    context.browser = webdriver.Edge()
-
-
-@given("The user is using firefox")
-def step_impl(context):
-    context.browser = webdriver.Firefox()
-
-
-@given("The user is using internet explorer")
-def step_impl(context):
-    context.browser = webdriver.Ie()
+# @given("The user is using chrome")
+# def step_impl(context):
+#     context.browser = webdriver.Chrome()
+#
+#
+# @given("The user is using edge")
+# def step_impl(context):
+#     context.browser = webdriver.Edge()
+#
+#
+# @given("The user is using firefox")
+# def step_impl(context):
+#     context.browser = webdriver.Firefox()
+#
+#
+# @given("The user is using internet explorer")
+# def step_impl(context):
+#     context.browser = webdriver.Ie()
 
 
 @given("the user has navigated to the login page")
