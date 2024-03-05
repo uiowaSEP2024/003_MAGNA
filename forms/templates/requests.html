@@ -35,6 +35,12 @@
 </div>
 
 <div class="container">
+    {% if current_user.role == "kiosk" %}
+        <label for="clock_number">Enter Clock Number:</label>
+        <input type="text" id="clock_number" name="clock_number">
+        <button id="search">Search</button>
+    {% endif %}
+
     {% for request in requests %}
     <div class="request-card status-{{ request.approval_status }}">
         <div class="request-card-top">

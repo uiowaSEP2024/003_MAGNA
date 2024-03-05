@@ -61,7 +61,11 @@ def requests(request):
     - HttpResponse object with the rendered HTML content.
     """
     activeRequests = AbsenceRequest.objects.all()
-    return render(request, "requests.html", {"requests": activeRequests})
+    return render(
+        request,
+        "requests.html",
+        {"requests": activeRequests, "current_user": request.user},
+    )
 
 
 def submit_absence_request(request):
