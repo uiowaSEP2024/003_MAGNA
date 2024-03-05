@@ -15,7 +15,7 @@ class Command(BaseCommand):
         """Handle method for seeding the database with absence requests"""
         shift_options = ["1st", "2nd", "3rd", "4th"]
         absence_type_options = ["sick", "vacation", "personal", "other"]
-        approval_options = ["pending", "approved", "denied"]
+        approval_options = ["pending", "approved", "rejected"]
 
         # Create absence requests
         for i in range(25):
