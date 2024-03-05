@@ -69,6 +69,7 @@ def step_impl(context):
         f"Expected url to be on login page, "
         f"instead is on {context.browser.current_url}"
     )
+    context.browser.quit()
 
 
 @when("the user correctly fills out clock number")
