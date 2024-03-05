@@ -14,7 +14,7 @@ Feature: Login functionality
   #Newer tests designed to be more modular
 
   # tests on chrome for correct login, user variants
-    Scenario Outline: Correct login on chrome
+  Scenario Outline: Correct login on chrome
     Given the user is using chrome
     And the user has navigated to the login page
     And the user enters <username> as the username
@@ -31,165 +31,68 @@ Feature: Login functionality
 
     # tests incorrect login where there is a missing username
     # Using chrome for webdriver in these tests, with different user variants
-
-  Scenario: Kiosk user tries to login on chrome with missing username
+  Scenario Outline: Missing username on chrome
     Given the user is using chrome
     And the user has navigated to the login page
-    When the kiosk user correctly enters the password
+    And the user enters <password> as the password
     When the user presses the login button
     Then the user should be on the login page
+    Examples:
+      | password |
+      | kioskpass1 |
+      | floorpass1 |
+      | managerpass1 |
+      | hrpass1      |
+      | adminpass123 |
 
-  Scenario: Floor employee tries to login on chrome with missing username
+  Scenario Outline: Missing password on chrome
     Given the user is using chrome
     And the user has navigated to the login page
-    When the floor employee user correctly enters the password
+    And the user enters <username> as the username
     When the user presses the login button
     Then the user should be on the login page
+    Examples:
+      | username |
+      | kiosk1   |
+      | floor1   |
+      | manager1 |
+      | hr1      |
+      | admin    |
 
-  Scenario: HR tries to login on chrome with missing username
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the HR user correctly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Manager tries to login on chrome with missing username
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the manager user correctly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Admin tries to login on chrome with missing username
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the admin user correctly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  # tests incorrect login where there is a missing password
-  # Using chrome for webdriver in these tests, with different user variants
-
-
-  Scenario: Kiosk user tries to login on chrome with missing password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the kiosk user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Floor employee tries to login on chrome with missing password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the floor employee user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: HR tries to login on chrome with missing password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the HR user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Manager tries to login on chrome with missing password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the manager user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Admin tries to login on chrome with missing password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the admin user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
 
   # tests incorrect login with mistyped username
   # Chrome webdriver, all user variants
-  Scenario: Kiosk user tries to login on chrome with mistyped username
+
+    Scenario Outline: Mistyped username on chrome
     Given the user is using chrome
     And the user has navigated to the login page
-    When the kiosk user incorrectly enters the username
-    When the kiosk user correctly enters the password
+    And the user enters <username> as the username
+    And the user enters <password> as the password
     When the user presses the login button
     Then the user should be on the login page
+    Examples:
+      | username | password |
+      | kiosk11 | kioskpass1 |
+      | flooor1 | floorpass1 |
+      | managerr1 | managerpass1 |
+      | he1      | hrpass1      |
+      | admin1    | adminpass123   |
 
-  Scenario: Floor Employee user tries to login on chrome with mistyped username
+    Scenario Outline: Mistyped password on chrome
     Given the user is using chrome
     And the user has navigated to the login page
-    When the floor employee user incorrectly enters the username
-    When the floor employee user correctly enters the password
+    And the user enters <username> as the username
+    And the user enters <password> as the password
     When the user presses the login button
     Then the user should be on the login page
+    Examples:
+      | username | password |
+      | kiosk1 | kioskpass |
+      | floor1 | floorpass |
+      | manager1 | managerpass |
+      | hr1      | hrpass      |
+      | admin    | adminpass1   |
 
-  Scenario: Manager user tries to login on chrome with mistyped username
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the manager user incorrectly enters the username
-    When the manager user correctly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: HR user tries to login on chrome with mistyped username
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the HR user incorrectly enters the username
-    When the HR user correctly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Admin user tries to login on chrome with mistyped username
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the Admin user incorrectly enters the username
-    When the Admin user correctly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  # tests incorrect login with mistyped password
-  # chrome webdriver, all user variants
-
-  Scenario: Kiosk user tries to login on chrome with mistyped password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the kiosk user correctly enters the username
-    When the kiosk user incorrectly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Floor Employee user tries to login on chrome with mistyped password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the floor employee user correctly enters the username
-    When the floor employee user incorrectly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Manager user tries to login on chrome with mistyped password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the manager user correctly enters the username
-    When the manager user incorrectly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: HR user tries to login on chrome with mistyped password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the HR user correctly enters the username
-    When the HR user incorrectly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Admin user tries to login on chrome with mistyped password
-    Given the user is using chrome
-    And the user has navigated to the login page
-    When the Admin user correctly enters the username
-    When the Admin user incorrectly enters the password
-    When the user presses the login button
-    Then the user should be on the login page
 
   # tests incorrect login with no fields
   # chrome webdriver, no user variants needed
@@ -228,40 +131,6 @@ Feature: Login functionality
   # tests incorrect login where there is a missing password
   # Using edge for webdriver in these tests, with different user variants
 
-  Scenario: Kiosk user tries to login on edge with missing password
-    Given the user is using edge
-    And the user has navigated to the login page
-    When the kiosk user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Floor employee tries to login on edge with missing password
-    Given the user is using edge
-    And the user has navigated to the login page
-    When the floor employee user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: HR tries to login on edge with missing password
-    Given the user is using edge
-    And the user has navigated to the login page
-    When the HR user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Manager tries to login on edge with missing password
-    Given the user is using edge
-    And the user has navigated to the login page
-    When the manager user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
-
-  Scenario: Admin tries to login on edge with missing password
-    Given the user is using edge
-    And the user has navigated to the login page
-    When the admin user correctly enters the username
-    When the user presses the login button
-    Then the user should be on the login page
 
   # tests incorrect login with mistyped username
   # Using edge, all user variants
