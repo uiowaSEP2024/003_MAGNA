@@ -1,6 +1,7 @@
 Feature: Home Page Functionality
-  Scenario: User tries to navigate to home page before logging in
-    Given the user is not logged in
+  Scenario: User tries to navigate to home page before logging in on Chrome
+    Given the user is using chrome
+    And the user is not logged in
     And the user tries to navigate to the home page
     Then the user is redirected to the login page
 

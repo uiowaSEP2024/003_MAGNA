@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from django.core import mail
 
+
 # if you are looking for the steps for initializing the browser,
 # those have been moved to BrowserInitSteps.py in the steps folder.
 
@@ -62,6 +63,7 @@ def step_impl(context):
     )
     # temporary until I can get after scenario steps work
     context.browser.quit()
+
 
 @then("the user should be on the login page")
 def step_impl(context):
