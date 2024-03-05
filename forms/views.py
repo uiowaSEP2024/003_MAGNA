@@ -49,7 +49,7 @@ def absence_request(request):
     Returns:
     - Rendered absence_request.html template
     """
-    return render(request, "absence_request.html")
+    return render(request, "absence_request.html", {"current_user": request.user})
 
 
 def requests(request):
