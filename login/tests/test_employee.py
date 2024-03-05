@@ -7,6 +7,7 @@ from login.models import Employee
 
 
 class TestEmployee:
+    """Test cases for the Employee model"""
 
     @pytest.mark.django_db
     def test_create_employee_with_valid_details(self):
@@ -192,7 +193,12 @@ class TestEmployee:
         """Creating an employee with a blank name should raise a validation error"""
         with pytest.raises(ValidationError):
             employee = Employee(
-                name="", username="johndoe", password="password", role="Manager", clock_number="12345", email="test@example.com"
+                name="",
+                username="johndoe",
+                password="password",
+                role="Manager",
+                clock_number="12345",
+                email="test@example.com",
             )
             employee.full_clean()
 
@@ -229,6 +235,11 @@ class TestEmployee:
         """Creating an employee with a blank email address should raise a validation error"""
         with pytest.raises(ValidationError):
             employee = Employee(
-                name="John Doe", username="", password="password", role="Manager", clock_number="12345", email=""
+                name="John Doe",
+                username="",
+                password="password",
+                role="Manager",
+                clock_number="12345",
+                email="",
             )
             employee.full_clean()
