@@ -215,17 +215,90 @@ Feature: Login functionality
 
   # tests on firefox for correct login, user variants
 
+  Scenario Outline: Correct login on firefox
+    Given the user is using firefox
+    And the user has navigated to the login page
+    And the user enters <username> as the username
+    And the user enters <password> as the password
+    When the user presses the login button
+    Then the user should be on the home page
+    Examples:
+      | username | password |
+      | kiosk1 | kioskpass1 |
+      | floor1 | floorpass1 |
+      | manager1 | managerpass1 |
+      | hr1      | hrpass1      |
+      | admin    | adminpass123   |
+
   # tests incorrect login where there is a missing username
   # Using firefox for webdriver in these tests, with different user variants
+
+  Scenario Outline: Missing username on firefox
+    Given the user is using firefox
+    And the user has navigated to the login page
+    And the user enters <password> as the password
+    When the user presses the login button
+    Then the user should be on the login page
+    Examples:
+      | password |
+      | kioskpass1 |
+      | floorpass1 |
+      | managerpass1 |
+      | hrpass1      |
+      | adminpass123 |
 
   # tests incorrect login where there is a missing password
   # Using firefox for webdriver in these tests, with different user variants
 
+  Scenario Outline: Missing password on firefox
+    Given the user is using firefox
+    And the user has navigated to the login page
+    And the user enters <username> as the username
+    When the user presses the login button
+    Then the user should be on the login page
+    Examples:
+      | username |
+      | kiosk1   |
+      | floor1   |
+      | manager1 |
+      | hr1      |
+      | admin    |
+
   # tests incorrect login with mistyped username
   # Using firefox, all user variants
 
+  Scenario Outline: Mistyped username on firefox
+    Given the user is using firefox
+    And the user has navigated to the login page
+    And the user enters <username> as the username
+    And the user enters <password> as the password
+    When the user presses the login button
+    Then the user should be on the login page
+    Examples:
+      | username | password |
+      | kiosk11 | kioskpass1 |
+      | flooor1 | floorpass1 |
+      | managerr1 | managerpass1 |
+      | he1      | hrpass1      |
+      | admin1    | adminpass123   |
+
   # tests incorrect login with mistyped password
   # Using firefox, all user variants
+
+  Scenario Outline: Mistyped password on firefox
+    Given the user is using firefox
+    And the user has navigated to the login page
+    And the user enters <username> as the username
+    And the user enters <password> as the password
+    When the user presses the login button
+    Then the user should be on the login page
+    Examples:
+      | username | password |
+      | kiosk1 | kioskpass |
+      | floor1 | floorpass |
+      | manager1 | managerpass |
+      | hr1      | hrpass      |
+      | admin    | adminpass1   |
 
   # tests incorrect login with no fields
   # using firefox, no user variants needed
