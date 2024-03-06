@@ -21,6 +21,7 @@ def step_impl(context):
     context.browser.get("http://localhost:8000/home")
 
 
+# Deprecated test - will soon be removed
 @given("the user has logged in")
 def step_impl(context):
     context.browser.get("http://localhost:8000/home")
@@ -32,6 +33,7 @@ def step_impl(context):
     login_button.click()
 
 
+# Deprecated
 @given("a user is logged in and on the absence request form")
 def step_impl(context):
     """Logs the user in, then navigates to the absence request Form
@@ -54,7 +56,7 @@ def step_impl(context):
 # have been moved to LoginSteps.py, in the steps folder.
 
 
-# login feature then steps are here
+# Command then tests are here, mostly for ease of use
 @then("the user should be on the home page")
 def step_impl(context):
     assert context.browser.current_url == "http://localhost:8000/home", (
@@ -69,6 +71,57 @@ def step_impl(context):
 def step_impl(context):
     assert context.browser.current_url == "http://localhost:8000/", (
         f"Expected url to be on login page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
+
+
+@then("the user should not be redirected to the home page")
+def step_impl(context):
+    """Checks if the test env is not on the home page"""
+    assert context.browser.current_url != "http://localhost:8000/home", (
+        f"Expected url to be on login page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
+
+
+@then("the user is redirected to the login page")
+def step_impl(context):
+    assert context.browser.current_url != "http://localhost:8000/home", (
+        f"expected to be on login page, " f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
+
+
+@then("the user should be redirected to the home page")
+def step_impl(context):
+    """Checks if the test env is on the home page"""
+    assert context.browser.current_url == "http://localhost:8000/home", (
+        f"Expected url to be on home page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
+
+
+
+
+
+@then("the form should be submitted")
+def step_impl(context):
+    """Checks if the test env is on the confirmation page"""
+    assert context.browser.current_url == "http://localhost:8000/confirm", (
+        f"Expected url to be on absence request form page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
+
+
+@then("the form should not be submitted")
+def step_impl(context):
+    """Checks if the test env is still on the absence request page"""
+    assert context.browser.current_url == "http://localhost:8000/absence_request", (
+        f"Expected url to be on absence request form page, "
         f"instead is on {context.browser.current_url}"
     )
     context.browser.quit()
@@ -214,11 +267,6 @@ def step_impl(context):
     login_button.click()
 
 
-@when("the user clicks on the absence request button")
-def step_impl(context):
-    """Clicks on the absence request link"""
-    absence_request_button = context.browser.find_element(By.ID, "absence-request-link")
-    absence_request_button.click()
 
 
 @when("the user submits the absence request form")
@@ -228,62 +276,6 @@ def step_impl(context):
     absence_request_submit.click()
 
 
-@then("the user should not be redirected to the home page")
-def step_impl(context):
-    """Checks if the test env is not on the home page"""
-    assert context.browser.current_url != "http://localhost:8000/home", (
-        f"Expected url to be on login page, "
-        f"instead is on {context.browser.current_url}"
-    )
-    context.browser.quit()
-
-
-@then("the user is redirected to the login page")
-def step_impl(context):
-    assert context.browser.current_url != "http://localhost:8000/home", (
-        f"expected to be on login page, " f"instead is on {context.browser.current_url}"
-    )
-    context.browser.quit()
-
-
-@then("the user should be redirected to the home page")
-def step_impl(context):
-    """Checks if the test env is on the home page"""
-    assert context.browser.current_url == "http://localhost:8000/home", (
-        f"Expected url to be on home page, "
-        f"instead is on {context.browser.current_url}"
-    )
-    context.browser.quit()
-
-
-@then("the user is redirected to the absence request form")
-def step_impl(context):
-    """Checks if the test env is on the absence request form"""
-    assert context.browser.current_url == "http://localhost:8000/absence-request", (
-        f"Expected url to be on absence request form page, "
-        f"instead is on {context.browser.current_url}"
-    )
-    context.browser.quit()
-
-
-@then("the form should be submitted")
-def step_impl(context):
-    """Checks if the test env is on the confirmation page"""
-    assert context.browser.current_url == "http://localhost:8000/confirm", (
-        f"Expected url to be on absence request form page, "
-        f"instead is on {context.browser.current_url}"
-    )
-    context.browser.quit()
-
-
-@then("the form should not be submitted")
-def step_impl(context):
-    """Checks if the test env is still on the absence request page"""
-    assert context.browser.current_url == "http://localhost:8000/absence_request", (
-        f"Expected url to be on absence request form page, "
-        f"instead is on {context.browser.current_url}"
-    )
-    context.browser.quit()
 
 
 @given("a user has filled out the absence request form")
