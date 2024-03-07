@@ -38,6 +38,7 @@ urlpatterns = [
         name="submit_absence_request",
     ),
     path("requests", forms.views.requests, name="requests"),
+    path("search-requests/", forms.views.search_requests, name="search-requests"),
     path(
         "api/allowed-absent/",
         forms.views.allowed_absent_data,

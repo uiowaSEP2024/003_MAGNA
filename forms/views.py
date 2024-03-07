@@ -203,3 +203,30 @@ def update_allowed_absent(request):
 
         # Handle any exceptions and return an error response
         return JsonResponse({"status": "error", "message": str(e)})
+
+
+def search_requests(request):
+    """
+    View function to search for absence requests by clock number.
+    Args:
+    - request: the HttpRequest object representing the request made to the server.
+    Returns:
+    - JsonResponse object with the list of absence requests matching the clock number.
+    """
+    if request.method == "GET" and request.user.role == "kiosk":
+        clock_number = request.GET.get("clock_number", None)
+        if clock_number:
+            matching_requests = AbsenceRequest.objects.filter(clock_number=clock_number)
+            data = [
+                {
+                    "start_date": request.start_date.strftime("%Y-%m-%d"),
+                    "end_date": request.end_date.strftime("%Y-%m-%d"),
+                    "filled_by": request.filled_by.name,
+                    "approval": request.approval.name,
+                    "approval_status": request.approval_status,
+                    "absence_type": request.absence_type,
+                }
+                for request in matching_requests
+            ]
+            return JsonResponse(data, safe=False)
+    return JsonResponse([], safe=False)
