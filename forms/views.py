@@ -221,6 +221,8 @@ def search_requests(request):
                 {
                     "start_date": request.start_date.strftime("%Y-%m-%d"),
                     "end_date": request.end_date.strftime("%Y-%m-%d"),
+                    "shift_number": request.shift_number,
+                    "hours_gone": request.hours_gone,
                     "filled_by": request.filled_by.name,
                     "approval": request.approval.name,
                     "approval_status": request.approval_status,
