@@ -52,6 +52,12 @@ class AbsenceRequest(models.Model):
         blank=True,  # Allow the field to be blank in forms and admin
     )
 
+    workflow_ids = models.ArrayField(
+        models.IntegerField(),
+        null=True,  # Allow null values
+        blank=True,  # Allow the field to be blank
+    )
+
     def clean(self):
         """Clean method for validation of approval status and shift number"""
         super().clean()
