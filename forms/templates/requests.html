@@ -66,6 +66,85 @@
         {% endfor %}
     {% endif %}
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchForm = document.getElementById('search-form');
+
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const clockNumber = document.getElementById('clock_number').value;
+
+                fetch(`/search-requests?clock_number=${clockNumber}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const container = document.querySelector('.container');
+                        container.innerHTML = '';
+
+                        if (data.length > 0) {
+                             data.forEach(request => {
+                                 const requestCard = document.createElement('div');
+                                 requestCard.classList.add('request-card');
+                                 requestCard.classList.add(`status-${request.approval_status}`);
+
+                                 const requestCardTop = document.createElement('div');
+                                 requestCardTop.classList.add('request-card-top');
+
+                                 const issueDate = document.createElement('div');
+                                 issueDate.classList.add('issue-date');
+                                 issueDate.textContent = `Issue Date: ${request.start_date}`;
+
+                                 const requestType = document.createElement('div');
+                                 requestType.classList.add('request-type');
+                                 requestType.textContent = request.absence_type;
+
+                                 requestCardTop.appendChild(issueDate);
+                                 requestCardTop.appendChild(requestType);
+
+                                 const requestCardBottom = document.createElement('div');
+                                 requestCardBottom.classList.add('request-card-bottom');
+
+                                 const effectiveDate = document.createElement('div');
+                                 effectiveDate.textContent = `Effective Date: ${request.start_date}`;
+
+                                 const endDate = document.createElement('div');
+                                 endDate.textContent = `End Date: ${request.end_date}`;
+
+                                 const filledBy = document.createElement('div');
+                                 filledBy.textContent = `Filled by: ${request.filled_by}`;
+
+                                 const supervisor = document.createElement('div');
+                                 supervisor.textContent = `Supervisor: ${request.approval}`;
+
+                                 const statusText = document.createElement('div');
+                                 statusText.classList.add('status-text');
+                                 statusText.textContent = `Status: ${request.approval_status}`;
+
+                                 requestCardBottom.appendChild(effectiveDate);
+                                 requestCardBottom.appendChild(endDate);
+                                 requestCardBottom.appendChild(filledBy);
+                                 requestCardBottom.appendChild(supervisor);
+                                 requestCardBottom.appendChild(statusText);
+
+                                 requestCard.appendChild(requestCardTop);
+                                 requestCard.appendChild(requestCardBottom);
+
+                                 container.appendChild(requestCard);
+                             })
+                        } else {
+                            const noRequestMessage = document.createElement('p');
+                            noRequestMessage.textContent = 'No requests found.';
+                            container.appendChild(noRequestMessage);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        }
+    });
+</script>
 <script src="{% static 'js/scripts.js' %}" defer></script>
 </body>
 </html>
