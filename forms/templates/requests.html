@@ -131,6 +131,11 @@
                                  requestCard.appendChild(requestCardBottom);
 
                                  container.appendChild(requestCard);
+
+                                 const resetButton = document.createElement('button');
+                                 resetButton.textContent = 'Reset';
+                                 resetButton.addEventListener('click', function() {location.reload();});
+                                 container.appendChild(resetButton);
                              })
                         } else {
                             const noRequestMessage = document.createElement('p');
