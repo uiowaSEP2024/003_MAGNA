@@ -55,8 +55,9 @@ urlpatterns = [
     ),
     path("calendar", forms.views.calendar, name="calendar"),
     path("logout/", auth_views.LogoutView.as_view(next_page="/"), name="logout"),
-    path("view-workflows/", workflows.views.view_workflows, name="list"),
-    path("edit-workflows/", workflows.views.edit_workflow, name="edit"),
+    path('edit-workflow/<int:form_id>/', views.edit_workflow, name='edit_workflow'),
+    path('received-forms/', views.view_received_forms, name='view_received_forms'),
+    path('view-workflows/', views.view_workflows, name='view_workflows'),
     path("delete-workflows/", workflows.views.delete_workflow, name="delete"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

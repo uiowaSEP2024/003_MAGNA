@@ -1,31 +1,35 @@
-from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.contrib.auth.decorators import login_required
 from forms.models import AbsenceRequest
-
 from .models import Workflow
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def view_workflows(request):
-    """View all workflows."""
-    workflows = Workflow.objects.all()
-    return render(request, "workflows/list.html", {"workflows": workflows})
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def edit_workflow(request, pk):
-    """Edit a workflow."""
-    workflow = get_object_or_404(Workflow, pk=pk)
+@login_required
+def edit_workflow(request, form_id):
+    # View for editing a form's workflow
+    form = YourFormModel.objects.get(id=form_id)
     if request.method == "POST":
-        # Form submission logic here
-        # Update workflow object and save
-        workflow.save()
-        return redirect("workflows:list")
-    return render(request, "workflows/edit.html", {"workflow": workflow})
+        # Update form.workflow_ids based on POST data
+        form.workflow_ids = request.POST.getlist('workflow_ids')  # Adjust as needed
+        form.save()
+        return redirect('workflow_list')
+    return render(request, 'workflow_form.html', {'form': form})
+
+@login_required
+def view_received_forms(request):
+    # View for forms a user receives based on their ID
+    user_id = request.user.id  # Adjust based on your user model
+    received_forms = YourFormModel.objects.filter(workflow_ids__contains=[user_id])
+    return render(request, 'received_forms.html', {'forms': received_forms})
+
+@login_required
+def view_workflows(request):
+    # View for listing all workflows
+    forms = YourFormModel.objects.all()
+    return render(request, 'workflow_list.html', {'forms': forms})
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
 def delete_workflow(request, pk):
     """Delete a workflow."""
     workflow = get_object_or_404(Workflow, pk=pk)
@@ -33,35 +37,3 @@ def delete_workflow(request, pk):
         workflow.delete()
         return redirect("workflows:list")
     return render(request, "workflows/confirm_delete.html", {"workflow": workflow})
-
-
-def manager_review(request, pk):
-    """Manager review of an absence request."""
-    absence_request = get_object_or_404(
-        AbsenceRequest, pk=pk, workflow__status="submitted"
-    )
-    if request.method == "POST":
-        # Form submission logic here
-        # Update absence request object and workflow status
-        absence_request.workflow.status = "manager_review"
-        absence_request.save()
-        return redirect("workflows:list")
-    return render(
-        request, "workflows/review.html", {"absence_request": absence_request}
-    )
-
-
-def HR_review(request, pk):
-    """HR review of an absence request."""
-    absence_request = get_object_or_404(
-        AbsenceRequest, pk=pk, workflow__status="manager_review"
-    )
-    if request.method == "POST":
-        # Form submission logic here
-        # Update absence request object and workflow status
-        absence_request.workflow.status = "HR_review"
-        absence_request.save()
-        return redirect("workflows:list")
-    return render(
-        request, "workflows/review.html", {"absence_request": absence_request}
-    )
