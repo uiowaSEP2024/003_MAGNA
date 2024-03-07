@@ -131,17 +131,17 @@
                                  requestCard.appendChild(requestCardBottom);
 
                                  container.appendChild(requestCard);
-
-                                 const resetButton = document.createElement('button');
-                                 resetButton.textContent = 'Reset';
-                                 resetButton.addEventListener('click', function() {location.reload();});
-                                 container.appendChild(resetButton);
                              })
                         } else {
                             const noRequestMessage = document.createElement('p');
                             noRequestMessage.textContent = 'No requests found.';
                             container.appendChild(noRequestMessage);
                         }
+
+                        const resetButton = document.createElement('button');
+                        resetButton.textContent = 'Reset';
+                        resetButton.addEventListener('click', function() {location.reload();});
+                        container.appendChild(resetButton);
                     })
                     .catch(error => {
                         console.error('Error:', error);
