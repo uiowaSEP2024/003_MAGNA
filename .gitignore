@@ -129,3 +129,6 @@ Control.system-ca-bundle
 GitHub.sublime-settings
 .idea/003_MAGNA.iml
 .idea/misc.xml
+.idea/copilot/chatSessions/00000000000.xd
+.idea/copilot/chatSessions/blobs/version
+.idea/copilot/chatSessions/xd.lck
