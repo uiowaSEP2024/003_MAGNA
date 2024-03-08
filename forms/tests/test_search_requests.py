@@ -16,6 +16,7 @@ class TestSearchRequests:
 
     @pytest.fixture
     def setup_data(self):
+        """Creates two employees in the database."""
         Employee.objects.create(
             username="johndoe",
             password="password",
@@ -27,7 +28,7 @@ class TestSearchRequests:
         Employee.objects.create(
             username="janedoe",
             password="password",
-            clock_number="12345",
+            clock_number="54321",
             name="Jane Doe",
             role="Manager",
             email="janedoe@email.com",
