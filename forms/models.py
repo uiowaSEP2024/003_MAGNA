@@ -5,12 +5,12 @@ from django.db import models
 from django.utils.datetime_safe import datetime
 
 from login.models import Employee
+import json
 
 
 # Model for the AbsenceRequest form to keep track of all information
 class AbsenceRequest(models.Model):
     """Model for the absence request form"""
-
     clock_number = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
@@ -52,10 +52,11 @@ class AbsenceRequest(models.Model):
         blank=True,  # Allow the field to be blank in forms and admin
     )
 
-    workflow_ids = models.ArrayField(
-        models.IntegerField(),
+    workflow_ids = models.JSONField(
         null=True,  # Allow null values
         blank=True,  # Allow the field to be blank
+        default=list,  # Default value is an empty list
+        help_text="A JSON field to store a list of integers."
     )
 
     def clean(self):
