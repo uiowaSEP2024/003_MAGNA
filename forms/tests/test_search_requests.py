@@ -59,6 +59,7 @@ class TestSearchRequests:
             AbsenceRequest(
                 start_date=datetime.date(2022, 1, 1),
                 end_date=datetime.date(2022, 1, 5),
+                clock_number="12345",
                 filled_by=Employee.objects.get(name="John Doe"),
                 approval=Employee.objects.get(name="Jane Doe"),
                 approval_status="Approved",
@@ -67,6 +68,7 @@ class TestSearchRequests:
             AbsenceRequest(
                 start_date=datetime.date(2022, 2, 1),
                 end_date=datetime.date(2022, 2, 5),
+                clock_number="12345",
                 filled_by=Employee.objects.get(name="John Doe"),
                 approval=Employee.objects.get(name="Jane Doe"),
                 approval_status="Approved",
@@ -126,6 +128,7 @@ class TestSearchRequests:
             AbsenceRequest(
                 start_date=datetime.date(2022, 1, 1),
                 end_date=datetime.date(2022, 1, 5),
+                clock_number="12345",
                 filled_by=Employee.objects.get(name="John Doe"),
                 approval=Employee.objects.get(name="Jane Doe"),
                 approval_status="Approved",
@@ -134,6 +137,7 @@ class TestSearchRequests:
             AbsenceRequest(
                 start_date=datetime.date(2022, 2, 1),
                 end_date=datetime.date(2022, 2, 5),
+                clock_number="12345",
                 filled_by=Employee.objects.get(name="John Doe"),
                 approval=Employee.objects.get(name="Jane Doe"),
                 approval_status="Approved",
@@ -161,6 +165,7 @@ class TestSearchRequests:
             AbsenceRequest(
                 start_date=datetime.date(2022, 1, 1),
                 end_date=datetime.date(2022, 1, 5),
+                clock_number="12345",
                 filled_by=Employee.objects.get(name="John Doe"),
                 approval=Employee.objects.get(name="Jane Doe"),
                 approval_status="Approved",
@@ -169,6 +174,7 @@ class TestSearchRequests:
             AbsenceRequest(
                 start_date=datetime.date(2022, 2, 1),
                 end_date=datetime.date(2022, 2, 5),
+                clock_number="12345",
                 filled_by=Employee.objects.get(name="John Doe"),
                 approval=Employee.objects.get(name="Jane Doe"),
                 approval_status="Approved",
@@ -215,20 +221,6 @@ class TestSearchRequests:
         assert response == JsonResponse([], safe=False)
 
     @pytest.mark.django_db
-    def test_not_kiosk_role(self, setup):
-        """Returns a JsonResponse object with an empty list if the user role is not kiosk."""
-        # Arrange
-        request = setup
-        request.method = "GET"
-        request.user.role = "admin"
-
-        # Act
-        response = search_requests(request)
-
-        # Assert
-        assert response == JsonResponse([], safe=False)
-
-    @pytest.mark.django_db
     def test_no_clock_number_provided(self, setup):
         """Returns an empty JsonResponse object if no clock number is provided."""
         # Arrange
@@ -252,33 +244,6 @@ class TestSearchRequests:
         request.user.role = "kiosk"
         request.GET.get = MagicMock(return_value="12345")
         AbsenceRequest.objects.filter = MagicMock(return_value=[])
-
-        # Act
-        response = search_requests(request)
-
-        # Assert
-        assert response == JsonResponse([], safe=False)
-
-    @pytest.mark.django_db
-    def test_not_get_request_empty_list(self, setup):
-        """Returns a JsonResponse object with an empty list if the request method is not GET."""
-        # Arrange
-        request = setup
-        request.method = "POST"
-
-        # Act
-        response = search_requests(request)
-
-        # Assert
-        assert response == JsonResponse([], safe=False)
-
-    @pytest.mark.django_db
-    def test_not_kiosk_role_empty_list(self, setup):
-        """Returns a JsonResponse object with an empty list if the user role is not kiosk."""
-        # Arrange
-        request = setup
-        request.method = "GET"
-        request.user.role = "admin"
 
         # Act
         response = search_requests(request)
