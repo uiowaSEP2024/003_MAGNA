@@ -15,7 +15,7 @@ class TestSearchRequests:
     """Contains tests for the requests view."""
 
     @pytest.fixture
-    def setup_data(self):
+    def setup(self):
         """Creates two employees in the database."""
         Employee.objects.create(
             username="johndoe",
@@ -33,12 +33,24 @@ class TestSearchRequests:
             role="Manager",
             email="janedoe@email.com",
         )
+        Employee.objects.create(
+            username="kiosk",
+            password="password",
+            clock_number="111111",
+            name="kiosk",
+            role="kiosk",
+            email="kiosk@email",
+        )
+
+        request = HttpRequest()
+        request.user = Employee.objects.get(name="kiosk")
+        return request
 
     @pytest.mark.django_db
-    def test_matching_requests(self, setup_data):
+    def test_matching_requests(self, setup):
         """Returns a JsonResponse object with a list of absence requests matching the clock number."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "kiosk"
         request.GET.get = MagicMock(return_value="12345")
@@ -88,10 +100,10 @@ class TestSearchRequests:
         assert response == JsonResponse(expected_data, safe=False)
 
     @pytest.mark.django_db
-    def test_no_clock_number(self, setup_data):
+    def test_no_clock_number(self, setup):
         """Returns an empty JsonResponse object if no clock number is provided."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "kiosk"
         request.GET.get = MagicMock(return_value=None)
@@ -103,10 +115,10 @@ class TestSearchRequests:
         assert response == JsonResponse([], safe=False)
 
     @pytest.mark.django_db
-    def test_filter_by_clock_number(self, setup_data):
+    def test_filter_by_clock_number(self, setup):
         """Filters absence requests by clock number."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "kiosk"
         request.GET.get = MagicMock(return_value="12345")
@@ -137,11 +149,11 @@ class TestSearchRequests:
         AbsenceRequest.objects.filter.assert_called_once_with(clock_number="12345")
 
     @pytest.mark.django_db
-    def test_absence_requests_data(self, setup_data):
+    def test_absence_requests_data(self, setup):
         """Returns a JsonResponse object with absence requests data."""
 
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "kiosk"
         request.GET.get = MagicMock(return_value="12345")
@@ -190,10 +202,10 @@ class TestSearchRequests:
         assert response == JsonResponse(expected_data, safe=False)
 
     @pytest.mark.django_db
-    def test_not_get_request(self):
+    def test_not_get_request(self, setup):
         """Returns a JsonResponse object with an empty list if the request method is not GET."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "POST"
 
         # Act
@@ -203,10 +215,10 @@ class TestSearchRequests:
         assert response == JsonResponse([], safe=False)
 
     @pytest.mark.django_db
-    def test_not_kiosk_role(self):
+    def test_not_kiosk_role(self, setup):
         """Returns a JsonResponse object with an empty list if the user role is not kiosk."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "admin"
 
@@ -217,10 +229,10 @@ class TestSearchRequests:
         assert response == JsonResponse([], safe=False)
 
     @pytest.mark.django_db
-    def test_no_clock_number_provided(self):
+    def test_no_clock_number_provided(self, setup):
         """Returns an empty JsonResponse object if no clock number is provided."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "kiosk"
         request.GET.get = MagicMock(return_value=None)
@@ -232,10 +244,10 @@ class TestSearchRequests:
         assert response == JsonResponse([], safe=False)
 
     @pytest.mark.django_db
-    def test_no_matching_requests(self):
+    def test_no_matching_requests(self, setup):
         """Returns an empty JsonResponse object if no absence requests match the clock number."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "kiosk"
         request.GET.get = MagicMock(return_value="12345")
@@ -248,10 +260,10 @@ class TestSearchRequests:
         assert response == JsonResponse([], safe=False)
 
     @pytest.mark.django_db
-    def test_not_get_request_empty_list(self):
+    def test_not_get_request_empty_list(self, setup):
         """Returns a JsonResponse object with an empty list if the request method is not GET."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "POST"
 
         # Act
@@ -261,10 +273,10 @@ class TestSearchRequests:
         assert response == JsonResponse([], safe=False)
 
     @pytest.mark.django_db
-    def test_not_kiosk_role_empty_list(self):
+    def test_not_kiosk_role_empty_list(self, setup):
         """Returns a JsonResponse object with an empty list if the user role is not kiosk."""
         # Arrange
-        request = HttpRequest()
+        request = setup
         request.method = "GET"
         request.user.role = "admin"
 
