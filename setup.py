@@ -23,6 +23,7 @@ subprocess.run("poetry run python manage.py migrate", shell=True)
 if user_input():
     subprocess.run("poetry run python manage.py flush", shell=True)
     subprocess.run("poetry run python manage.py seed_employees", shell=True)
+    subprocess.run("poetry run python manage.py seed_absence_requests", shell=True)
 
 # Run server
 subprocess.run("poetry run python manage.py runserver", shell=True)
