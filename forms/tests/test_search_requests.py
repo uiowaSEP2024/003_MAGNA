@@ -39,7 +39,7 @@ class TestSearchRequests:
             clock_number="111111",
             name="kiosk",
             role="kiosk",
-            email="kiosk@email",
+            email="kiosk@email.com",
         )
 
         request = HttpRequest()
