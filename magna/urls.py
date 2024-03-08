@@ -56,7 +56,7 @@ urlpatterns = [
     ),
     path("calendar", forms.views.calendar, name="calendar"),
     path("logout/", auth_views.LogoutView.as_view(next_page="/"), name="logout"),
-    path("delete-workflows/", workflows.views.delete_workflow, name="delete"),
+    path("edit/", workflows.views.edit_workflow, name="edit"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
