@@ -231,4 +231,6 @@ def search_requests(request):
                 for request in matching_requests
             ]
             return JsonResponse(data, safe=False)
+        else:
+            return JsonResponse([], safe=False)
     return JsonResponse([], safe=False)

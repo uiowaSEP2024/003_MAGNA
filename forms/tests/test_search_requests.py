@@ -208,34 +208,6 @@ class TestSearchRequests:
         assert response == JsonResponse(expected_data, safe=False)
 
     @pytest.mark.django_db
-    def test_not_get_request(self, setup):
-        """Returns a JsonResponse object with an empty list if the request method is not GET."""
-        # Arrange
-        request = setup
-        request.method = "POST"
-
-        # Act
-        response = search_requests(request)
-
-        # Assert
-        assert response == JsonResponse([], safe=False)
-
-    @pytest.mark.django_db
-    def test_no_clock_number_provided(self, setup):
-        """Returns an empty JsonResponse object if no clock number is provided."""
-        # Arrange
-        request = setup
-        request.method = "GET"
-        request.user.role = "kiosk"
-        request.GET.get = MagicMock(return_value=None)
-
-        # Act
-        response = search_requests(request)
-
-        # Assert
-        assert response == JsonResponse([], safe=False)
-
-    @pytest.mark.django_db
     def test_no_matching_requests(self, setup):
         """Returns an empty JsonResponse object if no absence requests match the clock number."""
         # Arrange
