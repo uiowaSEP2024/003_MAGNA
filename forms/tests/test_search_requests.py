@@ -12,6 +12,8 @@ from login.models import Employee
 
 
 class TestSearchRequests:
+    """Contains tests for the requests view."""
+
     @pytest.fixture
     def setup_data(self):
         Employee.objects.create(
@@ -31,9 +33,9 @@ class TestSearchRequests:
             email="janedoe@email.com",
         )
 
-    #  Returns a JsonResponse object with a list of absence requests matching the clock number.
     @pytest.mark.django_db
     def test_matching_requests(self, setup_data):
+        """Returns a JsonResponse object with a list of absence requests matching the clock number."""
         # Arrange
         request = HttpRequest()
         request.method = "GET"
@@ -84,9 +86,9 @@ class TestSearchRequests:
         ]
         assert response == JsonResponse(expected_data, safe=False)
 
-    #  Returns an empty JsonResponse object if no clock number is provided.
     @pytest.mark.django_db
     def test_no_clock_number(self, setup_data):
+        """Returns an empty JsonResponse object if no clock number is provided."""
         # Arrange
         request = HttpRequest()
         request.method = "GET"
@@ -99,9 +101,9 @@ class TestSearchRequests:
         # Assert
         assert response == JsonResponse([], safe=False)
 
-    #  Filters absence requests by clock number.
     @pytest.mark.django_db
     def test_filter_by_clock_number(self, setup_data):
+        """Filters absence requests by clock number."""
         # Arrange
         request = HttpRequest()
         request.method = "GET"
@@ -133,9 +135,9 @@ class TestSearchRequests:
         # Assert
         AbsenceRequest.objects.filter.assert_called_once_with(clock_number="12345")
 
-    #  Returns a JsonResponse object with absence requests data.
     @pytest.mark.django_db
     def test_absence_requests_data(self, setup_data):
+        """Returns a JsonResponse object with absence requests data."""
 
         # Arrange
         request = HttpRequest()
@@ -186,9 +188,9 @@ class TestSearchRequests:
         ]
         assert response == JsonResponse(expected_data, safe=False)
 
-    #  Returns an empty JsonResponse object if the request method is not GET.
     @pytest.mark.django_db
     def test_not_get_request(self):
+        """Returns a JsonResponse object with an empty list if the request method is not GET."""
         # Arrange
         request = HttpRequest()
         request.method = "POST"
@@ -199,9 +201,9 @@ class TestSearchRequests:
         # Assert
         assert response == JsonResponse([], safe=False)
 
-    #  Returns an empty JsonResponse object if the user role is not kiosk.
     @pytest.mark.django_db
     def test_not_kiosk_role(self):
+        """Returns a JsonResponse object with an empty list if the user role is not kiosk."""
         # Arrange
         request = HttpRequest()
         request.method = "GET"
@@ -213,9 +215,9 @@ class TestSearchRequests:
         # Assert
         assert response == JsonResponse([], safe=False)
 
-    #  Returns an empty JsonResponse object if the clock number is not provided.
     @pytest.mark.django_db
     def test_no_clock_number_provided(self):
+        """Returns an empty JsonResponse object if no clock number is provided."""
         # Arrange
         request = HttpRequest()
         request.method = "GET"
@@ -228,9 +230,9 @@ class TestSearchRequests:
         # Assert
         assert response == JsonResponse([], safe=False)
 
-    #  Returns an empty JsonResponse object if no absence requests match the clock number.
     @pytest.mark.django_db
     def test_no_matching_requests(self):
+        """Returns an empty JsonResponse object if no absence requests match the clock number."""
         # Arrange
         request = HttpRequest()
         request.method = "GET"
@@ -244,9 +246,9 @@ class TestSearchRequests:
         # Assert
         assert response == JsonResponse([], safe=False)
 
-    #  Returns a JsonResponse object with an empty list if the request method is not GET.
     @pytest.mark.django_db
     def test_not_get_request_empty_list(self):
+        """Returns a JsonResponse object with an empty list if the request method is not GET."""
         # Arrange
         request = HttpRequest()
         request.method = "POST"
@@ -257,9 +259,9 @@ class TestSearchRequests:
         # Assert
         assert response == JsonResponse([], safe=False)
 
-    #  Returns a JsonResponse object with an empty list if the user role is not kiosk.
     @pytest.mark.django_db
     def test_not_kiosk_role_empty_list(self):
+        """Returns a JsonResponse object with an empty list if the user role is not kiosk."""
         # Arrange
         request = HttpRequest()
         request.method = "GET"
