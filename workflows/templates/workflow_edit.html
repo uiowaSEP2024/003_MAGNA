@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Workflows</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header>
+        <nav class="navbar">
+            <a href="/home" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a>Innovations</a>
+                <a>Products</a>
+                <a>Stories</a>
+                <a>Company</a>
+                <a>Careers</a>
+                <a>Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <h2>Edit Workflow IDs for Request ID: {{ absence_request.id }}</h2>
+       <form method="post">
+           {% csrf_token %}
+           <input type="text" id="ids" name="ids">
+           <button type="submit">Save changes</button>
+        </form>
+</body>
+</html>
