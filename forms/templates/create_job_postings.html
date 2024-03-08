@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Upload PDF</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a>Innovations</a>
+                <a>Products</a>
+                <a>Stories</a>
+                <a>Company</a>
+                <a>Careers</a>
+                <a>Contact</a>
+            </div>
+        </nav>
+    </header>
+    <div class="navigation-container">
+        <div class="page-navigation">
+            <a href="/view_job_postings" class="nav-button {% if request.path == '/view_job_postings' %}active{% endif %}" id="current-postings">Current Postings</a>
+            <a href="/create_job_postings" class="nav-button {% if request.path == '/create_job_postings' %}active{% endif %}" id="new-posting">New Posting</a>
+        </div>
+        <hr class="separator">
+    </div>
     <div class="upload-container">
         <div class="upload-area">
             <form id="upload-form" method="post" action="{% url 'upload_pdf' %}" enctype="multipart/form-data">

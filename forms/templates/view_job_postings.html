@@ -33,6 +33,14 @@
     </div>
     {% endif %}
 
+    <div class="navigation-container">
+        <div class="page-navigation">
+            <a href="/view_job_postings" class="nav-button {% if request.path == '/view_job_postings' %}active{% endif %}" id="current-postings">Current Postings</a>
+            <a href="/create_job_postings" class="nav-button {% if request.path == '/create_job_postings' %}active{% endif %}" id="new-posting">New Posting</a>
+        </div>
+        <hr class="separator">
+    </div>
+
     <div class="request-container">
         <div class="form-card">
             <div class="form-top">

@@ -8,7 +8,9 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from .models import AbsenceRequest, AbsentDaysAllowed
+from .models import AbsenceRequest, AbsentDaysAllowed, JobPDFs, WorkOrder
+from .forms import PDFUploadForm
+
 
 # Create your views here.
 
@@ -97,6 +99,16 @@ def create_job_postings(request):
         form = PDFUploadForm()
     return render(request, 'create_job_postings.html', {'form': form})
 
+def upload_pdf(request):
+    if request.method == 'POST':
+        form = PDFUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "PDF uploaded successfully.")
+            return redirect('view_job_postings')  # or wherever you want to redirect after upload
+    else:
+        form = PDFUploadForm()
+    return render(request, 'create_job_postings.html', {'form': form})
 
 def submit_absence_request(request):
     """
@@ -227,7 +239,7 @@ def submit_work_order(request):
             work_order.save()
             messages.success(request, "Work order submitted successfully.")
             # Redirect to an appropriate page
-            return redirect("some_page_to_redirect_to_after_submission")
+            return render(request, "work_order.html")
         else:
             # Handle the invalid form case
             messages.error(request, "Invalid form submission.")
