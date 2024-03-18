@@ -61,7 +61,7 @@
             <ul>
                 {% for pdf in pdfs %}
                     <li>
-                        <a href="{{ pdf.file.url }}" target="_blank">{{ pdf.title }}</a>
+                        <a href="{{ pdf.pdf_file.url }}" target="_blank">{{ pdf.title }}</a><br>
                     </li>
                     {% empty %}
                         <li>No PDFs available.</li>

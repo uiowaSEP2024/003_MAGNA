@@ -29,34 +29,40 @@
         </div>
         <hr class="separator">
     </div>
-    <div class="upload-container">
-        <div class="upload-area">
+    <div class="side-by-side-container">
+        <div class="upload-pdf-card">
             <form id="upload-form" method="post" action="{% url 'upload_pdf' %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="text" name="title" placeholder="Enter title for the PDF">
-                <input type="file" name="pdf_file" accept="application/pdf">
-                <button type="submit">Upload PDF</button>
+                <div class="form-group">
+                    <label for="pdf_title">Enter title for the PDF</label>
+                    <input type="text" id="pdf_title" name="title" placeholder="Enter title for the PDF" required>
+                </div>
+                <div class="form-group">
+                    <label for="pdf_file">Choose File</label>
+                    <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" required>
+                </div>
+                <button type="submit" class="btn-upload">Upload PDF</button>
             </form>
         </div>
-        <div class="form-card">
-            <!-- Your form card design -->
-            <div class="form-top">
-                <div class="form-logo">
-                    <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="top-right-image">
+            <div class="form-card">
+                <!-- Your form card design -->
+                <div class="form-top">
+                    <div class="form-logo">
+                        <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="top-right-image">
+                    </div>
+                    <div class="datetime-container">
+                        <div class="current-time">Current Time: <span id="time"></span></div>
+                        <div class="current-date">Current Date: <span id="date"></span></div>
+                    </div>
                 </div>
-                <div class="datetime-container">
-                    <div class="current-time">Current Time: <span id="time"></span></div>
-                    <div class="current-date">Current Date: <span id="date"></span></div>
+                <div class="form-header">
+                    <h2>Job Postings</h2>
                 </div>
+                <div>
+                    <hr class="form-separator">
+                </div>
+                <!-- Add content here as needed -->
             </div>
-            <div class="form-header">
-                <h2>Job Postings</h2>
-            </div>
-            <div>
-                <hr class="form-separator">
-            </div>
-            <!-- Add content here as needed -->
-        </div>
     </div>
 
     <script src="{% static 'js/scripts.js' %}">defer</script>

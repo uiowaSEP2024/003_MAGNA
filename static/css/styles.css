@@ -530,3 +530,63 @@ form select {
 .calendar-date.high-request {
     background-color: yellow !important; /* Use !important to override other styles */
 }
+
+/* Styles for pdf page */
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Upload card styles */
+.upload-pdf-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 45%; /* or any other suitable width */
+    margin-right: 10%; /* space between the upload card and form card */
+}
+
+/* Existing form card styles */
+.existing-form-card {
+    flex-basis: 45%;
+}
+
+/* Form control styles */
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .upload-card,
+    .existing-form-card {
+        flex-basis: 100%;
+    }
+}
