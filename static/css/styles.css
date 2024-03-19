@@ -530,3 +530,16 @@ form select {
 .calendar-date.high-request {
     background-color: yellow !important; /* Use !important to override other styles */
 }
+
+.reset-button {
+    background-color: #ff3b30; /* Red background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px; /* Increased padding */
+    margin: 0 15px; /* Adjust margin as needed */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: larger; /* Optionally increase the font size */
+    transition: background-color 0.3s;
+}
