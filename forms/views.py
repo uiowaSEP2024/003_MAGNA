@@ -11,11 +11,6 @@ from django.views.decorators.http import require_POST
 from .models import AbsenceRequest, AbsentDaysAllowed, JobPDFs, WorkOrder
 from .forms import PDFUploadForm
 
-from django.template.loader import render_to_string
-from weasyprint import HTML
-from django.http import HttpResponse
-
-
 # Create your views here.
 
 
@@ -323,16 +318,4 @@ def update_allowed_absent(request):
         return JsonResponse({"status": "error", "message": str(e)})
 
 
-def generate_pdf(request):
-    # Use Django's render_to_string to render a template file to a string
-    html_string = render_to_string('absence_request_template.html', {'context': 'values'})
 
-    # Generate PDF from the HTML string
-    html = HTML(string=html_string)
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="absence_request.pdf"'
-
-    # Render the PDF on the response
-    html.write_pdf(response)
-
-    return response
