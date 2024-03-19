@@ -327,13 +327,27 @@ def create_pdf_from_content(request):
         form = PDFContentForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
+
+            # Process dynamically added form fields
+            text_inputs = request.POST.getlist('textInputs[]')
+            checkboxes = request.POST.getlist('checkboxes[]')  # This will give you 'on' for checked checkboxes
 
             # Create a PDF in-memory buffer
             buffer = BytesIO()
             p = canvas.Canvas(buffer)
-            p.drawString(100, 800, title)  # Position might need adjustment
-            p.drawString(100, 780, content)  # Continue drawing strings for the entire content
+            p.drawString(100, 800, title)  # Example of placing the title
+
+            # Adjust these positions as necessary
+            y_position = 780
+            for text in text_inputs:
+                p.drawString(100, y_position, text)
+                y_position -= 20  # Move up 20 units for the next line
+
+            for i, checkbox in enumerate(checkboxes, start=1):
+                checked_status = "Checked" if checkbox == 'on' else "Unchecked"
+                p.drawString(100, y_position, f"Checkbox {i}: {checked_status}")
+                y_position -= 20
+
             p.showPage()
             p.save()
 
