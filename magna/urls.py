@@ -38,6 +38,7 @@ urlpatterns = [
     path("view_job_postings/", forms.views.view_job_postings, name="view_job_postings"),
     path("create_job_postings/", forms.views.create_job_postings, name="create_job_postings"),
     path("upload_pdf/", forms.views.upload_pdf, name="upload_pdf"),
+    path('create_pdf_content/', views.create_pdf_from_content, name='create_pdf_content'),
     path("requests", forms.views.requests, name="requests"),
     path("api/allowed-absent/", forms.views.allowed_absent_data, name="allowed-absent-data"),
     path(

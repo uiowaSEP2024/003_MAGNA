@@ -61,7 +61,16 @@
                 <div>
                     <hr class="form-separator">
                 </div>
-                <!-- Add content here as needed -->
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div id="pdfFormComponents">
+                        <!-- Dynamic form components will be added here -->
+                    </div>
+                    <button type="button" id="addTextInput">Add Text Input</button>
+                    <button type="button" id="addCheckbox">Add Checkbox</button>
+                    <button type="submit" class="btn-upload">Create and Upload PDF</button>
+                </form>
             </div>
     </div>
 

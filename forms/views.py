@@ -10,8 +10,12 @@ from django.views.decorators.http import require_POST
 
 from .models import AbsenceRequest, AbsentDaysAllowed, JobPDFs, WorkOrder
 from .forms import PDFUploadForm
+from .forms import PDFContentForm
 
-# Create your views here.
+from reportlab.pdfgen import canvas
+from django.core.files.base import ContentFile
+from io import BytesIO
+
 
 
 def calendar(request):
@@ -318,4 +322,33 @@ def update_allowed_absent(request):
         return JsonResponse({"status": "error", "message": str(e)})
 
 
+def create_pdf_from_content(request):
+    if request.method == 'POST':
+        form = PDFContentForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
 
+            # Create a PDF in-memory buffer
+            buffer = BytesIO()
+            p = canvas.Canvas(buffer)
+            p.drawString(100, 800, title)  # Position might need adjustment
+            p.drawString(100, 780, content)  # Continue drawing strings for the entire content
+            p.showPage()
+            p.save()
+
+            # Move the buffer position to the start
+            buffer.seek(0)
+            pdf = buffer.getvalue()
+            buffer.close()
+
+            # Create a new JobPDFs instance and save the PDF file
+            new_pdf = JobPDFs(title=title, pdf_file=ContentFile(pdf, f"{title}.pdf"))
+            new_pdf.save()
+
+            # Redirect to the PDF view page or wherever appropriate
+            return redirect('view_job_postings')
+    else:
+        form = PDFContentForm()
+
+    return render(request, 'create_job_postings.html', {'form': form})
