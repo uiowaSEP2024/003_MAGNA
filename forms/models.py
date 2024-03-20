@@ -3,7 +3,7 @@ from datetime import date  # Import date directly
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.datetime_safe import datetime
-
+from django.utils import timezone
 from login.models import Employee
 
 
@@ -139,6 +139,7 @@ class AbsentDaysAllowed(models.Model):
 class JobPDFs(models.Model):
     title = models.CharField(max_length=200)
     pdf_file = models.FileField(upload_to='pdfs/')
+    date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title

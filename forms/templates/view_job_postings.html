@@ -58,19 +58,25 @@
             <div>
                 <hr class="form-separator">
             </div>
-            <div class="search-container">
-                <form action="{% url 'view_job_postings' %}" method="get">
-                    <input type="text" placeholder="Search Jobs..." name="search_query" id="searchQueryInput">
-                    <button type="submit">Search</button>
+            <div class="search-and-sort-container">
+                <form action="{% url 'view_job_postings' %}" method="get" class="search-and-sort-form">
+                    <input type="text" placeholder="Search PDFs..." name="search_query" id="searchQueryInput">
+                    <button type="submit" class="search-button">Search</button>
+                    <input type="hidden" name="sort" value="{% if sort_order == 'desc' %}asc{% else %}desc{% endif %}">
+                    <button type="submit" class="sort-button">
+                        <img src="{% static 'images/dateFilter.png' %}" alt="Sort" />
+                    </button>
                 </form>
             </div>
+
             <ul>
                 {% for pdf in pdfs %}
                     <li>
-                        <a href="{{ pdf.pdf_file.url }}" target="_blank">{{ pdf.title }}</a><br>
+                        <a href="{{ pdf.pdf_file.url }}" target="_blank">{{ pdf.title }}</a>
+                        <span>Created on: {{ pdf.date_created|date:"N j, Y" }}</span><br>
                     </li>
-                    {% empty %}
-                        <li>No PDFs available.</li>
+                {% empty %}
+                    <li>No PDFs available.</li>
                 {% endfor %}
             </ul>
         </div>

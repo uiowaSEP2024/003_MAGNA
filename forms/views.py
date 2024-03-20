@@ -27,7 +27,8 @@ from django.conf import settings
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.units import inch
-
+from django.db.models import Q
+from django.utils.dateparse import parse_date
 
 
 def calendar(request):
@@ -95,9 +96,20 @@ def requests(request):
 
 
 def view_job_postings(request):
-    search_query = request.GET.get('search_query') or ''
-    pdfs = JobPDFs.objects.filter(title__icontains=search_query)
-    return render(request, 'view_job_postings.html', {'pdfs': pdfs})
+    search_query = request.GET.get('search_query', '')
+    sort_order = request.GET.get('sort', 'asc')
+
+    pdfs = JobPDFs.objects.all()
+
+    if search_query:
+        pdfs = pdfs.filter(title__icontains=search_query)
+
+    if sort_order == 'desc':
+        pdfs = pdfs.order_by('-date_created')
+    else:
+        pdfs = pdfs.order_by('date_created')
+
+    return render(request, 'view_job_postings.html', {'pdfs': pdfs, 'sort_order': sort_order})
 
 
 def create_job_postings(request):

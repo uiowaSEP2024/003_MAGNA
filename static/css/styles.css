@@ -590,3 +590,54 @@ form select {
         flex-basis: 100%;
     }
 }
+
+/* Styles for search and filter in view_job_postings.html */
+.search-and-sort-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px; /* This sets a 10px gap between the search bar and the buttons */
+}
+
+.search-and-sort-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    flex-grow: 1; /* This allows the search input to take up the available space */
+    margin-right: 10px; /* Adds space to the right of the search bar */
+}
+
+.search-button {
+    background-color: #d3d3d3; /* Set the button color to grey */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.sort-button {
+    background-color: #d3d3d3; /* Grey background */
+    border: none;
+    border-radius: 50%; /* Make it round */
+    width: 40px; /* Fixed width */
+    height: 40px; /* Fixed height */
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.sort-icon {
+    font-size: 24px; /* Icon size */
+}
+
+.sort-button:hover {
+    background-color: #b3b3b3; /* Darker grey on hover */
+}
+
+.sort-button img {
+    width: 24px; /* Icon size */
+    height: 24px; /* Maintain aspect ratio */
+}
