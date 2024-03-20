@@ -95,7 +95,8 @@ def requests(request):
 
 
 def view_job_postings(request):
-    pdfs = JobPDFs.objects.all()
+    search_query = request.GET.get('search_query') or ''
+    pdfs = JobPDFs.objects.filter(title__icontains=search_query)
     return render(request, 'view_job_postings.html', {'pdfs': pdfs})
 
 
@@ -349,7 +350,7 @@ def create_pdf_from_content(request):
         x_position = inch
 
         # Path to the company logo using STATICFILES_DIRS
-        logo_path = os.path.join(settings.STATIC_ROOT, 'images/magnaLogo.png')
+        logo_path = os.path.join(settings.STATIC_ROOT, 'static/images/magnaLogo.png')
 
         # Draw the company logo if it exists
         if os.path.exists(logo_path):

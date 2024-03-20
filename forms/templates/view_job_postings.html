@@ -58,6 +58,12 @@
             <div>
                 <hr class="form-separator">
             </div>
+            <div class="search-container">
+                <form action="{% url 'view_job_postings' %}" method="get">
+                    <input type="text" placeholder="Search Jobs..." name="search_query" id="searchQueryInput">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
             <ul>
                 {% for pdf in pdfs %}
                     <li>
