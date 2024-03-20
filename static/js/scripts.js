@@ -355,38 +355,31 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    const formComponentsDiv = document.getElementById('pdfFormComponents');
     const addTextInputButton = document.getElementById('addTextInput');
     const addCheckboxButton = document.getElementById('addCheckbox');
-    const formComponentsDiv = document.getElementById('pdfFormComponents');
 
-    // Function to add a text input
-    function addTextInput() {
-        const inputGroup = document.createElement('div');
-        const label = document.createElement('label');
-        label.textContent = "Text Input:";
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.name = 'textInputs[]'; // Using array name so you can handle multiple inputs on the server side
-        inputGroup.appendChild(label);
-        inputGroup.appendChild(input);
-        formComponentsDiv.appendChild(inputGroup);
+    // Function to add a label input for a text input component
+    function addTextInputLabel() {
+        const labelInput = document.createElement('input');
+        labelInput.type = 'text';
+        labelInput.name = 'textInputLabels[]';
+        labelInput.placeholder = 'Label for text input';
+        formComponentsDiv.appendChild(labelInput);
     }
 
-    // Function to add a checkbox
-    function addCheckbox() {
-        const inputGroup = document.createElement('div');
-        const label = document.createElement('label');
-        label.textContent = "Checkbox:";
-        const input = document.createElement('input');
-        input.type = 'checkbox';
-        input.name = 'checkboxes[]'; // Using array name so you can handle multiple checkboxes on the server side
-        inputGroup.appendChild(label);
-        inputGroup.appendChild(input);
-        formComponentsDiv.appendChild(inputGroup);
+    // Function to add a label input for a checkbox component
+    function addCheckboxLabel() {
+        const labelInput = document.createElement('input');
+        labelInput.type = 'text';
+        labelInput.name = 'checkboxLabels[]';
+        labelInput.placeholder = 'Label for checkbox';
+        formComponentsDiv.appendChild(labelInput);
     }
 
-    // Event listeners for the buttons
-    addTextInputButton.addEventListener('click', addTextInput);
-    addCheckboxButton.addEventListener('click', addCheckbox);
+    addTextInputButton.addEventListener('click', addTextInputLabel);
+    addCheckboxButton.addEventListener('click', addCheckboxLabel);
 });
+
+
 

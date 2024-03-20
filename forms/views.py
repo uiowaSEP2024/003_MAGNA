@@ -12,9 +12,15 @@ from .models import AbsenceRequest, AbsentDaysAllowed, JobPDFs, WorkOrder
 from .forms import PDFUploadForm
 from .forms import PDFContentForm
 
+# PDF Creation Imports
 from reportlab.pdfgen import canvas
 from django.core.files.base import ContentFile
 from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
+from reportlab.platypus import SimpleDocTemplate, Spacer, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 
 
 
@@ -324,45 +330,34 @@ def update_allowed_absent(request):
 
 def create_pdf_from_content(request):
     if request.method == 'POST':
-        form = PDFContentForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data['title']
+        title = request.POST.get('title')
+        text_input_labels = request.POST.getlist('textInputLabels[]')
+        checkbox_labels = request.POST.getlist('checkboxLabels[]')
 
-            # Process dynamically added form fields
-            text_inputs = request.POST.getlist('textInputs[]')
-            checkboxes = request.POST.getlist('checkboxes[]')  # This will give you 'on' for checked checkboxes
+        # PDF generation
+        buffer = BytesIO()
+        p = canvas.Canvas(buffer, pagesize=letter)
+        y_position = 800
 
-            # Create a PDF in-memory buffer
-            buffer = BytesIO()
-            p = canvas.Canvas(buffer)
-            p.drawString(100, 800, title)  # Example of placing the title
+        p.drawString(100, y_position, title)
+        y_position -= 40  # Adjust spacing as needed
 
-            # Adjust these positions as necessary
-            y_position = 780
-            for text in text_inputs:
-                p.drawString(100, y_position, text)
-                y_position -= 20  # Move up 20 units for the next line
+        for label in text_input_labels:
+            p.drawString(100, y_position, label + ": _______________")
+            y_position -= 20
 
-            for i, checkbox in enumerate(checkboxes, start=1):
-                checked_status = "Checked" if checkbox == 'on' else "Unchecked"
-                p.drawString(100, y_position, f"Checkbox {i}: {checked_status}")
-                y_position -= 20
+        for label in checkbox_labels:
+            p.drawString(100, y_position, label + ": ☐")
+            y_position -= 20
 
-            p.showPage()
-            p.save()
+        p.showPage()
+        p.save()
+        buffer.seek(0)
+        pdf = buffer.getvalue()
+        buffer.close()
 
-            # Move the buffer position to the start
-            buffer.seek(0)
-            pdf = buffer.getvalue()
-            buffer.close()
+        # Save PDF to the database
+        new_pdf = JobPDFs(title=title, pdf_file=ContentFile(pdf, f"{title}.pdf"))
+        new_pdf.save()
 
-            # Create a new JobPDFs instance and save the PDF file
-            new_pdf = JobPDFs(title=title, pdf_file=ContentFile(pdf, f"{title}.pdf"))
-            new_pdf.save()
-
-            # Redirect to the PDF view page or wherever appropriate
-            return redirect('view_job_postings')
-    else:
-        form = PDFContentForm()
-
-    return render(request, 'create_job_postings.html', {'form': form})
+        return redirect('view_job_postings')  # Adjust the redirect as needed
