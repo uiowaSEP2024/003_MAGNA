@@ -81,26 +81,26 @@ class AbsenceRequest(models.Model):
         db_table = "forms_absence_request"
 
 
-# class TravelAuthorization(models.Model):
-#     clock_number = models.IntegerField()
-#     name = models.CharField(max_length=100)
-#     department = models.CharField(max_length=20, choices=[
-#         ("hr", "HR"),
-#         ("floor_staff", "Floor Staff")
-#     ])
-#     destination = models.CharField(max_length=50)
-#     departure_date = models.DateField()
-#     return_date = models.DateField()
-#     personal_car = models.BooleanField()
-#     company_car = models.BooleanField()
-#     car_rental = models.BooleanField()
-#     airfare = models.BooleanField()
-#     nights_lodging = models.IntegerField()
-#     department_manager = models.CharField(max_length=100, choices=[
-#         ("example", "Example")
-#     ])
-#     email = models.EmailField()
-#     signature = models.CharField(max_length=100)
+class TravelAuthorization(models.Model):
+    clock_number = models.IntegerField()
+    name = models.CharField(max_length=100)
+    department = models.CharField(max_length=20, choices=[
+        ("hr", "HR"),
+        ("floor_staff", "Floor Staff")
+    ])
+    destination = models.CharField(max_length=50)
+    departure_date = models.DateField()
+    return_date = models.DateField()
+    personal_car = models.BooleanField()
+    company_car = models.BooleanField()
+    car_rental = models.BooleanField()
+    airfare = models.BooleanField()
+    nights_lodging = models.IntegerField()
+    department_manager = models.CharField(max_length=100, choices=[
+        ("example", "Example")
+    ])
+    email = models.EmailField()
+    signature = models.CharField(max_length=100)
 
 
 # Model to keep track of allowed absent days on the Calendar
