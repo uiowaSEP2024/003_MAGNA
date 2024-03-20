@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
@@ -21,6 +21,12 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import SimpleDocTemplate, Spacer, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
+import os
+from io import BytesIO
+from django.conf import settings
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.lib.units import inch
 
 
 
@@ -334,30 +340,63 @@ def create_pdf_from_content(request):
         text_input_labels = request.POST.getlist('textInputLabels[]')
         checkbox_labels = request.POST.getlist('checkboxLabels[]')
 
-        # PDF generation
         buffer = BytesIO()
         p = canvas.Canvas(buffer, pagesize=letter)
-        y_position = 800
+        width, height = letter  # Get the dimensions of the page
 
-        p.drawString(100, y_position, title)
-        y_position -= 40  # Adjust spacing as needed
+        # Set the start position:
+        y_position = height - inch
+        x_position = inch
 
+        # Path to the company logo using STATICFILES_DIRS
+        logo_path = os.path.join(settings.STATIC_ROOT, 'images/magnaLogo.png')
+
+        # Draw the company logo if it exists
+        if os.path.exists(logo_path):
+            p.drawImage(logo_path, x_position, y_position, width=2 * inch, height=0.5 * inch, preserveAspectRatio=True,
+                        mask='auto')
+
+        # Draw the title above the form separator
+        p.setFont("Helvetica-Bold", 14)
+        y_position -= (0.75 * inch)  # Adjust this offset based on your logo size
+        p.drawString(x_position, y_position, title)
+
+        # Draw the form separator
+        p.setStrokeColor(colors.black)
+        y_position -= (0.25 * inch)
+        p.line(x_position, y_position, width - inch, y_position)
+
+        # Draw form content
+        p.setFont("Helvetica", 12)
+        form_field_height = 0.2 * inch
+        form_field_margin = 0.5 * inch
+        y_position -= (form_field_margin * 2)  # Initial gap before the first field
+
+        # For text input fields
         for label in text_input_labels:
-            p.drawString(100, y_position, label + ": _______________")
-            y_position -= 20
+            p.drawString(x_position, y_position, label + ":")
+            y_position -= (form_field_margin / 2)
+            p.rect(x_position + 3 * inch, y_position - 3, 3 * inch, form_field_height)
+            y_position -= form_field_margin
 
+        # For checkbox fields
         for label in checkbox_labels:
-            p.drawString(100, y_position, label + ": ☐")
-            y_position -= 20
+            p.drawString(x_position, y_position, label + ":")
+            checkbox_size = 12  # Size of checkbox
+            y_position -= (form_field_margin / 2)
+            p.rect(x_position + 3 * inch, y_position, checkbox_size, checkbox_size)
+            y_position -= form_field_margin
 
+        # Finish the PDF
         p.showPage()
         p.save()
         buffer.seek(0)
-        pdf = buffer.getvalue()
-        buffer.close()
 
-        # Save PDF to the database
-        new_pdf = JobPDFs(title=title, pdf_file=ContentFile(pdf, f"{title}.pdf"))
+        # Create a Django File object from the buffer content
+        pdf_file = ContentFile(buffer.getvalue(), f"{title}.pdf")
+
+        # Save PDF to a model field
+        new_pdf = JobPDFs(title=title, pdf_file=pdf_file)
         new_pdf.save()
 
-        return redirect('view_job_postings')  # Adjust the redirect as needed
+        return redirect('view_job_postings')
