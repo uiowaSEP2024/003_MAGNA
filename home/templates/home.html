@@ -15,6 +15,9 @@
                 <!-- Note: This isn't correct and will need to be changed - we'll have to load it elsewhere than in templates -->
                 <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
             </a>
+            <div class="nav-links">
+                <a href=" {% url 'logout' %}">Log Out</a>
+            </div>
         </nav>
         <div class="header-image-container">
             <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="header-image">
