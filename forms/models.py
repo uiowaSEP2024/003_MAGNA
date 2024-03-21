@@ -96,9 +96,10 @@ class TravelAuthorization(models.Model):
     car_rental = models.BooleanField()
     airfare = models.BooleanField()
     nights_lodging = models.IntegerField()
-    department_manager = models.CharField(max_length=100, choices=[
-        ("example", "Example")
-    ])
+    department_manager = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+    )
     email = models.EmailField()
     signature = models.CharField(max_length=100)
 

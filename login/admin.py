@@ -25,3 +25,5 @@ class EmployeeAdmin(UserAdmin):
 
 
 admin.site.register(Employee, EmployeeAdmin)
+
+
