@@ -60,11 +60,13 @@
             </div>
             <div class="search-and-sort-container">
                 <form action="{% url 'view_job_postings' %}" method="get" class="search-and-sort-form">
-                    <input type="text" placeholder="Search PDFs..." name="search_query" id="searchQueryInput">
+                    <input type="text" placeholder="Search PDFs..." name="search_query" class="search-input">
                     <button type="submit" class="search-button">Search</button>
+                    <!-- Hidden input to toggle sort order -->
                     <input type="hidden" name="sort" value="{% if sort_order == 'desc' %}asc{% else %}desc{% endif %}">
+                    <!-- Button for sorting -->
                     <button type="submit" class="sort-button">
-                        <img src="{% static 'images/dateFilter.png' %}" alt="Sort" />
+                        <img src="{% static 'images/dateFilter.png' %}" alt="Sort">
                     </button>
                 </form>
             </div>
