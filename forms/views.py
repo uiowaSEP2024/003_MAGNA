@@ -239,3 +239,7 @@ def search_requests(request):
 
 def travel_auth(request):
     return render(request, "travel_auth.html")
+
+
+def submit_travel_auth():
+    return redirect("home")
