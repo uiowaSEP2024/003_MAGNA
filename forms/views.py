@@ -10,6 +10,7 @@ from django.views.decorators.http import require_POST
 
 from .models import AbsenceRequest, AbsentDaysAllowed
 
+
 # Create your views here.
 
 
@@ -92,12 +93,12 @@ def submit_absence_request(request):
 
         # Check if required fields are present
         if (
-            start_date
-            and end_date
-            and shift_number
-            and hours_gone
-            and absence_type
-            and clock_number
+                start_date
+                and end_date
+                and shift_number
+                and hours_gone
+                and absence_type
+                and clock_number
         ):
             # Create and save the AbsenceRequest object
             absence_request = AbsenceRequest(
@@ -234,3 +235,7 @@ def search_requests(request):
         else:
             return JsonResponse([], safe=False)
     return JsonResponse([], safe=False)
+
+
+def travel_auth(request):
+    return render(request, "travel_auth.html")
