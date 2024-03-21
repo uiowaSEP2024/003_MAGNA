@@ -102,6 +102,15 @@ class TravelAuthorization(models.Model):
     )
     email = models.EmailField()
     signature = models.CharField(max_length=100)
+    approval_status = models.CharField(
+        max_length=20,
+        choices=[
+            ("pending", "Pending"),
+            ("approved", "Approved"),
+            ("rejected", "Rejected"),
+        ],
+        default="pending",
+    )
 
 
 # Model to keep track of allowed absent days on the Calendar
