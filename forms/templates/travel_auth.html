@@ -45,7 +45,17 @@
                 <hr class="form-separator">
             </div>
             <form id="travel-auth-form" method="post" action="{% url 'submit_travel_auth' %}">
+                {% csrf_token %}
+                <label for="clock_number">Clock Number:</label>
+                <input type="text" id="clock_number" name="clock_number">
 
+                <label for="full-name">Full Name:</label>
+                <input type="text" id="full-name" name="full_name">
+
+<!--                Still need department-->
+
+                <label for="dest">Destination:</label>
+                <input type="text" id="dest" name="destination">
             </form>
         </div>
     </div>
