@@ -114,7 +114,8 @@ class TravelAuthorization(models.Model):
         default="pending",
     )
 
-
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 
 class TravelAuthorizationForm(forms.ModelForm):
@@ -123,6 +124,10 @@ class TravelAuthorizationForm(forms.ModelForm):
         fields = ['clock_number', 'name', 'department', 'destination', 'departure_date', 'return_date',
                   'personal_car', 'company_car', 'car_rental', 'airfare', 'nights_lodging', 'department_manager',
                   'email', 'signature']
+        widgets = {
+            'departure_date': DateInput(),
+            'return_date': DateInput()
+        }
 
 
 # Model to keep track of allowed absent days on the Calendar
