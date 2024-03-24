@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from .models import AbsenceRequest, AbsentDaysAllowed
+from .models import AbsenceRequest, AbsentDaysAllowed, TravelAuthorizationForm
 
 
 # Create your views here.
@@ -243,3 +243,14 @@ def travel_auth(request):
 
 def submit_travel_auth():
     return redirect("home")
+
+
+def travel_auth_form(request):
+    if request.method == 'POST':
+        form = TravelAuthorizationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+    else:
+        form = TravelAuthorizationForm()
+    return render(request, 'travel_auth_form.html', {'form': form})

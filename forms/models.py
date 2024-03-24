@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.datetime_safe import datetime
 
+from django import forms
+
 from login.models import Employee
 
 
@@ -111,6 +113,16 @@ class TravelAuthorization(models.Model):
         ],
         default="pending",
     )
+
+
+
+
+class TravelAuthorizationForm(forms.ModelForm):
+    class Meta:
+        model = TravelAuthorization
+        fields = ['clock_number', 'name', 'department', 'destination', 'departure_date', 'return_date',
+                  'personal_car', 'company_car', 'car_rental', 'airfare', 'nights_lodging', 'department_manager',
+                  'email', 'signature']
 
 
 # Model to keep track of allowed absent days on the Calendar

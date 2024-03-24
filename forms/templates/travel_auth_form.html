@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Authorization Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/home" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a href=" {% url 'logout' %}">Log Out</a>
+            </div>
+        </nav>
+    </header>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="request-container">
+        <div class="form-card">
+            <div class="form-top">
+                <div class="form-logo">
+                    <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="top-right-image">
+                </div>
+                <div class="datetime-container">
+                    <div class="current-time">Current Time: <span id="time"></span></div>
+                    <div class="current-date">Current Date: <span id="date"></span></div>
+                </div>
+            </div>
+            <div class="form-header">
+                <h2>Travel Authorization Form</h2>
+            </div>
+            <div>
+                <hr class="form-separator">
+            </div>
+            <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
