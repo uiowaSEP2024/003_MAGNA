@@ -2,7 +2,6 @@ from datetime import date  # Import date directly
 
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.datetime_safe import datetime
 
 from django import forms
 
