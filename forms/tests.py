@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from forms.models import AbsenceRequest, AbsentDaysAllowed
+from forms.models import AbsenceRequest, AbsentDaysAllowed, TravelAuthorization
 from login.models import Employee
 
 
@@ -309,3 +309,11 @@ class JavaScriptTests(StaticLiveServerTestCase):
 
         except TimeoutException:
             self.fail("Calendar generation failed or took too long.")
+
+class TravelAuthTestCase(TestCase):
+
+    def test_valid_travel_authorization_creation(self):
+        ta = TravelAuthorization.objects.create(
+            clock_number=12345,
+            name="test",
+        )
