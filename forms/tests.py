@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from forms.models import AbsenceRequest, AbsentDaysAllowed, TravelAuthorization
+from forms.models import AbsenceRequest, AbsentDaysAllowed
 from login.models import Employee
 
 

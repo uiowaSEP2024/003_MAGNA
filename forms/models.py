@@ -137,8 +137,6 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 
-
-
 class TravelAuthorizationForm(forms.ModelForm):
     class Meta:
         model = TravelAuthorization

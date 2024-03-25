@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -22,7 +21,10 @@
                 <a>Company</a>
                 <a>Careers</a>
                 <a>Contact</a>
-                <a href=" {% url 'logout' %}">Log Out</a>
+                <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log Out</button>
+                </form>
             </div>
         </nav>
         <div class="header-image-container">
