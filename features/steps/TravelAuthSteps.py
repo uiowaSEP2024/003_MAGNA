@@ -72,3 +72,11 @@ def step_impl(context, email):
 def step_impl(context, signature):
     signature_input = context.browser.find_element(By.ID, "id_signature")
     signature_input.send_keys(signature)
+
+@then("the user is on the travel authorization form")
+def step_impl(context):
+    assert  context.browser.current_url == 'http://localhost:8000/travel-auth', (
+        f"Expected url to be on travel auth page, "
+        f"instead is on {context.browser.current_url}"
+    )
+    context.browser.quit()
