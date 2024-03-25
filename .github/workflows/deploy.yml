@@ -2,7 +2,7 @@ name: Deploy to Heroku
 
 on:
   push:
-    branches: ["121-heroku-auto-deployment"]
+    branches: ["main"]
 
 jobs:
   build:
