@@ -60,11 +60,6 @@ urlpatterns = [
     path("edit-workflows/", workflows.views.edit_workflow, name="edit"),
     path("delete-workflows/", workflows.views.delete_workflow, name="delete"),
     path("travel-auth", forms.views.travel_auth_form),
-    path(
-        "submit-travel-auth/",
-        forms.views.submit_travel_auth,
-        name="submit_travel_auth",
-    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
