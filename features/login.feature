@@ -325,6 +325,3 @@ Feature: Login functionality
 
   # tests incorrect login with no fields
   # using internet explorer, no user variants needed
-
-
-

@@ -1,8 +1,9 @@
 from datetime import date  # Import date directly
 
+from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db import models
-from django.utils.datetime_safe import datetime
 
 from login.models import Employee
 
@@ -81,26 +82,80 @@ class AbsenceRequest(models.Model):
         db_table = "forms_absence_request"
 
 
-# class TravelAuthorization(models.Model):
-#     clock_number = models.IntegerField()
-#     name = models.CharField(max_length=100)
-#     department = models.CharField(max_length=20, choices=[
-#         ("hr", "HR"),
-#         ("floor_staff", "Floor Staff")
-#     ])
-#     destination = models.CharField(max_length=50)
-#     departure_date = models.DateField()
-#     return_date = models.DateField()
-#     personal_car = models.BooleanField()
-#     company_car = models.BooleanField()
-#     car_rental = models.BooleanField()
-#     airfare = models.BooleanField()
-#     nights_lodging = models.IntegerField()
-#     department_manager = models.CharField(max_length=100, choices=[
-#         ("example", "Example")
-#     ])
-#     email = models.EmailField()
-#     signature = models.CharField(max_length=100)
+# Validators for travel auth go here
+def check_mail(value):
+    if "@" not in value:
+        raise ValidationError("The email is not valid.")
+
+
+class TravelAuthorization(models.Model):
+    """The model for travel authorization forms"""
+    clock_number = models.IntegerField()
+    name = models.CharField(max_length=100)
+    department = models.CharField(
+        max_length=20, choices=[("hr", "HR"), ("floor_staff", "Floor Staff")]
+    )
+    destination = models.CharField(max_length=50)
+    departure_date = models.DateField()
+    return_date = models.DateField()
+    personal_car = models.BooleanField(default=False)
+    company_car = models.BooleanField(default=False)
+    car_rental = models.BooleanField(default=False)
+    airfare = models.BooleanField(default=False)
+    nights_lodging = models.IntegerField()
+    department_manager = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+    )
+    email = models.EmailField(validators=[validate_email])
+    signature = models.CharField(max_length=100)
+    approval_status = models.CharField(
+        max_length=20,
+        choices=[
+            ("pending", "Pending"),
+            ("approved", "Approved"),
+            ("rejected", "Rejected"),
+        ],
+        default="pending",
+    )
+
+    def clean(self):
+        """A overrriden clean method so it actually gets called when the object is saved."""
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        """Overridden clean method in order to ensure clean method is run"""
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
+# Validations and input stuff starts here
+class DateInput(forms.DateInput):
+    """To make sure the date input appears properly on the form, this was created."""
+    input_type = "date"
+
+
+class TravelAuthorizationForm(forms.ModelForm):
+    """The model form for the travel auth form."""
+    class Meta:
+        model = TravelAuthorization
+        fields = [
+            "clock_number",
+            "name",
+            "department",
+            "destination",
+            "departure_date",
+            "return_date",
+            "personal_car",
+            "company_car",
+            "car_rental",
+            "airfare",
+            "nights_lodging",
+            "department_manager",
+            "email",
+            "signature",
+        ]
+        widgets = {"departure_date": DateInput(), "return_date": DateInput()}
 
 
 # Model to keep track of allowed absent days on the Calendar
