@@ -1,12 +1,12 @@
 # steps.py
 from behave import given, then, when
+from django.core import mail
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from django.core import mail
-
 
 # if you are looking for the steps for initializing the browser,
 # those have been moved to BrowserInitSteps.py in the steps folder.
+
 
 @given("the user has navigated to the login page")
 def step_impl(context):
@@ -102,9 +102,6 @@ def step_impl(context):
         f"instead is on {context.browser.current_url}"
     )
     context.browser.quit()
-
-
-
 
 
 @then("the form should be submitted")
@@ -267,15 +264,11 @@ def step_impl(context):
     login_button.click()
 
 
-
-
 @when("the user submits the absence request form")
 def step_impl(context):
     """Submits the absence request form"""
     absence_request_submit = context.browser.find_element(By.ID, "submit")
     absence_request_submit.click()
-
-
 
 
 @given("a user has filled out the absence request form")
@@ -288,6 +281,12 @@ def step_user_filled_out_form(context):
         "absence_type": "sick",
         "email": "test@example.com",
     }
+
+
+@when("the user submits the form")
+def step_impl(context):
+    absence_request_submit = context.browser.find_element(By.ID, "submit")
+    absence_request_submit.click()
 
 
 @when("they submit the form")

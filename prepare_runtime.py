@@ -3,6 +3,7 @@
 import toml
 from packaging import version
 
+
 def main():
     # Load pyproject.toml
     pyproject = toml.load("pyproject.toml")
@@ -19,6 +20,7 @@ def main():
     # Write the determined version to runtime.txt
     with open("runtime.txt", "w") as runtime_file:
         runtime_file.write(f"python-{base_version}")
+
 
 if __name__ == "__main__":
     main()

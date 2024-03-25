@@ -8,9 +8,8 @@ from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from .models import AbsenceRequest, AbsentDaysAllowed, JobPDFs, WorkOrder
-from .forms import PDFUploadForm
-from .forms import PDFContentForm
+from .models import AbsenceRequest, AbsentDaysAllowed, JobPDFs, WorkOrder, TravelAuthorizationForm
+from .forms import PDFUploadForm, PDFContentForm
 
 # PDF Creation Imports
 from reportlab.pdfgen import canvas
@@ -450,3 +449,16 @@ def search_requests(request):
         else:
             return JsonResponse([], safe=False)
     return JsonResponse([], safe=False)
+
+
+
+def travel_auth_form(request):
+    """Renders the travel authorization page."""
+    if request.method == "POST":
+        form = TravelAuthorizationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+    else:
+        form = TravelAuthorizationForm()
+    return render(request, "travel_auth_form.html", {"form": form})
