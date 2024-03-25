@@ -2,42 +2,46 @@ name: Deploy to Heroku
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["121-heroku-auto-deployment"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Node.js 20
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.x'
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.x'
-    - name: Install poetry
-      uses: abatilo/actions-poetry@v2
-      with:
-        version: '1.2.2'
-    - uses: actions/cache@v3
-      name: Cache Python virtual environment
-      with:
-        path: ~/.cache/pypoetry/virtualenvs
-        key: venv-${{ hashFiles('poetry.lock') }}
-    - name: Install Dependencies
+    - name: Install dependencies
       run: |
-        poetry install
+        pip install tomlkit # tomlkit is a better choice for modifying TOML files
+        pip install poetry
+    - name: Modify pyproject.toml and poetry.lock for deployment
+      run: |
+        python3 modify_project_files_for_heroku.py
+    - name: Commit changes and push to temporary deployment branch
+      run: |
+        git config user.name 'github-actions'
+        git config user.email 'github-actions@github.com'
+        git checkout -b temporary-deployment-branch
+        git add pyproject.toml poetry.lock
+        git commit -m "Temporary changes for Heroku deployment"
+        git push --set-upstream origin temporary-deployment-branch
     - name: Install Heroku CLI
       run: |
         curl https://cli-assets.heroku.com/install.sh | sh
-    - name: Prepare runtime.txt
-      run: |
-        python3 prepare_runtime.py
-    - name: Deploy to Heroku
+    - name: Deploy to Heroku from temporary branch
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
         heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        branch: temporary-deployment-branch
+    - name: Cleanup
+      if: always()
+      run: |
+        git fetch origin main:main 
+        git checkout main
+        git branch -D temporary-deployment-branch 
+        git push origin --delete temporary-deployment-branch
