@@ -73,6 +73,12 @@ form button {
     aspect-ratio: 3 / 2;
 }
 
+.card:hover {
+    background-color: blue; /* Replace 'blue' with your desired color */
+}
+
+
+
 .card-link {
     text-decoration: none; /* Removes underline from links */
     color: black; /* Sets the text color to black */
@@ -104,7 +110,7 @@ form button {
 }
 
 .logo img {
-    height: 50px;
+    height: 25px;
 }
 
 .nav-links a {

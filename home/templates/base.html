@@ -19,18 +19,27 @@
                 <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
             </a>
             {% endif %}
+            {% if not request.path == "/" and not request.path == "/home" %}
+                <div class="nav-links">
+                    <a>Innovations</a>
+                    <a>Products</a>
+                    <a>Stories</a>
+                    <a>Company</a>
+                    <a>Careers</a>
+                    <a>Contact</a>
+                    {% if user.is_authenticated %}
+                        <a href=" {% url 'logout' %}">Log Out</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+            {% if request.path == "/home" %}
+                <div class="nav-links">
+                    {% if user.is_authenticated %}
+                        <a href=" {% url 'logout' %}">Log Out</a>
+                    {% endif %}
+                </div>
+            {% endif %}
 
-            <div class="nav-links">
-                <a>Innovations</a>
-                <a>Products</a>
-                <a>Stories</a>
-                <a>Company</a>
-                <a>Careers</a>
-                <a>Contact</a>
-                {% if user.is_authenticated %}
-                    <a href=" {% url 'logout' %}">Log Out</a>
-                {% endif %}
-            </div>
         </nav>
     </header>
 
