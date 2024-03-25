@@ -16,8 +16,8 @@ This project aims to revamp the Magna International kiosk application for employ
 
 <!-- Documentation -->
 ## Documentation
-* ![User Docs](https://github.com/uiowaSEP2024/003_MAGNA/wiki/Developer-Documentation)
-* ![User Guide}(https://github.com/uiowaSEP2024/003_MAGNA/wiki/User-Guide)
+* [User Docs](https://github.com/uiowaSEP2024/003_MAGNA/wiki/Developer-Documentation)
+* [User Guide}(https://github.com/uiowaSEP2024/003_MAGNA/wiki/User-Guide)
 
 <!-- AUTHORS -->
 ## Authors
