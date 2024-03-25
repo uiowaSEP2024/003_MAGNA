@@ -289,6 +289,11 @@ def step_user_filled_out_form(context):
         "email": "test@example.com",
     }
 
+@when("the user submits the form")
+def step_impl(context):
+    absence_request_submit = context.browser.find_element(By.ID, "submit")
+    absence_request_submit.click()
+
 
 @when("they submit the form")
 def step_user_submits_form(context):
