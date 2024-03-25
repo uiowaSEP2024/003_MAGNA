@@ -73,6 +73,16 @@ def step_impl(context, signature):
     signature_input = context.browser.find_element(By.ID, "id_signature")
     signature_input.send_keys(signature)
 
+@given("the users enters {departure_date} as their departure date on firefox")
+def step_impl(context, departure_date):
+    date_input = context.browser.find_element(By.ID, "id_departure_date")
+    date_input.send_keys(departure_date)
+
+@step("the user enters {return_date} as their return date on firefox")
+def step_impl(context, return_date):
+    date_input = context.browser.find_element(By.ID, "id_return_date")
+    date_input.send_keys(return_date)
+
 @then("the user should be on the travel authorization form")
 def step_impl(context):
     assert  context.browser.current_url == 'http://localhost:8000/travel-auth', (
@@ -80,3 +90,5 @@ def step_impl(context):
         f"instead is on {context.browser.current_url}"
     )
     context.browser.quit()
+
+
