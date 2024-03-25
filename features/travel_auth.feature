@@ -426,11 +426,11 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the home page
     Examples:
       | clock_number | name | department | destination | departure_date | return_date | travel_type | nights | manager | email | signature |
-      | 0001         | test | HR         | place       |2025-01-05       | 2025/1/6    | personal_car| 1      | manager1| test@test.com| test|
-      |0001          |test  |Floor Staff |place        |2025/1/5        |2025/1/6     |company_car  |1       |manager2 |test@test.com |test |
-      |0001          |test  |HR          |place        |2025/1/5        |2025/1/6     |car_rental  |1       |manager3 |test@test.com |test |
-      |0001          |test  |Floor Staff |place        |2025/1/5        |2025/1/6     |airfare  |1       |manager4 |test@test.com |test |
-      |0001          |test  |Floor Staff |place        |2025/1/5        |2025/1/6     |company_car  |1       |manager5 |test@test.com |test |
+      | 0001         | test | HR         | place       |2025-01-05       | 2025-01-06    | personal_car| 1      | manager1| test@test.com| test|
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager2 |test@test.com |test |
+      |0001          |test  |HR          |place        |2025-01-05        |2025-01-06     |car_rental  |1       |manager3 |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |airfare  |1       |manager4 |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager5 |test@test.com |test |
 
 
 
@@ -453,10 +453,10 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the travel authorization form
     Examples:
       | name | department | destination | departure_date | return_date | travel_type | nights | manager | email | signature |
-      |test | HR         | place       |2025-1-5        | 2025-1-6    | personal_car| 1      | manager1| test@test.com| test|
-      |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager2 |test@test.com |test |
-      |test  |HR |place        |2025-1-5        |2025-1-6     |car_rental  |1       |manager3 |test@test.com |test |
-      |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |airfare  |1       |manager4 |test@test.com |test |
+      |test | HR         | place       |2025-01-5        | 2025-01-6    | personal_car| 1      | manager1| test@test.com| test|
+      |test  |Floor Staff |place        |2025-01-5        |2025-01-6     |company_car  |1       |manager2 |test@test.com |test |
+      |test  |HR |place        |2025-01-5        |2025-01-6     |car_rental  |1       |manager3 |test@test.com |test |
+      |test  |Floor Staff |place        |2025-01-5        |2025-01-6     |airfare  |1       |manager4 |test@test.com |test |
       |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager5 |test@test.com |test |
 
   Scenario Outline: Missing department on firefox
@@ -477,11 +477,11 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the travel authorization form
     Examples:
       | clock_number | name  | destination | departure_date | return_date | travel_type | nights | manager | email | signature |
-      | 0001         | test          | place       |2025-1-5        | 2025-1-6    | personal_car| 1      | manager1| test@test.com| test|
-      |0001          |test  |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager2 |test@test.com |test |
-      |0001          |test  |place        |2025-1-5        |2025-1-6     |car_rental  |1       |manager3 |test@test.com |test |
-      |0001          |test  |place        |2025-1-5        |2025-1-6     |airfare  |1       |manager4 |test@test.com |test |
-      |0001          |test  |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager5 |test@test.com |test |
+      | 0001         | test          | place       |2025-01-05        | 2025-01-06    | personal_car| 1      | manager1| test@test.com| test|
+      |0001          |test  |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager2 |test@test.com |test |
+      |0001          |test  |place        |2025-01-05        |2025-01-06     |car_rental  |1       |manager3 |test@test.com |test |
+      |0001          |test  |place        |2025-01-05        |2025-01-06     |airfare  |1       |manager4 |test@test.com |test |
+      |0001          |test  |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager5 |test@test.com |test |
 
 
   Scenario Outline: Missing departure date on firefox
@@ -502,11 +502,11 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the travel authorization form
     Examples:
     | clock_number | name | department | destination | return_date | travel_type | nights | manager | email | signature |
-    | 0001         | test | HR         | place       | 2025-1-6    | personal_car| 1      | manager1| test@test.com| test|
-    |0001          |test  |Floor Staff |place        |2025-1-6     |company_car  |1       |manager2 |test@test.com |test |
-    |0001          |test  |HR |place        |2025-1-6     |car_rental  |1       |manager3 |test@test.com |test |
-    |0001          |test  |Floor Staff |place        |2025-1-6     |airfare  |1       |manager4 |test@test.com |test |
-    |0001          |test  |Floor Staff |place        |2025-1-6     |company_car  |1       |manager5 |test@test.com |test |
+    | 0001         | test | HR         | place       | 2025-01-06    | personal_car| 1      | manager1| test@test.com| test|
+    |0001          |test  |Floor Staff |place        |2025-01-06     |company_car  |1       |manager2 |test@test.com |test |
+    |0001          |test  |HR |place        |2025-01-06     |car_rental  |1       |manager3 |test@test.com |test |
+    |0001          |test  |Floor Staff |place        |2025-01-06     |airfare  |1       |manager4 |test@test.com |test |
+    |0001          |test  |Floor Staff |place        |2025-01-06     |company_car  |1       |manager5 |test@test.com |test |
 
   # Personal car, and all of those are skipped as the default is false
 
@@ -528,11 +528,11 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the travel authorization form
     Examples:
       | clock_number | name | department | destination | departure_date | return_date | travel_type | manager | email | signature |
-      | 0001         | test | HR         | place       |2025-1-5        | 2025-1-6    | personal_car| manager1| test@test.com| test|
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |manager2 |test@test.com |test |
-      |0001          |test  |HR |place        |2025-1-5        |2025-1-6     |car_rental  |manager3 |test@test.com |test |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |airfare |manager4 |test@test.com |test |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |manager5 |test@test.com |test |
+      | 0001         | test | HR         | place       |2025-01-05        | 2025-01-06    | personal_car| manager1| test@test.com| test|
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |manager2 |test@test.com |test |
+      |0001          |test  |HR |place        |2025-01-05        |2025-1-6     |car_rental  |manager3 |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |airfare |manager4 |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |manager5 |test@test.com |test |
 
   Scenario Outline: Missing department manager on firefox
     Given the user is using firefox
@@ -552,11 +552,11 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the travel authorization form
     Examples:
       | clock_number | name | department | destination | departure_date | return_date | travel_type | nights | email | signature |
-      | 0001         | test | HR         | place       |2025-1-5        | 2025-1-6    | personal_car| 1      | test@test.com| test|
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |test@test.com |test |
-      |0001          |test  |HR |place        |2025-1-5        |2025-1-6     |car_rental  |1       |test@test.com |test |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |airfare  |1       |test@test.com |test |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |test@test.com |test |
+      | 0001         | test | HR         | place       |2025-01-05        | 20250-1-06    | personal_car| 1      | test@test.com| test|
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |test@test.com |test |
+      |0001          |test  |HR |place        |2025-01-5        |2025-01-06     |car_rental  |1       |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |airfare  |1       |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |test@test.com |test |
 
   Scenario Outline: Missing email on firefox
     Given the user is using firefox
@@ -576,11 +576,11 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the travel authorization form
     Examples:
       | clock_number | name | department | destination | departure_date | return_date | travel_type | nights | manager | signature |
-      | 0001         | test | HR         | place       |2025-1-5        | 2025-1-6    | personal_car| 1      | manager1| test|
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager2 |test |
-      |0001          |test  |HR |place        |2025-1-5        |2025-1-6     |car_rental  |1       |manager3 |test |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |airfare  |1       |manager4 |test |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager5 |test |
+      | 0001         | test | HR         | place       |2025-01-05        | 2025-01-06    | personal_car| 1      | manager1| test|
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager2 |test |
+      |0001          |test  |HR |place        |2025-01-05        |2025-01-06     |car_rental  |1       |manager3 |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |airfare  |1       |manager4 |test |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager5 |test |
 
   Scenario Outline: Missing signature on firefox
     Given the user is using firefox
@@ -600,8 +600,8 @@ Scenario Outline: Correct form on firefox
     Then the user should be on the travel authorization form
     Examples:
       | clock_number | name | department | destination | departure_date | return_date | travel_type | nights | manager | email |
-      | 0001         | test | HR         | place       |2025-1-5        | 2025-1-6    | personal_car| 1      | manager1| test@test.com|
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager2 |test@test.com |
-      |0001          |test  |HR |place        |2025-1-5        |2025-1-6     |car_rental  |1       |manager3 |test@test.com           |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |airfare  |1       |manager4 |test@test.com |
-      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |1       |manager5 |test@test.com |
+      | 0001         | test | HR         | place       |2025-01-05        | 2025-01-06    | personal_car| 1      | manager1| test@test.com|
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager2 |test@test.com |
+      |0001          |test  |HR |place        |2025-01-05        |2025-01-06     |car_rental  |1       |manager3 |test@test.com           |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |airfare  |1       |manager4 |test@test.com |
+      |0001          |test  |Floor Staff |place        |2025-01-05        |2025-01-06     |company_car  |1       |manager5 |test@test.com |
