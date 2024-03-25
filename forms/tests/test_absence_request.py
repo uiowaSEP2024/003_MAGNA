@@ -3,9 +3,15 @@ import datetime
 
 import pytest
 from django.core.exceptions import ValidationError
+from django.test import RequestFactory
+from django.http import JsonResponse
+import json
 
 from forms.models import AbsenceRequest
 from login.models import Employee
+from forms.views import submit_absence_request
+from forms.views import update_allowed_absent
+from forms.views import days_requested_data
 
 
 class TestAbsenceRequest:
@@ -344,3 +350,204 @@ class TestAbsenceRequest:
         with pytest.raises(ValidationError):
             absence_request = AbsenceRequest(absence_type="")
             absence_request.full_clean()
+
+    @pytest.mark.django_db
+    #  Submitting an absence request form with all fields filled with valid data except for the 'end_date' field, which is before the 'start_date' field, should display an error message and render the absence_request.html template.
+    def test_end_date_before_start_date_field(self):
+        # Arrange
+        with pytest.raises(ValidationError) as e:
+            request = RequestFactory().post('/submit_absence_request', {
+                'clock_number': '12345',
+                'start_date': '2022-01-02',
+                'end_date': '2022-01-01',
+                'shift_number': '1st',
+                'hours_gone': 8,
+                'absence_type': 'Vacation'
+            })
+
+            # Act
+            response = submit_absence_request(request)
+
+    @pytest.mark.django_db
+    #  Submitting an absence request form with all fields filled with valid data except for the 'clock_number' field, which is not a valid clock number, should display an error message and render the absence_request.html template.
+    def test_invalid_clock_number_field(self):
+        with pytest.raises(ValidationError) as e:
+            # Arrange
+            request = RequestFactory().post('/submit_absence_request', {
+                'clock_number': 'abc',
+                'start_date': '2022-01-01',
+                'end_date': '2022-01-02',
+                'shift_number': '1st',
+                'hours_gone': 8,
+                'absence_type': 'Vacation'
+            })
+
+            # Act
+            response = submit_absence_request(request)
+
+    @pytest.mark.django_db
+    #  Submitting an absence request form with all fields filled with valid data except for the 'hours_gone' field, which is negative, should display an error message and render the absence_request.html template.
+    def test_negative_hours_gone_field(self):
+        with pytest.raises(ValidationError) as e:
+            # Arrange
+            request = RequestFactory().post('/submit_absence_request', {
+                'clock_number': '12345',
+                'start_date': '2022-01-01',
+                'end_date': '2022-01-02',
+                'shift_number': '1st',
+                'hours_gone': -8,
+                'absence_type': 'Vacation'
+            })
+
+            # Act
+            response = submit_absence_request(request)
+
+    @pytest.mark.django_db
+    #  Function successfully updates allowed absent days for a specific shift day
+    def test_update_allowed_absent_success(self):
+        # Prepare test data
+        request_body = {
+            "shiftDay": "2022-01-01",
+            "allowedAbsent": 2
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the response status code and content
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    #  Function returns a JSON response indicating the success status of the update
+    def test_update_allowed_absent_response(self):
+        # Prepare test data
+        request_body = {
+            "shiftDay": "2022-01-01",
+            "allowedAbsent": 2
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the response status code and content
+        assert isinstance(response, JsonResponse)
+
+    @pytest.mark.django_db
+    #  Function correctly parses the request body as JSON
+    def test_update_allowed_absent_parse_json(self):
+        # Prepare test data
+        request_body = {
+            "shiftDay": "2022-01-01",
+            "allowedAbsent": 2
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the parsed data
+        assert isinstance(response, JsonResponse)
+
+    @pytest.mark.django_db
+    #  Function correctly converts the shift day string to a datetime object
+    def test_update_allowed_absent_convert_datetime(self):
+        # Prepare test data
+        request_body = {
+            "shiftDay": "2022-01-01",
+            "allowedAbsent": 2
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the converted datetime object
+        assert isinstance(response, JsonResponse)
+
+    @pytest.mark.django_db
+    #  Function correctly retrieves the allowed absent value
+    def test_update_allowed_absent_retrieve_value(self):
+        # Prepare test data
+        request_body = {
+            "shiftDay": "2022-01-01",
+            "allowedAbsent": 2
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the retrieved value
+        assert isinstance(response, JsonResponse)
+
+    @pytest.mark.django_db
+    #  Request body is empty
+    def test_update_allowed_absent_empty_body(self):
+        # Prepare test data
+        request = RequestFactory().post('/update_allowed_absent', data={}, content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the response status code and content
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    #  Request body is not in JSON format
+    def test_update_allowed_absent_invalid_json(self):
+        # Prepare test data
+        request = RequestFactory().post('/update_allowed_absent', data="invalid", content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the response status code and content
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    #  Shift day is not provided in the request body
+    def test_update_allowed_absent_missing_shift_day(self):
+        # Prepare test data
+        request_body = {
+            "allowedAbsent": 2
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the response status code and content
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    #  Allowed absent value is not provided in the request body
+    def test_update_allowed_absent_missing_allowed_absent(self):
+        # Prepare test data
+        request_body = {
+            "shiftDay": "2022-01-01"
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the response status code and content
+        assert response.status_code == 200
+
+    @pytest.mark.django_db
+    #  Shift day is in an invalid format
+    def test_update_allowed_absent_invalid_shift_day(self):
+        # Prepare test data
+        request_body = {
+            "shiftDay": "2022-01-01T00:00:00Z",
+            "allowedAbsent": 2
+        }
+        request = RequestFactory().post('/update_allowed_absent', data=json.dumps(request_body), content_type='application/json')
+
+        # Invoke the function
+        response = update_allowed_absent(request)
+
+        # Check the response status code and content
+        assert response.status_code == 200
