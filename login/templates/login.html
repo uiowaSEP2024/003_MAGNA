@@ -1,29 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block title %}Login - Magna{% endblock %}
+
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <header>
-        <nav class="navbar">
-            <a href="/home" class="logo">
-                <!-- Note: This isn't correct and will need to be changed - we'll have to load it elsewhere than in templates -->
-                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
-            </a>
-            <div class="nav-links">
-                <a>Innovations</a>
-                <a>Products</a>
-                <a>Stories</a>
-                <a>Company</a>
-                <a>Careers</a>
-                <a>Contact</a>
-            </div>
-        </nav>
-    </header>
-        {% if form.non_field_errors %}
+
+{% block content %}
+    {% if form.non_field_errors %}
     <div class="alert alert-danger" role="alert">
         {% for error in form.non_field_errors %}
         {{ error }}
@@ -45,20 +27,21 @@
 <!--            <button type="submit" id="log-in">Log In</button>-->
 <!--        </form>-->
 <!--    </div>-->
+
     <h2>Login</h2>
     <form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        {{ form.username.label_tag }}
-        {{ form.username }}
-        {{ form.username.errors }}
-    </div>
-    <div class="form-group">
-        {{ form.password.label_tag }}
-        {{ form.password }}
-        {{ form.password.errors }}
-    </div>
-    <button type="submit" class="btn btn-primary" id="log-in">Login</button>
-</form>
-</body>
-</html>
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+        <button type="submit" class="btn btn-primary" id="log-in">Login</button>
+    </form>
+
+{% endblock %}
