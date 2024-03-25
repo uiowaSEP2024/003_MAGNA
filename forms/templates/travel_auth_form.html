@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block title %}Login - Magna{% endblock %}
+
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>Travel Authorization Form</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <header>
-        <nav class="navbar">
-            <a href="/home" class="logo">
-                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
-            </a>
-            <div class="nav-links">
-                <a href=" {% url 'logout' %}">Log Out</a>
-            </div>
-        </nav>
-    </header>
+
+{% block content %}
     {% if messages %}
     <div class="messages">
         {% for message in messages %}
@@ -50,6 +38,4 @@
             </form>
         </div>
     </div>
-    <script src="{% static 'js/scripts.js' %}">defer</script>
-</body>
-</html>
+{% endblock %}
