@@ -22,6 +22,7 @@ class TestAbsenceRequest:
             shift_number="1st",
             hours_gone=8,
             absence_type="Vacation",
+            email_address="test@example.com"
         )
         absence_request.save()
 
@@ -40,6 +41,7 @@ class TestAbsenceRequest:
                 shift_number="1st",
                 hours_gone=8,
                 absence_type="Vacation",
+                email_address="test@example.com"
             )
             absence_request.full_clean()
 
@@ -54,6 +56,7 @@ class TestAbsenceRequest:
             shift_number="1st",
             hours_gone=40,
             absence_type="Vacation",
+            email_address="test@example.com"
         )
         try:
             absence_request.full_clean()
@@ -72,6 +75,7 @@ class TestAbsenceRequest:
             shift_number="1st",
             hours_gone=40,
             absence_type="Vacation",
+            email_address="test@example.com"
         )
 
         # Get the initial count of AbsenceRequest objects in the database
@@ -98,6 +102,7 @@ class TestAbsenceRequest:
             shift_number="1st",
             hours_gone=40,
             absence_type="Vacation",
+            email_address="test@example.com"
         )
 
         # Save the object
@@ -121,6 +126,7 @@ class TestAbsenceRequest:
             shift_number="1st",
             hours_gone=40,
             absence_type="Vacation",
+            email_address="test@example.com"
         )
 
         # Update the AbsenceRequest object with valid data
@@ -168,6 +174,7 @@ class TestAbsenceRequest:
             hours_gone=40,
             absence_type="Vacation",
             filled_by=employee,
+            email_address="test@example.com"
         )
 
         # Set the approval field to the valid Employee object
@@ -204,6 +211,7 @@ class TestAbsenceRequest:
             shift_number="1st",
             hours_gone=8,
             absence_type="Sick Leave",
+            email_address="test@example.com"
         )
 
         # Set the filled_by field to the valid Employee object
@@ -232,6 +240,7 @@ class TestAbsenceRequest:
                 absence_type="Vacation",
                 filled_by=None,
                 approval=None,
+                email_address="test@example.com"
             )
 
     @pytest.mark.django_db
@@ -246,6 +255,7 @@ class TestAbsenceRequest:
                 shift_number="1st",
                 hours_gone=8,
                 absence_type="Sick Leave",
+                email_address="test@example.com"
             )
 
     @pytest.mark.django_db
@@ -262,6 +272,7 @@ class TestAbsenceRequest:
                 absence_type="Sick Leave",
                 filled_by=None,
                 approval=None,
+                email_address="test@example.com"
             )
 
     @pytest.mark.django_db
@@ -276,6 +287,7 @@ class TestAbsenceRequest:
                 shift_number="1st",
                 hours_gone=-10,
                 absence_type="Sick Leave",
+                email_address="test@example.com"
             )
             absence_request.full_clean()
 
@@ -292,6 +304,7 @@ class TestAbsenceRequest:
             absence_type="Vacation",
             filled_by=None,
             approval=None,
+            email_address="test@example.com"
         )
         try:
             absence_request.full_clean()
@@ -310,6 +323,7 @@ class TestAbsenceRequest:
             hours_gone=8,
             absence_type="Sick Leave",
             filled_by=None,
+            email_address="test@example.com"
         )
         absence_request.save()
         assert absence_request.id is not None

@@ -3,12 +3,12 @@ import datetime
 import pytest
 from django.core.exceptions import ValidationError
 
-from forms.models import UploadedPDF
+from forms.models import JobPDFs
 
-from forms.views import create_job_postings
+from forms.views import create_job_postings, view_job_postings, upload_pdf, create_pdf_from_content
 from django.test import RequestFactory
 
-
+@pytest.mark.django_db
 class TestCreateJobPostings:
     @pytest.mark.django_db
     def test_valid_form_data(self):
