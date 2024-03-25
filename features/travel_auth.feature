@@ -109,6 +109,7 @@ Feature: Travel Authorization form feature
   Scenario Outline: Missing nights lodging on chrome
     Given the user is using chrome
     And a kiosk user is logged in
+    And the user clicks on the travel authorization button
     And the user enters <clock_number> as their clock number
     And the user enters <name> as their name
     And the user selects <department> from the dropdown menu
@@ -119,6 +120,15 @@ Feature: Travel Authorization form feature
     And the user enters <manager> as their manager
     And the user enters <email> as their email
     And the user enters <signature> as their signature
+    When the user submits the form
+    Then the user should be on the travel authorization form
+    Examples:
+      | clock_number | name | department | destination | departure_date | return_date | travel_type | manager | email | signature |
+      | 0001         | test | HR         | place       |2025-1-5        | 2025-1-6    | personal_car| manager1| test@test.com| test|
+      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |manager2 |test@test.com |test |
+      |0001          |test  |HR |place        |2025-1-5        |2025-1-6     |car_rental  |manager3 |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |airfare |manager4 |test@test.com |test |
+      |0001          |test  |Floor Staff |place        |2025-1-5        |2025-1-6     |company_car  |manager5 |test@test.com |test |
 
   Scenario Outline: Missing department manager on chrome
     Given the user is using chrome
