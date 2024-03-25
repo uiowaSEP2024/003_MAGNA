@@ -1,62 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block title %}Home - Magna{% endblock %}
+
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magna Homepage</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"> <!-- Link to your external CSS file -->
-</head>
-<body>
-    <header>
-        <nav class="navbar">
-            <a href="/home" class="logo">
-                <!-- Note: This isn't correct and will need to be changed - we'll have to load it elsewhere than in templates -->
-                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
-            </a>
-            <div class="nav-links">
-                <a>Innovations</a>
-                <a>Products</a>
-                <a>Stories</a>
-                <a>Company</a>
-                <a>Careers</a>
-                <a>Contact</a>
-                <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit">Log Out</button>
-                </form>
-            </div>
-        </nav>
-        <div class="header-image-container">
-            <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="header-image">
-        </div>
-        <hr class="separator"> <!-- This is the line separator -->
-    </header>
 
-    <main>
-        <div class="container">
-            <a href="/absence-request" class="card-link" id="absence_request">
-                <div class="card">
-                    <h2>Time Off</h2>
-                </div>
-            </a>
-            <a href="/travel-auth" class="card-link" id="travel_auth">
-                <div class="card">
-                    <h2>Travel Authorization</h2>
-                </div>
-            </a>
-            <div class="card">
-                <h2>Job Openings</h2>
-            </div>
-            <div class="card">
-                <h2>HR Safety and Well Being</h2>
-            </div>
-        </div>
-    </main>
+{% block content %}
 
-    <footer>
-        <!-- Footer content goes here -->
-    </footer>
-    <script src="../static/js/scripts.js"></script>
-</body>
-</html>
+    <div class="header-image-container">
+        <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="header-image">
+    </div>
+    <hr class="separator">
+
+    <div class="container">
+        <a href="/absence-request" class="card-link" id="absence_request">
+            <div class="card">
+                <h2>Time Off</h2>
+            </div>
+        </a>
+        <a href="/travel-auth" class="card-link" id="travel_auth">
+            <div class="card">
+                <h2>Travel Authorization</h2>
+            </div>
+        </a>
+        <div class="card">
+            <h2>Job Openings</h2>
+        </div>
+        <div class="card">
+            <h2>HR Safety and Well Being</h2>
+        </div>
+    </div>
+{% endblock %}

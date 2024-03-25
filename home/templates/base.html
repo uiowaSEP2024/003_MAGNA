@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Magna{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            {% if user.is_authenticated %}
+            <a href="/home" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            {% else %}
+            <a href="/" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            {% endif %}
+
+            <div class="nav-links">
+                <a>Innovations</a>
+                <a>Products</a>
+                <a>Stories</a>
+                <a>Company</a>
+                <a>Careers</a>
+                <a>Contact</a>
+                {% if user.is_authenticated %}
+                    <a href=" {% url 'logout' %}">Log Out</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+</body>
+</html>
