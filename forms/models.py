@@ -92,10 +92,10 @@ class TravelAuthorization(models.Model):
     destination = models.CharField(max_length=50)
     departure_date = models.DateField()
     return_date = models.DateField()
-    personal_car = models.BooleanField()
-    company_car = models.BooleanField()
-    car_rental = models.BooleanField()
-    airfare = models.BooleanField()
+    personal_car = models.BooleanField(default=False)
+    company_car = models.BooleanField(default=False)
+    car_rental = models.BooleanField(default=False)
+    airfare = models.BooleanField(default=False)
     nights_lodging = models.IntegerField()
     department_manager = models.ForeignKey(
         Employee,
