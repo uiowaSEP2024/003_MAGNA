@@ -122,10 +122,11 @@ def create_job_postings(request):
             )
             new_pdf.save()
             # Redirect to PDF list or success page
-            return redirect('list_pdfs')
+            return redirect('view_job_postings')
     else:
         form = PDFUploadForm()
     return render(request, 'create_job_postings.html', {'form': form})
+
 
 def upload_pdf(request):
     if request.method == 'POST':
@@ -137,6 +138,7 @@ def upload_pdf(request):
     else:
         form = PDFUploadForm()
     return render(request, 'create_job_postings.html', {'form': form})
+
 
 def submit_absence_request(request):
     """

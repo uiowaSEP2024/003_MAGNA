@@ -7,6 +7,7 @@ class PDFUploadForm(forms.ModelForm):
         model = JobPDFs
         fields = ['title', 'pdf_file']
 
+
 class PDFContentForm(forms.Form):
     title = forms.CharField(max_length=200, label='PDF Title')
     content = forms.CharField(widget=forms.Textarea, label='PDF Content')
