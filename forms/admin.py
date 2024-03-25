@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import AbsentDaysAllowed
-from .models import AbsenceRequest
+from .models import AbsenceRequest, AbsentDaysAllowed
 
 # Register your models here.
 

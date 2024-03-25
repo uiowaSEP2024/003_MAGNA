@@ -65,9 +65,3 @@ Feature: Home Page Functionality
     And a kiosk user is logged in
     When the user clicks on the travel authorization button
     Then the user is redirected to the travel authorization form
-
-
-
-
-
-

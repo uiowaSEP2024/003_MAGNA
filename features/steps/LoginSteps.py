@@ -1,12 +1,12 @@
 from behave import given, then, when
+from django.core import mail
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from django.core import mail
-
 
 # Steps for logging in the different types of users, specifically on the login page.
 # Note: All of these steps assume a browser has been set up. These steps also assume the user
 # is on the login page. These were made for testing the login page originally.
+
 
 # test for if the user is not logged in
 @given("the user is not logged in")

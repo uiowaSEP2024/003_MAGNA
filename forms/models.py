@@ -1,10 +1,9 @@
 from datetime import date  # Import date directly
 
+from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db import models
-
-from django import forms
 
 from login.models import Employee
 
@@ -89,15 +88,13 @@ def check_mail(value):
         raise ValidationError("The email is not valid.")
 
 
-
-
 class TravelAuthorization(models.Model):
+    """The model for travel authorization forms"""
     clock_number = models.IntegerField()
     name = models.CharField(max_length=100)
-    department = models.CharField(max_length=20, choices=[
-        ("hr", "HR"),
-        ("floor_staff", "Floor Staff")
-    ])
+    department = models.CharField(
+        max_length=20, choices=[("hr", "HR"), ("floor_staff", "Floor Staff")]
+    )
     destination = models.CharField(max_length=50)
     departure_date = models.DateField()
     return_date = models.DateField()
@@ -123,6 +120,7 @@ class TravelAuthorization(models.Model):
     )
 
     def clean(self):
+        """A overrriden clean method so it actually gets called when the object is saved."""
         super().clean()
 
     def save(self, *args, **kwargs):
@@ -131,22 +129,33 @@ class TravelAuthorization(models.Model):
         super().save(*args, **kwargs)
 
 
-
 # Validations and input stuff starts here
 class DateInput(forms.DateInput):
-    input_type = 'date'
+    """To make sure the date input appears properly on the form, this was created."""
+    input_type = "date"
 
 
 class TravelAuthorizationForm(forms.ModelForm):
+    """The model form for the travel auth form."""
     class Meta:
         model = TravelAuthorization
-        fields = ['clock_number', 'name', 'department', 'destination', 'departure_date', 'return_date',
-                  'personal_car', 'company_car', 'car_rental', 'airfare', 'nights_lodging', 'department_manager',
-                  'email', 'signature']
-        widgets = {
-            'departure_date': DateInput(),
-            'return_date': DateInput()
-        }
+        fields = [
+            "clock_number",
+            "name",
+            "department",
+            "destination",
+            "departure_date",
+            "return_date",
+            "personal_car",
+            "company_car",
+            "car_rental",
+            "airfare",
+            "nights_lodging",
+            "department_manager",
+            "email",
+            "signature",
+        ]
+        widgets = {"departure_date": DateInput(), "return_date": DateInput()}
 
 
 # Model to keep track of allowed absent days on the Calendar

@@ -309,5 +309,3 @@ class JavaScriptTests(StaticLiveServerTestCase):
 
         except TimeoutException:
             self.fail("Calendar generation failed or took too long.")
-
-

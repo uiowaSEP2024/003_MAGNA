@@ -3,9 +3,8 @@ import datetime
 
 import pytest
 from django.core.exceptions import ValidationError
+
 from forms.models import TravelAuthorization
-
-
 from login.models import Employee
 
 
@@ -17,7 +16,7 @@ class TestTravelAuthorization:
             clock_number="123456",
             name="Manager Name",
             role="Manager",
-            username='manager',
+            username="manager",
             password="testPass",
         )
         ta = TravelAuthorization.objects.create(
@@ -35,7 +34,7 @@ class TestTravelAuthorization:
             department_manager=manager,
             email="test@example.com",
             signature="John Doe",
-            approval_status="pending"
+            approval_status="pending",
         )
         assert ta.clock_number == 12345
         assert ta.name == "John Doe"
@@ -60,7 +59,7 @@ class TestTravelAuthorization:
             clock_number="123456",
             name="Manager Name",
             role="Manager",
-            username='manager',
+            username="manager",
             password="testPass",
         )
         ta = TravelAuthorization.objects.create(
@@ -73,7 +72,7 @@ class TestTravelAuthorization:
             department_manager=manager,
             nights_lodging=4,
             email="test@example.com",
-            signature="John Doe"
+            signature="John Doe",
         )
         assert ta.clock_number == 12345
         assert ta.name == "John Doe"
@@ -98,7 +97,7 @@ class TestTravelAuthorization:
             clock_number="123456",
             name="Manager Name",
             role="Manager",
-            username='manager',
+            username="manager",
             password="testPass",
         )
         ta = TravelAuthorization.objects.create(
@@ -112,7 +111,7 @@ class TestTravelAuthorization:
             nights_lodging=4,
             department_manager=manager,
             email="test@example.com",
-            signature="John Doe"
+            signature="John Doe",
         )
         assert ta.clock_number == 12345
         assert ta.name == "John Doe"
@@ -137,7 +136,7 @@ class TestTravelAuthorization:
             clock_number="123456",
             name="Manager Name",
             role="Manager",
-            username='manager',
+            username="manager",
             password="testPass",
         )
         with pytest.raises(ValidationError):
@@ -153,7 +152,7 @@ class TestTravelAuthorization:
                 department_manager=manager,
                 email="test@example.com",
                 signature="John Doe",
-                approval_status="pending"
+                approval_status="pending",
             )
 
     #  Creating a travel authorization with an empty name field should raise an error.
@@ -163,7 +162,7 @@ class TestTravelAuthorization:
             clock_number="123456",
             name="Manager Name",
             role="Manager",
-            username='manager',
+            username="manager",
             password="testPass",
         )
         with pytest.raises(ValidationError):
@@ -179,7 +178,7 @@ class TestTravelAuthorization:
                 department_manager=manager,
                 email="test@example.com",
                 signature="John Doe",
-                approval_status="pending"
+                approval_status="pending",
             )
 
     #  Creating a travel authorization with an invalid email should raise an error.
@@ -189,7 +188,7 @@ class TestTravelAuthorization:
             clock_number="123456",
             name="Manager Name",
             role="Manager",
-            username='manager',
+            username="manager",
             password="testPass",
         )
         with pytest.raises(ValidationError):
@@ -205,5 +204,5 @@ class TestTravelAuthorization:
                 department_manager=manager,
                 email="invalid_email",
                 signature="John Doe",
-                approval_status="pending"
+                approval_status="pending",
             )
