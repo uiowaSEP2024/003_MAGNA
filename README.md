@@ -13,6 +13,12 @@ This project aims to revamp the Magna International kiosk application for employ
 * ![Heroku](https://img.shields.io/badge/Heroku-%23FF9900.svg?style=for-the-badge&logo=heroku&logoColor=white)
 * ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
+
+<!-- Documentation -->
+## Documentation
+* ![User Docs](https://github.com/uiowaSEP2024/003_MAGNA/wiki/Developer-Documentation)
+* ![User Guide}(https://github.com/uiowaSEP2024/003_MAGNA/wiki/User-Guide)
+
 <!-- AUTHORS -->
 ## Authors
 
