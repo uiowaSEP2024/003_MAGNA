@@ -353,3 +353,34 @@ document.addEventListener('DOMContentLoaded', function() {
         navigateCalendar('next');
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const formComponentsDiv = document.getElementById('pdfFormComponents');
+    const addTextInputButton = document.getElementById('addTextInput');
+    const addCheckboxButton = document.getElementById('addCheckbox');
+
+    // Function to add a label input for a text input component
+    function addTextInputLabel() {
+        const labelInput = document.createElement('input');
+        labelInput.type = 'text';
+        labelInput.name = 'textInputLabels[]';
+        labelInput.placeholder = 'Label for text input';
+        formComponentsDiv.appendChild(labelInput);
+    }
+
+    // Function to add a label input for a checkbox component
+    function addCheckboxLabel() {
+        const labelInput = document.createElement('input');
+        labelInput.type = 'text';
+        labelInput.name = 'checkboxLabels[]';
+        labelInput.placeholder = 'Label for checkbox';
+        formComponentsDiv.appendChild(labelInput);
+    }
+
+    addTextInputButton.addEventListener('click', addTextInputLabel);
+    addCheckboxButton.addEventListener('click', addCheckboxLabel);
+});
+
+
+
+

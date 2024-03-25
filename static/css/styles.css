@@ -531,6 +531,119 @@ form select {
     background-color: yellow !important; /* Use !important to override other styles */
 }
 
+/* Styles for pdf page */
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Upload card styles */
+.upload-pdf-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 45%; /* or any other suitable width */
+    margin-right: 10%; /* space between the upload card and form card */
+}
+
+/* Existing form card styles */
+.existing-form-card {
+    flex-basis: 45%;
+}
+
+/* Form control styles */
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .upload-card,
+    .existing-form-card {
+        flex-basis: 100%;
+    }
+}
+
+/* Styles for search and filter in view_job_postings.html */
+.search-and-sort-container {
+    display: flex;
+    justify-content: flex-start; /* Align items to the start of the container */
+    gap: 10px; /* Gap between items */
+    padding: 10px 0; /* Padding above and below */
+}
+
+.search-and-sort-form {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: flex-start; /* Align items to the start */
+    flex-wrap: wrap; /* Allow items to wrap if not enough space */
+}
+
+.search-input {
+    flex: 1; /* Allow input to fill available space */
+    min-width: 120px; /* Minimum width of the input field */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px; /* Space after the search bar */
+}
+
+.search-button {
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px; /* Space after the search button */
+}
+
+.sort-button {
+    background-color: #d3d3d3; /* Grey background */
+    border: none;
+    border-radius: 50%; /* Circle shape */
+    width: 32px; /* Fixed width */
+    height: 32px; /* Fixed height */
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    line-height: 0; /* Reset line height */
+}
+
+.sort-button img {
+    width: 20px; /* Size of the icon */
+    height: 20px; /* Size of the icon */
+    display: block; /* Removes bottom space under the image */
+}
+
 .reset-button {
     background-color: #ff3b30; /* Red background */
     color: white;

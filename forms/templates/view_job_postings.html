@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Off Request</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a href="/absence-request">Time Off</a>
+                <a href="/view_job_postings">Careers</a>
+                <a href="/work-order">Work Order</a>
+                <a>Contact</a>
+                <a href=" {% url 'logout' %}">Log Out</a>
+            </div>
+        </nav>
+    </header>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="navigation-container">
+        <div class="page-navigation">
+            <a href="{% url 'view_job_postings' %}" class="nav-button {% if request.resolver_match.url_name == 'view_job_postings' %}active{% endif %}">Current Postings</a>
+            <a href="{% url 'create_job_postings' %}" class="nav-button {% if request.resolver_match.url_name == 'create_job_postings' %}active{% endif %}">New Posting</a>
+        </div>
+        <hr class="separator">
+    </div>
+
+    <div class="request-container">
+        <div class="form-card">
+            <div class="form-top">
+                <div class="form-logo">
+                    <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="top-right-image">
+                </div>
+                <div class="datetime-container">
+                    <div class="current-time">Current Time: <span id="time"></span></div>
+                    <div class="current-date">Current Date: <span id="date"></span></div>
+                </div>
+            </div>
+            <div class="form-header">
+                <h2>Job Postings</h2>
+            </div>
+            <div>
+                <hr class="form-separator">
+            </div>
+            <div class="search-and-sort-container">
+                <form action="{% url 'view_job_postings' %}" method="get" class="search-and-sort-form">
+                    <input type="text" placeholder="Search PDFs..." name="search_query" class="search-input">
+                    <button type="submit" class="search-button">Search</button>
+                    <!-- Hidden input to toggle sort order -->
+                    <input type="hidden" name="sort" value="{% if sort_order == 'desc' %}asc{% else %}desc{% endif %}">
+                    <!-- Button for sorting -->
+                    <button type="submit" class="sort-button">
+                        <img src="{% static 'images/dateFilter.png' %}" alt="Sort">
+                    </button>
+                </form>
+            </div>
+
+            <ul>
+                {% for pdf in pdfs %}
+                    <li>
+                        <a href="{{ pdf.pdf_file.url }}" target="_blank">{{ pdf.title }}</a>
+                        <span>Created on: {{ pdf.date_created|date:"N j, Y" }}</span><br>
+                    </li>
+                {% empty %}
+                    <li>No PDFs available.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}">defer</script>
+</body>
+</html>
