@@ -6,6 +6,7 @@ Feature: Travel Authorization form feature
   Scenario Outline: Correct form on Chrome
     Given the user is using chrome
     And a kiosk user is logged in
+    And the user clicks on the travel authorization button
 
   Scenario Outline: Missing clock number on chrome
     Given the user is using chrome
