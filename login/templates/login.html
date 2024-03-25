@@ -28,6 +28,11 @@
 <!--        </form>-->
 <!--    </div>-->
 
+<div class="header-image-container">
+    <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="header-image">
+</div>
+
+<div class="form-card">
     <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
@@ -43,5 +48,6 @@
         </div>
         <button type="submit" class="btn btn-primary" id="log-in">Login</button>
     </form>
+</div>
 
 {% endblock %}
