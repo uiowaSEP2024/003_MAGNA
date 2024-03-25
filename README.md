@@ -11,24 +11,13 @@ This project aims to revamp the Magna International kiosk application for employ
 * ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 * ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 * ![Heroku](https://img.shields.io/badge/Heroku-%23FF9900.svg?style=for-the-badge&logo=heroku&logoColor=white)
-* ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 * ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-<!-- USAGE -->
-## Usage
 
-How to use the Kiosk App, including any sample inputs or workflows.
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-Plans for future development or improvements
-
-<!-- LICENSE -->
-## License
-
-Note: This project is currently under development and is not authorized for external use at this time.
+<!-- Documentation -->
+## Documentation
+* ![User Docs](https://github.com/uiowaSEP2024/003_MAGNA/wiki/Developer-Documentation)
+* ![User Guide}(https://github.com/uiowaSEP2024/003_MAGNA/wiki/User-Guide)
 
 <!-- AUTHORS -->
 ## Authors

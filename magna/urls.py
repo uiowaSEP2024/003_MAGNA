@@ -41,6 +41,12 @@ urlpatterns = [
     path('create_pdf_content/', forms.views.create_pdf_from_content, name='create_pdf_content'),
     path("requests", forms.views.requests, name="requests"),
     path("api/allowed-absent/", forms.views.allowed_absent_data, name="allowed-absent-data"),
+    path("search-requests/", forms.views.search_requests, name="search-requests"),
+    path(
+        "api/allowed-absent/",
+        forms.views.allowed_absent_data,
+        name="allowed-absent-data",
+    ),
     path(
         "api/days-requested/",
         forms.views.days_requested_data,

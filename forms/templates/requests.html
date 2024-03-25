@@ -1,57 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block title %}Requests - Magna{% endblock %}
+
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Requests</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-</head>
-<body>
 
-<header>
-        <nav class="navbar">
-            <a href="/" class="logo">
-                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
-            </a>
-            <div class="nav-links">
-                <a href="/absence-request">Time Off</a>
-                <a href="/view_job_postings">Careers</a>
-                <a href="/work-order">Work Order</a>
-                <a>Contact</a>
-                <a href=" {% url 'logout' %}">Log Out</a>
+{% block content %}
+    <div class="navigation-container">
+        <div class="page-navigation">
+            <a href="/absence-request" class="nav-button {% if request.path == '/absence-request' %}active{% endif %}" id="new-request">New Request</a>
+            <a href="/requests" class="nav-button {% if request.path == '/requests' %}active{% endif %}" id="current-requests">Current Requests</a>
+            {% if current_user.role != "kiosk" %}
+                <a href="/calendar" class="nav-button {% if request.path == '/calendar' %}active{% endif %}" id="calendar">Calendar</a>
+            {% endif %}
+        </div>
+        <hr class="separator">
+    </div>
+
+    <div class="container">
+        {% if current_user.role == "kiosk" %}
+           <form id="search-form">
+                <label for="clock_number">Enter Clock Number:</label>
+                <input type="text" id="clock_number" name="clock_number">
+                <button type="submit">Search</button>
+            </form>
+        {% endif %}
+
+        {% if current_user.role != "kiosk" %}
+            {% for request in requests %}
+            <div class="request-card status-{{ request.approval_status }}">
+                <div class="request-card-top">
+                    <div>Filled by: {{ request.filled_by.name }} </div>
+                    <div class="request-type">{{ request.absence_type }}</div>
+                </div>
+                <div class="request-card-bottom">
+                    <div>Start Date: {{ request.start_date|date:"m/d/Y" }}</div>
+                    <div>End Date: {{ request.end_date|date:"m/d/Y" }}</div>
+                    <div>Shift: {{ request.shift_number }}</div>
+                    <div>Hours Gone: {{request.hours_gone}}</div>
+                    <div>Supervisor: {{ request.approval.name }}</div>
+                    <div class="status-text">Status: {{ request.approval_status }}</div>
+                </div>
             </div>
-        </nav>
-    </header>
-
-<div class="navigation-container">
-    <div class="page-navigation">
-        <a href="/absence-request" class="nav-button {% if request.path == '/absence-request' %}active{% endif %}" id="new-request">New Request</a>
-        <a href="/requests" class="nav-button {% if request.path == '/requests' %}active{% endif %}" id="current-requests">Current Requests</a>
-        <a href="/calendar" class="nav-button {% if request.path == '/calendar' %}active{% endif %}" id="calendar">Calendar</a>
+            {% empty %}
+            <p>No requests found.</p>
+            {% endfor %}
+        {% endif %}
     </div>
-    <hr class="separator">
-</div>
-
-<div class="container">
-    {% for request in requests %}
-    <div class="request-card status-{{ request.approval_status }}">
-        <div class="request-card-top">
-            <span class="close-btn">X</span>
-            <div class="issue-date">Issue Date: {{ request.start_date|date:"m/d/Y" }}</div>
-            <div class="request-type">{{ request.absence_type }}</div>
-        </div>
-        <div class="request-card-bottom">
-            <div>Effective Date: {{ request.start_date|date:"m/d/Y" }}</div>
-            <div>End Date: {{ request.end_date|date:"m/d/Y" }}</div>
-            <div>Supervisor: <!-- Supervisor Name Here --></div>
-            <div class="status-text">Status: {{ request.get_approval_status_display }}</div>
-        </div>
-    </div>
-    {% empty %}
-    <p>No requests found.</p>
-    {% endfor %}
-</div>
-<script src="{% static 'js/scripts.js' %}" defer></script>
-</body>
-</html>
+{% endblock %}
