@@ -118,8 +118,8 @@ class TestTravelAuthorization:
         assert ta.name == "John Doe"
         assert ta.department == "hr"
         assert ta.destination == "New York"
-        assert ta.departure_date == "2022-01-01"
-        assert ta.return_date == "2022-01-05"
+        assert ta.departure_date == datetime.date(2022, 1, 1)
+        assert ta.return_date == datetime.date(2022, 1, 5)
         assert ta.personal_car == True
         assert ta.company_car == False
         assert ta.car_rental == False
@@ -146,8 +146,8 @@ class TestTravelAuthorization:
                 name="John Doe",
                 department="invalid_department",
                 destination="New York",
-                departure_date="2022-01-01",
-                return_date="2022-01-05",
+                departure_date=datetime.date(2022, 1, 1),
+                return_date=datetime.date(2022, 1, 5),
                 personal_car=True,
                 nights_lodging=4,
                 department_manager=manager,
@@ -172,8 +172,8 @@ class TestTravelAuthorization:
                 name="",
                 department="hr",
                 destination="New York",
-                departure_date="2022-01-01",
-                return_date="2022-01-05",
+                departure_date=datetime.date(2022, 1, 1),
+                return_date=datetime.date(2022, 1, 5),
                 personal_car=True,
                 nights_lodging=4,
                 department_manager=manager,
@@ -198,8 +198,8 @@ class TestTravelAuthorization:
                 name="John Doe",
                 department="hr",
                 destination="New York",
-                departure_date="2022-01-01",
-                return_date="2022-01-05",
+                departure_date=datetime.date(2022, 1, 1),
+                return_date=datetime.date(2022, 1, 5),
                 personal_car=True,
                 nights_lodging=4,
                 department_manager=manager,
