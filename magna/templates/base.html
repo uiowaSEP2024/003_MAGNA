@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Off Request</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="/home" class="logo">
+                <img src="{% static 'images/magnaLogoWhite.png' %}" alt="Company Logo">
+            </a>
+            <div class="nav-links">
+                <a>Innovations</a>
+                <a>Products</a>
+                <a>Stories</a>
+                <a>Company</a>
+                <a>Careers</a>
+                <a>Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
