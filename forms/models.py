@@ -1,6 +1,7 @@
 from datetime import date  # Import date directly
 
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db import models
 
 from django import forms
@@ -82,6 +83,14 @@ class AbsenceRequest(models.Model):
         db_table = "forms_absence_request"
 
 
+# Validators for travel auth go here
+def check_mail(value):
+    if "@" not in value:
+        raise ValidationError("The email is not valid.")
+
+
+
+
 class TravelAuthorization(models.Model):
     clock_number = models.IntegerField()
     name = models.CharField(max_length=100)
@@ -101,7 +110,7 @@ class TravelAuthorization(models.Model):
         Employee,
         on_delete=models.CASCADE,
     )
-    email = models.EmailField()
+    email = models.EmailField(validators=[validate_email])
     signature = models.CharField(max_length=100)
     approval_status = models.CharField(
         max_length=20,
@@ -113,8 +122,21 @@ class TravelAuthorization(models.Model):
         default="pending",
     )
 
+    def clean(self):
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        """Overridden clean method in order to ensure clean method is run"""
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
+
+# Validations and input stuff starts here
 class DateInput(forms.DateInput):
     input_type = 'date'
+
+
 
 
 class TravelAuthorizationForm(forms.ModelForm):
