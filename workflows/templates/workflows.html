@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Home - Magna{% endblock %}
+{% load static %}
+{% block content %}
+
+    <div class="header-image-container">
+        <img src="{% static 'images/magnaLogo.png' %}" alt="Company Logo" class="header-image">
+    </div>
+    <hr class="separator">
+
+    <main>
+        {% for form_type in form_types %}
+            <h2>Manage Email Recipients for {{ form_type }}</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label>
+                    <textarea name="email_recipients_{{ form_type }}" rows="4" cols="50">{{ form_email_settings.get.email_recipients }}</textarea>
+                </label>
+                <button type="submit">Save Changes</button>
+            </form>
+        {% endfor %}
+    </main>
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+    <script src="../static/js/scripts.js"></script>
+{% endblock %}
