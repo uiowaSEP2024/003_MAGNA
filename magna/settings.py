@@ -94,7 +94,8 @@ DEVELOPMENT_DATABASE = {
 # Deployment database (Heroku Postgres)
 DEPLOYMENT_DATABASE = {
     'default': dj_database_url.config(
-        default='postgres://sbotjdypigxujq:a89470ddfdaaae7a3ac8991d79eca05cd0298cd4bb73fc4166500713187970fa@ec2-54-167-29-148.compute-1.amazonaws.com:5432/d8tvfh3jpmk7t2', conn_max_age=600
+        default='postgres://sbotjdypigxujq:a89470ddfdaaae7a3ac8991d79eca05cd0298cd4bb73fc4166500713187970fa@ec2-54'
+                '-167-29-148.compute-1.amazonaws.com:5432/d8tvfh3jpmk7t2', conn_max_age=600
     )
 }
 
