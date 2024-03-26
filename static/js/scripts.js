@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     cards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            card.style.backgroundColor = 'red';
+            card.style.backgroundColor = 'blue';
         });
 
         card.addEventListener('mouseleave', () => {

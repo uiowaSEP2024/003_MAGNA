@@ -16,13 +16,15 @@
     </div>
     {% endif %}
 
-    <div class="navigation-container">
-        <div class="page-navigation">
-            <a href="{% url 'view_job_postings' %}" class="nav-button {% if request.resolver_match.url_name == 'view_job_postings' %}active{% endif %}">Current Postings</a>
-            <a href="{% url 'create_job_postings' %}" class="nav-button {% if request.resolver_match.url_name == 'create_job_postings' %}active{% endif %}">New Posting</a>
+    {% if current_user.role != "kiosk" %}
+        <div class="navigation-container">
+            <div class="page-navigation">
+                <a href="{% url 'view_job_postings' %}" class="nav-button {% if request.resolver_match.url_name == 'view_job_postings' %}active{% endif %}">Current Postings</a>
+                <a href="{% url 'create_job_postings' %}" class="nav-button {% if request.resolver_match.url_name == 'create_job_postings' %}active{% endif %}">New Posting</a>
+            </div>
+            <hr class="separator">
         </div>
-        <hr class="separator">
-    </div>
+    {% endif %}
 
     <div class="request-container">
         <div class="form-card">

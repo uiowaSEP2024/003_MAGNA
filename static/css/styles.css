@@ -79,10 +79,6 @@ form button {
     aspect-ratio: 3 / 2;
 }
 
-.card:hover {
-    background-color: blue; /* Replace 'blue' with your desired color */
-}
-
 
 
 .card-link {
@@ -119,7 +115,7 @@ form button {
 }
 
 .logo {
-    margin-left: 50px; 
+    margin-left: 50px;
 }
 
 .logo img {
