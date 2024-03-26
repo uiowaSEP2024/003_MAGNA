@@ -2,66 +2,39 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404, redirect, render
 
 from forms.models import AbsenceRequest
-
-from .models import Workflow
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def view_workflows(request):
-    """View all workflows."""
-    workflows = Workflow.objects.all()
-    return render(request, "workflows/list.html", {"workflows": workflows})
+from django.shortcuts import render, redirect
+from .models import FormEmailSetting, Workflow
+from .forms import FormEmailSettingForm
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def edit_workflow(request, pk):
-    """Edit a workflow."""
-    workflow = get_object_or_404(Workflow, pk=pk)
-    if request.method == "POST":
-        # Form submission logic here
-        # Update workflow object and save
-        workflow.save()
-        return redirect("workflows:list")
-    return render(request, "workflows/edit.html", {"workflow": workflow})
+def workflows(request):
+    """
+    Renders the workflow page.
+
+    Args:
+    - request: the HTTP request object
+
+    Returns:
+    - Rendered workflows.html template
+    """
+    form_type = 'time_off'
+    return manage_email_recipients(request)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def delete_workflow(request, pk):
-    """Delete a workflow."""
-    workflow = get_object_or_404(Workflow, pk=pk)
-    if request.method == "POST":
-        workflow.delete()
-        return redirect("workflows:list")
-    return render(request, "workflows/confirm_delete.html", {"workflow": workflow})
+def manage_email_recipients(request):
+    form_types = ['time_off', 'job_postings', 'work_orders']
+    form_email_settings = {}
 
+    for form_type in form_types:
+        form_email_setting = FormEmailSetting.objects.filter(form_type=form_type).first()
+        if not form_email_setting:
+            form_email_setting = FormEmailSetting(form_type=form_type)
 
-def manager_review(request, pk):
-    """Manager review of an absence request."""
-    absence_request = get_object_or_404(
-        AbsenceRequest, pk=pk, workflow__status="submitted"
-    )
-    if request.method == "POST":
-        # Form submission logic here
-        # Update absence request object and workflow status
-        absence_request.workflow.status = "manager_review"
-        absence_request.save()
-        return redirect("workflows:list")
-    return render(
-        request, "workflows/review.html", {"absence_request": absence_request}
-    )
+        if request.method == 'POST' and request.POST.get(f'form_type_{form_type}'):
+            email_recipients = request.POST.get(f'email_recipients_{form_type}', '')
+            form_email_setting.email_recipients = email_recipients
+            form_email_setting.save()
 
+        form_email_settings[form_type] = form_email_setting
 
-def HR_review(request, pk):
-    """HR review of an absence request."""
-    absence_request = get_object_or_404(
-        AbsenceRequest, pk=pk, workflow__status="manager_review"
-    )
-    if request.method == "POST":
-        # Form submission logic here
-        # Update absence request object and workflow status
-        absence_request.workflow.status = "HR_review"
-        absence_request.save()
-        return redirect("workflows:list")
-    return render(
-        request, "workflows/review.html", {"absence_request": absence_request}
-    )
+    return render(request, 'workflows.html', {'form_email_settings': form_email_settings, 'form_types': form_types})
