@@ -3,6 +3,19 @@ body {
     font-family: Arial, sans-serif; /* Sets the default font for the entire website */
 }
 
+/* Reset the padding and margin for the body and set it to 0 */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Make sure the header extends fully to the width of the page */
+header .navbar {
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 /* Login Container Style - Used for login pages (not included in provided HTML) */
 #login-container {
     width: 300px;
@@ -105,8 +118,8 @@ form button {
     justify-content: space-between;
     align-items: center;
     background-color: black;
-    color: white;
-    padding: 10px 20px;
+    color: black;
+    padding: 30px 30px;
 }
 
 .logo img {
@@ -114,7 +127,7 @@ form button {
 }
 
 .nav-links a {
-    color: white;
+    color: gray;
     text-decoration: none;
     margin-left: 20px;
     font-size: 16px;
@@ -245,8 +258,8 @@ form select {
 
 .page-navigation {
     display: inline-block;
-    margin-top: 10px;
-    margin-bottom: -1px; /* Overlap with the separator */
+    margin-top: 20px;
+    margin-bottom: -20px; /* Overlap with the separator */
 }
 
 .nav-button {
