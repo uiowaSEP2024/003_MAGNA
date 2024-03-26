@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import os.path
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,12 +83,27 @@ WSGI_APPLICATION = "magna.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
+# Development database
+DEVELOPMENT_DATABASE = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# Deployment database (Heroku Postgres)
+DEPLOYMENT_DATABASE = {
+    'default': dj_database_url.config(
+        default='postgres://sbotjdypigxujq:a89470ddfdaaae7a3ac8991d79eca05cd0298cd4bb73fc4166500713187970fa@ec2-54'
+                '-167-29-148.compute-1.amazonaws.com:5432/d8tvfh3jpmk7t2', conn_max_age=600
+    )
+}
+
+# Select the appropriate database based on the environment
+if os.environ.get('ENV') == 'production':
+    DATABASES = DEPLOYMENT_DATABASE
+else:
+    DATABASES = DEVELOPMENT_DATABASE
 
 
 # Password validation
