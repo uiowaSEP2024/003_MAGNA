@@ -9,13 +9,6 @@ body, html {
     padding: 0;
 }
 
-/* Make sure the header extends fully to the width of the page */
-header .navbar {
-    margin: 0;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 /* Login Container Style - Used for login pages (not included in provided HTML) */
 #login-container {
     width: 300px;
@@ -120,6 +113,13 @@ form button {
     background-color: black;
     color: black;
     padding: 30px 30px;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo {
+    margin-left: 50px; 
 }
 
 .logo img {
