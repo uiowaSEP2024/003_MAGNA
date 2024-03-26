@@ -33,6 +33,7 @@ urlpatterns = [
     path("home", home.views.index, name="home"),
     path("absence-request", forms.views.absence_request, name="absence-request"),
     path("work-order", forms.views.work_order, name="work-order"),
+    path("workflow", workflows.views.workflows, name="workflow"),
     path("submit-absence-request/", forms.views.submit_absence_request, name="submit_absence_request"),
     path("submit-work-order/", forms.views.submit_work_order, name="submit-work-order"),
     path("view_job_postings/", forms.views.view_job_postings, name="view_job_postings"),
@@ -59,10 +60,10 @@ urlpatterns = [
     ),
     path("calendar", forms.views.calendar, name="calendar"),
     path("logout/", auth_views.LogoutView.as_view(next_page="/"), name="logout"),
-    path("view-workflows/", workflows.views.view_workflows, name="list"),
-    path("edit-workflows/", workflows.views.edit_workflow, name="edit"),
-    path("delete-workflows/", workflows.views.delete_workflow, name="delete"),
     path("travel-auth", forms.views.travel_auth_form),
+    path('workflows/time-off/', workflows.views.manage_email_recipients, {'form_type': 'time_off'}, name='manage_time_off_recipients'),
+    path('workflows/job-postings/', workflows.views.manage_email_recipients, {'form_type': 'job_postings'}, name='manage_job_postings_recipients'),
+    path('workflows/work-orders/', workflows.views.manage_email_recipients, {'form_type': 'work_orders'}, name='manage_work_orders_recipients'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
