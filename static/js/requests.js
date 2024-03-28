@@ -1,3 +1,12 @@
+/**
+ * This file contains the JavaScript code for the requests page.
+ * It is responsible for handling the search form submission and displaying the search results.
+ * The search results are displayed in a card format, with each card containing the details of a request.
+ * The card is styled based on the approval status of the request.
+ * If no requests are found, a message is displayed indicating that no requests were found.
+ * A reset button is also displayed to allow the user to reset the search and view all requests.
+ * The reset button reloads the page when clicked.
+ */
 document.addEventListener("DOMContentLoaded", function() {
     const searchForm = document.getElementById('search-form');
 
